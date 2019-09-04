@@ -1,3 +1,3 @@
 .PHONY:
 mount:
-	docker run --rm -it --network host --device /dev/fuse --privileged -v $(pwd)/wiki:/home/user/doku/wiki:shared --name doku-fuse docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
+	docker run --rm -it --privileged --name doku-fuse --network host --device /dev/fuse -v $$(pwd)/wiki:/home/user/doku/wiki:shared docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
