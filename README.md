@@ -1,5 +1,7 @@
 # Courses
 
+[![workflow](https://github.com/seankhliao/uva-sne-courses/workflows/build-docker/badge.svg)](https://github.com/seankhliao/uva-sne-courses/actions)
+
 Backup for course data
 
 ## Security of Systems and Networks
