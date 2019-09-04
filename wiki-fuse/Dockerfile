@@ -1,5 +1,4 @@
 FROM ubuntu:latest
-LABEL maintainer="seankhliao@gmail.com"
 
 RUN useradd -u 1000 user
 RUN apt-get update && apt-get -y install git python3 python3-dev python3-pip libattr1-dev libfuse-dev pkg-config bash fuse
