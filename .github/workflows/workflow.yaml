@@ -1,0 +1,17 @@
+name: docker-build
+on:
+  push:
+    paths:
+      - "wiki-fuse/*"
+  schedule:
+    - cron: "0 0 0 0 0"
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: docker login -u seankhliao -p $TOKEN
+        env:
+          TOKEN: ${{ secrets.PAT }}
+      - run: docker build -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:(GITHUB_SHA:0:7) -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest .
+      - run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:(GITHUB_SHA:0:7) docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
