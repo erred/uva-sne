@@ -3,9 +3,6 @@ on:
   push:
     paths:
       - "wiki-fuse/*"
-      - ".github/workflows/wiki-fuse-build.yaml"
-  schedule:
-    - cron: "0 0 0 0 0"
 jobs:
   docker-build:
     runs-on: ubuntu-latest
