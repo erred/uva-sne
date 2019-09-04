@@ -14,5 +14,5 @@ jobs:
       - run: docker login docker.pkg.github.com -u seankhliao -p $TOKEN
         env:
           TOKEN: ${{ secrets.PAT }}
-      - run: docker build -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:{GITHUB_SHA:0:7} -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest .
-      - run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:{GITHUB_SHA:0:7} docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
+      - run: docker build -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7} -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest .
+      - run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7} docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
