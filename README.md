@@ -1,6 +1,4 @@
-# Courses
-
-[![workflow](https://github.com/seankhliao/uva-sne-courses/workflows/wiki-fuse-build/badge.svg)](https://github.com/seankhliao/uva-sne-courses/actions)
+# UvA SNE Courses
 
 Backup for course data
 
