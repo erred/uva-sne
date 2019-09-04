@@ -18,4 +18,4 @@ jobs:
       - name: push1
         run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7}
       - name: push2
-        run: docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
+        run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
