@@ -10,9 +10,13 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - run: docker login docker.pkg.github.com -u seankhliao -p $TOKEN
+      - name: checkout
+        uses: actions/checkout@master
+      - name: login
+        run: docker login docker.pkg.github.com -u seankhliao -p $TOKEN
         env:
           TOKEN: ${{ secrets.PAT }}
-      - run: docker build -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7} -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest .
-      - run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7} docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
+      - name: build
+        run: docker build -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7} -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest wiki-fuse
+      - name: push
+        run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7} docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
