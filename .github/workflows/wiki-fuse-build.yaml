@@ -15,5 +15,7 @@ jobs:
           TOKEN: ${{ secrets.PAT }}
       - name: build
         run: docker build -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7} -t docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest wiki-fuse
-      - name: push
-        run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7} docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
+      - name: push1
+        run: docker push docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:${GITHUB_SHA:0:7}
+      - name: push2
+        run: docker.pkg.github.com/seankhliao/uva-sne-courses/wiki-fuse:latest
