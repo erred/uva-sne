@@ -78,3 +78,19 @@ Secondary: [Network Security](Network_Security.pdf)
   - uncronstructable from X and Y
 - Elliptical
   - same concept but uses points on elliptical curve as generator
+
+## 2019-09-09 Enigma
+- History
+- Not max combinations
+  - plug 11 wires(?)
+- Eventually cyclic
+- Never match self
+
+## 2019-09-12 Modern Cryto DES and AES
+- Stream Cipher
+  - stretch key, use like one time pad
+  - A5/1, A5/2, RC4 (read, use in cell)
+- Block cipher
+  - manipulation on matrix
+  - DES
+  - AES, shift, mix, sub
