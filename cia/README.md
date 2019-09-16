@@ -10,4 +10,21 @@
 
 - more history lessons
 
+### 2019-09-10
+- Teletypes
+- X server as physical machines
+- shell parsing
+- exec
+- fork/clone
+- ELF executables
+- dynamic linking, interpreters
+- /proc virtialfs
+- compiler stages
+
+### 2019-09-13 
+- CISC/RISC/VLIW
+- register size history
+- assembly syntac
+- syscalls
+
 ## RFCs
