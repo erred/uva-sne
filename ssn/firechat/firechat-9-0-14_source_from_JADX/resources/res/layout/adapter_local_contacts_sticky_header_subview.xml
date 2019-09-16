@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:id="@+id/matrix_only_filter" android:background="?attr/list_header_background_color" android:paddingLeft="10dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <CheckBox android:theme="@style/CheckBoxTheme" android:textColor="?attr/riot_primary_text_color" android:id="@+id/matrix_only_filter_checkbox" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/matrix_only_filter"/>
-</LinearLayout>

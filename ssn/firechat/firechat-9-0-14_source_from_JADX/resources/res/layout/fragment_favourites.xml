@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <android.support.p003v7.widget.RecyclerView android:id="@+id/favorites_recycler_view" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-    <TextView android:id="@+id/favorites_placeholder" android:padding="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/search_no_results"/>
-</RelativeLayout>

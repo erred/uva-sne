@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <plurals name="public_room_nb_users">
-        <item quantity="other">%d pengguna</item>
-    </plurals>
-</resources>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:background="?attr/list_header_background_color" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <RelativeLayout android:id="@+id/heading_layout" android:layout_width="match_parent" android:layout_height="42dp">
-        <TextView android:textSize="14sp" android:textColor="?attr/riot_primary_text_color" android:id="@+id/heading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="18dp" android:text="Header" android:layout_centerVertical="true" android:fontFamily="sans-serif-medium"/>
-        <ImageView android:id="@+id/heading_image" android:layout_width="24dp" android:layout_height="24dp" android:layout_marginRight="15dp" android:layout_alignParentRight="true" android:layout_centerVertical="true"/>
-    </RelativeLayout>
-</RelativeLayout>

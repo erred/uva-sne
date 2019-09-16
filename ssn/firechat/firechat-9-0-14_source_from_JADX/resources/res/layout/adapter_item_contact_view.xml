@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:id="@+id/contact_view" android:paddingLeft="16dp" android:paddingRight="16dp" android:layout_width="match_parent" android:layout_height="74dp">
-    <include android:id="@+id/contact_avatar_layout" android:layout_width="@dimen/chat_avatar_size" android:layout_height="@dimen/chat_avatar_size" android:layout_centerVertical="true" layout="@layout/adapter_item_circular_avatar_contact_view"/>
-    <ImageView android:id="@+id/contact_badge" android:visibility="gone" android:layout_width="20dp" android:layout_height="20dp" android:layout_marginTop="-7dp" android:layout_marginRight="-7dp" android:src="@drawable/firechatlogo" android:layout_alignTop="@+id/contact_avatar_layout" android:layout_alignRight="@+id/contact_avatar_layout"/>
-    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:layout_marginRight="16dp" android:layout_toRightOf="@+id/contact_avatar_layout" android:layout_centerVertical="true">
-        <TextView android:textSize="16sp" android:textStyle="bold" android:textColor="?attr/default_text_dark_color" android:id="@+id/contact_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1"/>
-        <TextView android:textSize="14sp" android:textColor="?attr/default_text_light_color" android:id="@+id/contact_desc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1"/>
-    </LinearLayout>
-</RelativeLayout>

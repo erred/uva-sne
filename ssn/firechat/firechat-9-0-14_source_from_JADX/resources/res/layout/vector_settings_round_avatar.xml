@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="40dp" android:layout_height="40dp">
-    <com.opengarden.firechat.view.VectorCircularImageView android:id="@+id/avatar_img" android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:adjustViewBounds="true"/>
-    <ProgressBar android:theme="@style/SpinnerThemeGrey" android:layout_gravity="center" android:id="@+id/avatar_update_progress_bar" android:visibility="gone" android:layout_width="40dp" android:layout_height="40dp"/>
-</FrameLayout>

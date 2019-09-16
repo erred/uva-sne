@@ -1,1 +1,0 @@
-ALTER TABLE `bgf_friend` ADD COLUMN `color` AFTER `wifi_p2p_address`;

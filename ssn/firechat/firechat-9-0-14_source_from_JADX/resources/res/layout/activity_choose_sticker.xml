@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:background="@android:color/black" android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-        <android.support.p003v7.widget.Toolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" style="@style/VectorToolbarStyle"/>
-        <include layout="@layout/activity_integration_manager"/>
-    </LinearLayout>
-</merge>

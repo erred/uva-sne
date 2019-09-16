@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="wrap_content">
-    <LinearLayout android:orientation="vertical" android:id="@+id/header_texts_container" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_toLeftOf="@+id/open_chat_header_arrow" android:layout_alignParentLeft="true" android:layout_centerVertical="true">
-        <TextView android:textSize="20sp" android:textColor="@android:color/white" android:id="@+id/room_action_bar_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:singleLine="true" android:fontFamily="sans-serif-medium"/>
-        <TextView android:textColor="@android:color/white" android:ellipsize="end" android:id="@+id/room_action_bar_topic" android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="sans-serif-medium"/>
-    </LinearLayout>
-    <ImageView android:id="@+id/open_chat_header_arrow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:src="@drawable/ic_arrow_drop_down_white" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:contentDescription="@string/open_chat_header"/>
-</RelativeLayout>
