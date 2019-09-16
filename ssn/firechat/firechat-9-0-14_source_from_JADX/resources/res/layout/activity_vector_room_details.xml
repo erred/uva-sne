@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
+    <RelativeLayout android:background="@android:color/white" android:layout_width="match_parent" android:layout_height="match_parent">
+        <FrameLayout android:id="@+id/room_details_fragment_container" android:layout_width="match_parent" android:layout_height="match_parent"/>
+        <FrameLayout android:id="@+id/settings_loading_layout" android:background="?attr/waiting_background_color" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+            <ProgressBar android:layout_gravity="center" android:id="@+id/loading_settings_progress_bar" android:visibility="visible" android:layout_width="40dp" android:layout_height="40dp"/>
+        </FrameLayout>
+        <ProgressBar android:id="@+id/search_load_oldest_progress" android:visibility="gone" android:layout_width="match_parent" android:layout_height="40dp" android:indeterminate="true" android:layout_alignParentLeft="true"/>
+    </RelativeLayout>
+</FrameLayout>

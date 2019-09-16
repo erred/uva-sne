@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="active_widgets">
+        <item quantity="one">1 aktív kisalkalmazás</item>
+        <item quantity="other">%d aktív kisalkalmazás</item>
+    </plurals>
+    <plurals name="directory_search_rooms">
+        <item quantity="one">1 szoba</item>
+        <item quantity="other">%d szoba</item>
+    </plurals>
+    <plurals name="directory_search_rooms_for">
+        <item quantity="one">%1$s szoba találat ehhez: %2$s</item>
+        <item quantity="other">%1$s szoba találat ehhez: %2$s</item>
+    </plurals>
+    <plurals name="membership_changes">
+        <item quantity="one">1 tagság változás</item>
+        <item quantity="other">%d tagság változás</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages">
+        <item quantity="one">1 olvasatlan üzenet</item>
+        <item quantity="other">%d olvasatlan üzenet</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_msgs">
+        <item quantity="one">1 olvasatlan üzenet értesítéssel</item>
+        <item quantity="other">%d olvasatlan üzenet értesítéssel</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_rooms">
+        <item quantity="one">1 szoba</item>
+        <item quantity="other">%d szoba</item>
+    </plurals>
+    <plurals name="others">
+        <item quantity="one">1 másik</item>
+        <item quantity="other">%d másik</item>
+    </plurals>
+    <plurals name="public_room_nb_users">
+        <item quantity="one">1 felhasználó</item>
+        <item quantity="other">%d felhasználó</item>
+    </plurals>
+    <plurals name="room_header_active_members_count">
+        <item quantity="one">1 aktív tag</item>
+        <item quantity="other">%d aktív tag</item>
+    </plurals>
+    <plurals name="room_new_messages_notification">
+        <item quantity="one">1 új üzenet</item>
+        <item quantity="other">%d új üzenet</item>
+    </plurals>
+    <plurals name="room_title_members">
+        <item quantity="one">1 tag</item>
+        <item quantity="other">%d tag</item>
+    </plurals>
+</resources>

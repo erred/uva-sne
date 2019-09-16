@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt">
+    <item android:icon="@drawable/vector_micro_green" android:id="@+id/ic_action_speak_to_search" android:title="Speak" app:showAsAction="always"/>
+    <item android:icon="@drawable/vector_clear_edittext_green" android:id="@+id/ic_action_clear_search" android:title="Clear" app:showAsAction="always"/>
+</menu>

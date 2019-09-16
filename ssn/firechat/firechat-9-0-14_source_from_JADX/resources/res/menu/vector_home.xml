@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt">
+    <item android:icon="@drawable/ic_material_search_white" android:id="@+id/ic_action_global_search" android:title="@string/action_global_search" app:showAsAction="collapseActionView"/>
+    <item android:icon="@drawable/ic_material_history_white" android:id="@+id/ic_action_historical" android:title="@string/action_historical" app:showAsAction="collapseActionView"/>
+    <item android:icon="@drawable/ic_material_done_all_white" android:id="@+id/ic_action_mark_all_as_read" android:title="@string/action_mark_all_as_read" app:showAsAction="collapseActionView"/>
+</menu>

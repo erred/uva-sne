@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
+    <android.support.p003v7.widget.Toolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="?attr/actionBarSize" style="@style/VectorToolbarStyle"/>
+    <android.support.p003v7.widget.RecyclerView android:id="@+id/room_directory_recycler_view" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_below="@+id/toolbar"/>
+    <RelativeLayout android:id="@+id/room_directory_loading" android:background="?attr/waiting_background_color" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@+id/toolbar">
+        <ProgressBar android:theme="@style/SpinnerThemeGrey" android:layout_width="40dp" android:layout_height="40dp" android:indeterminate="true" android:layout_centerHorizontal="true" android:layout_centerVertical="true"/>
+    </RelativeLayout>
+</RelativeLayout>

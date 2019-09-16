@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="active_widgets">
+        <item quantity="one">1 активно приспособление</item>
+        <item quantity="other">%d активни приспособления</item>
+    </plurals>
+    <plurals name="directory_search_rooms">
+        <item quantity="one">1 стая</item>
+        <item quantity="other">%d стаи</item>
+    </plurals>
+    <plurals name="directory_search_rooms_for">
+        <item quantity="one">%1$s стая намерена за %2$s</item>
+        <item quantity="other">%1$s стаи намерени за %2$s</item>
+    </plurals>
+    <plurals name="membership_changes">
+        <item quantity="one">1 промяна в членството</item>
+        <item quantity="other">%d промени в членствата</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages">
+        <item quantity="one">1 непрочетено съобщение</item>
+        <item quantity="other">%d непрочетени съобщения</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_msgs">
+        <item quantity="one">1 непрочетено съобщение</item>
+        <item quantity="other">%d непрочетени съобщения</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_rooms">
+        <item quantity="one">1 стая</item>
+        <item quantity="other">%d стаи</item>
+    </plurals>
+    <plurals name="others">
+        <item quantity="one">1 друг</item>
+        <item quantity="other">%d други</item>
+    </plurals>
+    <plurals name="public_room_nb_users">
+        <item quantity="one">1 потребител</item>
+        <item quantity="other">%d потребители</item>
+    </plurals>
+    <plurals name="room_header_active_members_count">
+        <item quantity="one">1 активен член</item>
+        <item quantity="other">%d активни членове</item>
+    </plurals>
+    <plurals name="room_new_messages_notification">
+        <item quantity="one">1 ново съобщение</item>
+        <item quantity="other">%d нови съобщения</item>
+    </plurals>
+    <plurals name="room_title_members">
+        <item quantity="one">1 член</item>
+        <item quantity="other">%d членове</item>
+    </plurals>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="active_widgets">
+        <item quantity="one">Trepeta aktibo bat</item>
+        <item quantity="other">%d trepeta aktibo</item>
+    </plurals>
+    <plurals name="directory_search_rooms">
+        <item quantity="one">Gela bat</item>
+        <item quantity="other">%d gela</item>
+    </plurals>
+    <plurals name="directory_search_rooms_for">
+        <item quantity="one">Gela %1$s aurkitu da %2$s bilatuz</item>
+        <item quantity="other">%1$s gela aurkitu dira %2$s bilatuz</item>
+    </plurals>
+    <plurals name="membership_changes">
+        <item quantity="one">Kidetza aldaketa bat</item>
+        <item quantity="other">%d kidetza aldaketa</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages">
+        <item quantity="one">Irakurri gabeko jakinaraziko mezu bat</item>
+        <item quantity="other">%d irakurri gabeko jakinaraziko mezu</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_msgs">
+        <item quantity="one">Irakurri gabeko jakinaraziko mezu bat</item>
+        <item quantity="other">%d irakurri gabeko jakinaraziko mezu</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_rooms">
+        <item quantity="one">Gela 1</item>
+        <item quantity="other">%d gela</item>
+    </plurals>
+    <plurals name="others">
+        <item quantity="one">Beste bat</item>
+        <item quantity="other">Beste %d</item>
+    </plurals>
+    <plurals name="public_room_nb_users">
+        <item quantity="one">Erabiltzaile 1</item>
+        <item quantity="other">%d erabiltzaile</item>
+    </plurals>
+    <plurals name="room_header_active_members_count">
+        <item quantity="one">Kide aktibo 1</item>
+        <item quantity="other">%d kide aktibo</item>
+    </plurals>
+    <plurals name="room_new_messages_notification">
+        <item quantity="one">Mezu berri 1</item>
+        <item quantity="other">%d mezu berri</item>
+    </plurals>
+    <plurals name="room_title_members">
+        <item quantity="one">Kide 1</item>
+        <item quantity="other">%d kide</item>
+    </plurals>
+</resources>

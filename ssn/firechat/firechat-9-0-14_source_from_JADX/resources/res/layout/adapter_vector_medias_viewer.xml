@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
+    <WebView android:id="@+id/media_slider_image_webview" android:background="#000" android:layout_width="match_parent" android:layout_height="match_parent"/>
+    <RelativeLayout android:id="@+id/media_slider_videolayout" android:layout_width="match_parent" android:layout_height="match_parent">
+        <VideoView android:layout_gravity="center" android:id="@+id/media_slider_videoview" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_centerInParent="true"/>
+        <ImageView android:id="@+id/media_slider_video_thumbnail" android:background="#000" android:layout_width="match_parent" android:layout_height="match_parent"/>
+        <ImageView android:id="@+id/media_slider_video_playView" android:background="#77777777" android:layout_width="100dp" android:layout_height="100dp" android:src="@drawable/ic_material_play_circle" android:layout_centerHorizontal="true" android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <com.opengarden.firechat.matrixsdk.view.PieFractionView android:id="@+id/media_slider_piechart" android:layout_width="160dp" android:layout_height="160dp" android:layout_centerHorizontal="true" android:layout_centerVertical="true" android:alpha="0.2"/>
+    <ImageView android:id="@+id/media_download_failed" android:layout_width="match_parent" android:layout_height="match_parent" android:src="@android:drawable/ic_menu_gallery"/>
+</RelativeLayout>

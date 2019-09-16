@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
+    <ListView android:id="@+id/fragment_public_rooms_list" android:layout_width="match_parent" android:layout_height="match_parent" android:divider="#00000000" android:dividerHeight="0dp"/>
+    <RelativeLayout android:id="@+id/listView_global_spinner_views" android:background="#339d9d9d" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+        <ProgressBar android:theme="@style/SpinnerThemeGrey" android:id="@+id/listView_spinner" android:visibility="visible" android:layout_width="40dp" android:layout_height="40dp" android:layout_centerHorizontal="true" android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <ProgressBar android:theme="@style/SpinnerThemeGrey" android:id="@+id/listView_forward_spinner_view" android:visibility="gone" android:layout_width="match_parent" android:layout_height="40dp" android:indeterminate="true" android:layout_alignParentBottom="true"/>
+</RelativeLayout>

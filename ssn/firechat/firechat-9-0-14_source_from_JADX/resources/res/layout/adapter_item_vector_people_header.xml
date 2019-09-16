@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="vertical" android:id="@+id/people_header_layout" android:background="?attr/list_header_background_color" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <RelativeLayout android:id="@+id/people_header_sub_layout" android:layout_width="match_parent" android:layout_height="20dp" android:layout_marginTop="11dp" android:layout_marginBottom="11dp">
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
+            <TextView android:textSize="14sp" android:textColor="?attr/riot_primary_text_color" android:id="@+id/people_header_text_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:text="Header" android:layout_centerVertical="true" android:fontFamily="sans-serif-medium"/>
+            <ProgressBar android:id="@+id/heading_loading_view" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_marginLeft="8dp" android:indeterminate="true" android:layout_toRightOf="@+id/people_header_text_view" android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <ImageView android:id="@+id/heading_image" android:layout_width="20dp" android:layout_height="20dp" android:layout_marginRight="15dp" android:layout_alignParentRight="true" android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@+id/people_header_matrix_contacts_layout" android:visibility="visible" android:layout_width="match_parent" android:layout_height="20dp" android:layout_marginBottom="11dp">
+        <CheckBox android:id="@+id/contacts_filter_checkbox" android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_marginLeft="19dp"/>
+        <TextView android:textSize="14sp" android:textColor="?attr/riot_primary_text_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/people_search_filter_text"/>
+    </LinearLayout>
+</LinearLayout>

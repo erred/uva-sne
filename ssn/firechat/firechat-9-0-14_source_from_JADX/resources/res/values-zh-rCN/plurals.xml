@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="active_widgets">
+        <item quantity="other">已启用 %d 个小部件</item>
+    </plurals>
+    <plurals name="directory_search_rooms">
+        <item quantity="other">%d 个聊天室</item>
+    </plurals>
+    <plurals name="directory_search_rooms_for">
+        <item quantity="other">有 %1$s 个聊天室符合 “%2$s”</item>
+    </plurals>
+    <plurals name="membership_changes">
+        <item quantity="other">%d 位成员的状态发生了变化</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages">
+        <item quantity="other">%d 条未读消息</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_msgs">
+        <item quantity="other">%d 条未读消息</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_rooms">
+        <item quantity="other">%d 个聊天室</item>
+    </plurals>
+    <plurals name="others">
+        <item quantity="other">与其他 %d 个人</item>
+    </plurals>
+    <plurals name="public_room_nb_users">
+        <item quantity="other">%d 个用户</item>
+    </plurals>
+    <plurals name="room_header_active_members_count">
+        <item quantity="other">%d 人在线</item>
+    </plurals>
+    <plurals name="room_new_messages_notification">
+        <item quantity="other">%d 条新消息</item>
+    </plurals>
+    <plurals name="room_title_members">
+        <item quantity="other">%d 位成员</item>
+    </plurals>
+</resources>

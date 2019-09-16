@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="active_widgets">
+        <item quantity="one">1 aktives Widget</item>
+        <item quantity="other">%d aktive Widgets</item>
+    </plurals>
+    <plurals name="directory_search_rooms">
+        <item quantity="one">1 Raum</item>
+        <item quantity="other">%d Räume</item>
+    </plurals>
+    <plurals name="directory_search_rooms_for">
+        <item quantity="one">%1$s Raum gefunden für %2$s</item>
+        <item quantity="other">%1$s Räume gefunden für %2$s</item>
+    </plurals>
+    <plurals name="membership_changes">
+        <item quantity="one">1 Mitgliederänderung</item>
+        <item quantity="other">%d Mitgliederänderungen</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages">
+        <item quantity="one">1 ungelesene Nachricht</item>
+        <item quantity="other">%d ungelesene Nachrichten</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_msgs">
+        <item quantity="one">1 ungelesene benachrichtige Nachricht</item>
+        <item quantity="other">%d ungelesene benachrichte Nachrichten</item>
+    </plurals>
+    <plurals name="notification_unread_notified_messages_in_room_rooms">
+        <item quantity="one">1 Raum</item>
+        <item quantity="other">%d Räume</item>
+    </plurals>
+    <plurals name="others">
+        <item quantity="one">1 andere(r)</item>
+        <item quantity="other">%d andere</item>
+    </plurals>
+    <plurals name="public_room_nb_users">
+        <item quantity="one">1 Benutzer</item>
+        <item quantity="other">%d Benutzer</item>
+    </plurals>
+    <plurals name="room_header_active_members_count">
+        <item quantity="one">1 aktives Mitglied</item>
+        <item quantity="other">%d aktive Mitglieder</item>
+    </plurals>
+    <plurals name="room_new_messages_notification">
+        <item quantity="one">1 neue Nachricht</item>
+        <item quantity="other">%d neue Nachrichten</item>
+    </plurals>
+    <plurals name="room_title_members">
+        <item quantity="one">1 Mitglied</item>
+        <item quantity="other">%d Mitglieder</item>
+    </plurals>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout android:orientation="vertical" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1">
+        <TextView android:textSize="10sp" android:id="@+id/media_progress_text_view" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text=""/>
+        <ProgressBar android:layout_gravity="center_vertical" android:id="@+id/media_progress_view" android:layout_width="match_parent" android:layout_height="20dp" android:max="100" android:progress="0" style="?android:attr/progressBarStyleHorizontal"/>
+    </LinearLayout>
+    <RelativeLayout android:id="@+id/media_progress_cancel" android:layout_width="40dp" android:layout_height="match_parent">
+        <ImageView android:layout_width="20dp" android:layout_height="20dp" android:src="@drawable/vector_cancel_upload_download" android:layout_alignParentRight="true" android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>

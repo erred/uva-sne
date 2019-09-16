@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="directory_search_rooms">
+        <item quantity="one">1 rum</item>
+        <item quantity="other">%d rum</item>
+    </plurals>
+    <plurals name="directory_search_rooms_for">
+        <item quantity="one">%1$s rum fundet for %2$s</item>
+        <item quantity="other">%1$s rum fundet for %2$s</item>
+    </plurals>
+    <plurals name="membership_changes">
+        <item quantity="one">1 medlemsændring</item>
+        <item quantity="other">%d medlemsændringer</item>
+    </plurals>
+    <plurals name="others">
+        <item quantity="one">1 anden</item>
+        <item quantity="other">%d andre</item>
+    </plurals>
+    <plurals name="public_room_nb_users">
+        <item quantity="one">1 bruger</item>
+        <item quantity="other">%d brugere</item>
+    </plurals>
+    <plurals name="room_header_active_members_count">
+        <item quantity="one">1 aktivt medlem</item>
+        <item quantity="other">%d aktive medlemmer</item>
+    </plurals>
+    <plurals name="room_new_messages_notification">
+        <item quantity="one">1 ny meddelelse</item>
+        <item quantity="other">%d nye meddelelser</item>
+    </plurals>
+    <plurals name="room_title_members">
+        <item quantity="one">1 medlem</item>
+        <item quantity="other">%d medlemmer</item>
+    </plurals>
+</resources>

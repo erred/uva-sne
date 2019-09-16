@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="membership_changes">
+        <item quantity="other">%d 會員變動</item>
+    </plurals>
+    <plurals name="public_room_nb_users">
+        <item quantity="other">%d 個使用者</item>
+    </plurals>
+    <plurals name="room_header_active_members_count">
+        <item quantity="other">%d 個活躍成員</item>
+    </plurals>
+    <plurals name="room_new_messages_notification">
+        <item quantity="other">%d 則新訊息</item>
+    </plurals>
+    <plurals name="room_title_members">
+        <item quantity="other">%d 個成員</item>
+    </plurals>
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="notification_values">
+        <item>@string/room_settings_all_messages_noisy</item>
+        <item>@string/room_settings_all_messages</item>
+        <item>@string/room_settings_mention_only</item>
+        <item>@string/room_settings_mute</item>
+    </array>
+    <array name="room_access_rules_entries">
+        <item>@string/room_settings_room_access_entry_only_invited</item>
+        <item>@string/room_settings_room_access_entry_anyone_with_link_apart_guest</item>
+        <item>@string/room_settings_room_access_entry_anyone_with_link_including_guest</item>
+    </array>
+    <array name="room_access_rules_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </array>
+    <array name="room_directory_servers">
+        <item>serve2.firech.at</item>
+    </array>
+    <array name="room_read_history_rules_entries">
+        <item>@string/room_settings_read_history_entry_anyone</item>
+        <item>@string/room_settings_read_history_entry_members_only_option_time_shared</item>
+        <item>@string/room_settings_read_history_entry_members_only_invited</item>
+        <item>@string/room_settings_read_history_entry_members_only_joined</item>
+    </array>
+    <array name="room_read_history_rules_values">
+        <item>@string/room_settings_read_history_entry_value_anyone</item>
+        <item>@string/room_settings_read_history_entry_value_members_only_option_time_shared</item>
+        <item>@string/room_settings_read_history_entry_value_members_only_invited</item>
+        <item>@string/room_settings_read_history_entry_value_members_only_joined</item>
+    </array>
+    <array name="tag_entries">
+        <item>@string/room_settings_tag_pref_entry_favourite</item>
+        <item>@string/room_settings_tag_pref_entry_low_priority</item>
+        <item>@string/room_settings_tag_pref_entry_none</item>
+    </array>
+    <array name="tag_values">
+        <item>@string/room_settings_tag_pref_entry_value_favourite</item>
+        <item>@string/room_settings_tag_pref_entry_value_low_priority</item>
+        <item>@string/room_settings_tag_pref_entry_value_none</item>
+    </array>
+    <array name="theme_codes">
+        <item>light</item>
+        <item>dark</item>
+        <item>black</item>
+    </array>
+    <array name="theme_description">
+        <item>@string/light_theme</item>
+        <item>@string/dark_theme</item>
+        <item>@string/black_them</item>
+    </array>
+</resources>

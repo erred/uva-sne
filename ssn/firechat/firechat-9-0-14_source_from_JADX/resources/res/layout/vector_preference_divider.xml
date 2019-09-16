@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <View android:background="@drawable/shadow_bottom" android:layout_width="match_parent" android:layout_height="5dp"/>
+    <View android:background="#e1e1e1" android:layout_width="match_parent" android:layout_height="2dp"/>
+    <View android:background="@drawable/shadow_top" android:layout_width="match_parent" android:layout_height="3dp"/>
+</LinearLayout>

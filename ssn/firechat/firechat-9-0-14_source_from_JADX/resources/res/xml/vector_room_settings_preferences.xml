@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
+    <com.opengarden.firechat.preference.RoomAvatarPreference android:title="@string/room_settings_room_photo" android:key="roomPhotoAvatar"/>
+    <EditTextPreference android:focusable="true" android:title="@string/room_settings_room_name" android:key="roomNameEditText"/>
+    <EditTextPreference android:focusable="true" android:title="@string/room_settings_topic" android:key="roomTopicEditText"/>
+    <ListPreference android:entries="@array/tag_entries" android:title="@string/room_settings_room_tag" android:key="roomTagList" android:dialogTitle="@string/room_settings_tag_pref_dialog_title" android:entryValues="@array/tag_values"/>
+    <ListPreference android:entries="@array/notification_values" android:title="@string/room_settings_room_notifications_title" android:key="roomNotificationPreference" android:entryValues="@array/notification_values"/>
+    <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/leave" android:key="roomLeave"/>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <com.opengarden.firechat.preference.VectorPreferenceCategory android:title="@string/room_settings_category_access_visibility_title" android:key="prefCatAccessVisibility">
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/room_settings_directory_visibility" android:key="roomNameListedInDirectorySwitch"/>
+        <com.opengarden.firechat.preference.VectorListPreference android:entries="@array/room_access_rules_entries" android:title="@string/room_settings_room_access_rules_pref_title" android:key="roomAccessRulesList" android:dialogTitle="@string/room_settings_room_access_rules_pref_dialog_title" android:entryValues="@array/room_access_rules_values"/>
+        <ListPreference android:entries="@array/room_read_history_rules_entries" android:title="@string/room_settings_room_read_history_rules_pref_title" android:key="roomReadHistoryRulesList" android:dialogTitle="@string/room_settings_room_read_history_rules_pref_dialog_title" android:entryValues="@array/room_read_history_rules_values"/>
+    </com.opengarden.firechat.preference.VectorPreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <com.opengarden.firechat.preference.VectorPreferenceCategory android:title="@string/room_settings_addresses_pref_title" android:key="addresses"/>
+    <com.opengarden.firechat.preference.VectorDividerCategory android:title="flair_divider" android:key="flair_divider"/>
+    <com.opengarden.firechat.preference.VectorPreferenceCategory android:title="@string/settings_flair" android:key="flair"/>
+    <com.opengarden.firechat.preference.VectorDividerCategory android:title="banned_divider" android:key="banned_divider"/>
+    <com.opengarden.firechat.preference.VectorPreferenceCategory android:title="@string/room_settings_banned_users_title" android:key="banned"/>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <com.opengarden.firechat.preference.VectorPreferenceCategory android:title="@string/room_settings_category_advanced_title" android:key="advanced">
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/room_settings_room_internal_id" android:key="roomInternalId"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/room_settings_never_send_to_unverified_devices_title" android:key="@string/room_settings_never_send_to_unverified_devices_title" android:summary="@string/room_settings_never_send_to_unverified_devices_summary"/>
+    </com.opengarden.firechat.preference.VectorPreferenceCategory>
+</PreferenceScreen>

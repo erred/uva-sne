@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
+    <RelativeLayout android:id="@+id/captcha_logo_layout" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="30dp" android:layout_marginBottom="27dp">
+        <ImageView android:id="@+id/login_large_logo" android:layout_width="100dp" android:layout_height="100dp" android:src="@drawable/firechatlogo" android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+    <TextView android:textSize="16sp" android:id="@+id/account_creation_message" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:layout_marginRight="16dp" android:layout_marginBottom="10dp" android:text="@string/auth_recaptcha_message" android:layout_below="@+id/captcha_logo_layout"/>
+    <WebView android:id="@+id/account_creation_webview" android:background="#000" android:layout_width="match_parent" android:layout_height="0dp" android:layout_below="@+id/account_creation_message" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" android:layout_alignParentEnd="true"/>
+    <RelativeLayout android:id="@+id/account_creation_webview_loading" android:background="@android:color/transparent" android:layout_width="match_parent" android:layout_height="0dp" android:layout_below="@+id/account_creation_message" android:layout_alignBottom="@+id/account_creation_webview">
+        <ProgressBar android:theme="@style/SpinnerThemeGrey" android:layout_width="60dp" android:layout_height="60dp" android:indeterminate="true" android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</RelativeLayout>

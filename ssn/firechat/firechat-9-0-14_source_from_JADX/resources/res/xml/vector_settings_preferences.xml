@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
+    <PreferenceCategory android:title="@string/settings_user_settings" android:key="SETTINGS_USER_SETTINGS_PREFERENCE_KEY">
+        <com.opengarden.firechat.preference.UserAvatarPreference android:title="@string/settings_profile_picture" android:key="SETTINGS_PROFILE_PICTURE_PREFERENCE_KEY"/>
+        <EditTextPreference android:focusable="true" android:title="@string/settings_display_name" android:key="SETTINGS_DISPLAY_NAME_PREFERENCE_KEY" android:summary="@string/settings_display_name"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_change_password" android:key="SETTINGS_CHANGE_PASSWORD_PREFERENCE_KEY" android:summary="********"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_contact" android:key="SETTINGS_CONTACT_PREFERENCE_KEYS">
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_contacts_app_permission" android:key="CONTACT_BOOK_ACCESS_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_contacts_phonebook_country" android:key="SETTINGS_CONTACTS_PHONEBOOK_COUNTRY_PREFERENCE_KEY" android:dialogTitle="@string/settings_select_country"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_user_interface" android:key="SETTINGS_USER_INTERFACE_KEY">
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_interface_language" android:key="SETTINGS_INTERFACE_LANGUAGE_PREFERENCE_KEY" android:dialogTitle="@string/settings_select_language"/>
+        <ListPreference android:entries="@array/theme_description" android:title="@string/settings_theme" android:key="APPLICATION_THEME_KEY" android:summary="%s" android:entryValues="@array/theme_codes"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/font_size" android:key="SETTINGS_INTERFACE_TEXT_SIZE_KEY" android:dialogTitle="@string/font_size"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_inline_url_preview" android:key="SETTINGS_SHOW_URL_PREVIEW_KEY" android:defaultValue="true"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_hide_read_receipts" android:key="SETTINGS_HIDE_READ_RECEIPTS_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_dont_send_typings_notifs" android:key="SETTINGS_DONT_SEND_TYPING_NOTIF_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_always_show_timestamps" android:key="SETTINGS_ALWAYS_SHOW_TIMESTAMPS_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_12_24_timestamps" android:key="SETTINGS_12_24_TIMESTAMPS_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_hide_join_leave_messages" android:key="SETTINGS_HIDE_JOIN_LEAVE_MESSAGES_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_hide_avatar_display_name_changes_messages" android:key="SETTINGS_HIDE_AVATAR_DISPLAY_NAME_CHANGES_MESSAGES_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_disable_markdown" android:key="SETTINGS_DISABLE_MARKDOWN_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_vibrate_on_mention" android:key="SETTINGS_VIBRATE_ON_MENTION_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_labs_keyboard_options_to_send_message" android:key="SETTINGS_SEND_MESSAGE_ENTER_KEY" android:defaultValue="false"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_home_display" android:key="SETTINGS_HOME_DISPLAY_KEY">
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_pin_missed_notifications" android:key="SETTINGS_PIN_MISSED_NOTIFICATIONS_PREFERENCE_KEY" android:defaultValue="true"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_pin_unread_messages" android:key="SETTINGS_PIN_UNREAD_MESSAGES_PREFERENCE_KEY" android:defaultValue="true"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_flair" android:key="SETTINGS_GROUPS_FLAIR_KEY"/>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_notifications" android:key="SETTINGS_NOTIFICATIONS_KEY">
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_enable_all_notif" android:key="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_enable_this_device" android:key="SETTINGS_ENABLE_THIS_DEVICE_PREFERENCE_KEY" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_notification_privacy" android:key="SETTINGS_NOTIFICATION_PRIVACY_PREFERENCE_KEY" android:dialogTitle="@string/settings_notification_privacy"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_notification_ringtone" android:key="SETTINGS_NOTIFICATION_RINGTONE_SELECTION_PREFERENCE_KEY" android:dialogTitle="@string/settings_notification_ringtone"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_turn_screen_on" android:key="SETTINGS_TURN_SCREEN_ON_PREFERENCE_KEY" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.BingRulePreference android:title="@string/settings_containing_my_display_name" android:key="SETTINGS_CONTAINING_MY_DISPLAY_NAME_PREFERENCE_KEY_2" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.BingRulePreference android:title="@string/settings_containing_my_user_name" android:key="SETTINGS_CONTAINING_MY_USER_NAME_PREFERENCE_KEY_2" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.BingRulePreference android:title="@string/settings_messages_in_one_to_one" android:key="SETTINGS_MESSAGES_IN_ONE_TO_ONE_PREFERENCE_KEY_2" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.BingRulePreference android:title="@string/settings_messages_in_group_chat" android:key="SETTINGS_MESSAGES_IN_GROUP_CHAT_PREFERENCE_KEY_2" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.BingRulePreference android:title="@string/settings_invited_to_room" android:key="SETTINGS_INVITED_TO_ROOM_PREFERENCE_KEY_2" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.BingRulePreference android:title="@string/settings_call_invitations" android:key="SETTINGS_CALL_INVITATIONS_PREFERENCE_KEY_2" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.BingRulePreference android:title="@string/settings_messages_sent_by_bot" android:key="SETTINGS_MESSAGES_SENT_BY_BOT_PREFERENCE_KEY_2" android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory android:key="SETTINGS_BACKGROUND_SYNC_DIVIDER_PREFERENCE_KEY"/>
+    <PreferenceCategory android:title="@string/settings_background_sync" android:key="SETTINGS_BACKGROUND_SYNC_PREFERENCE_KEY">
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_start_on_boot" android:key="SETTINGS_START_ON_BOOT_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_enable_background_sync" android:key="SETTINGS_ENABLE_BACKGROUND_SYNC_PREFERENCE_KEY"/>
+        <EditTextPreference android:focusable="true" android:numeric="integer" android:title="@string/settings_set_sync_timeout" android:key="SETTINGS_SET_SYNC_TIMEOUT_PREFERENCE_KEY"/>
+        <EditTextPreference android:focusable="true" android:numeric="integer" android:title="@string/settings_set_sync_delay" android:key="SETTINGS_SET_SYNC_DELAY_PREFERENCE_KEY"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory android:title="notifications_targets_divider" android:key="SETTINGS_NOTIFICATIONS_TARGET_DIVIDER_PREFERENCE_KEY"/>
+    <PreferenceCategory android:title="@string/settings_notifications_targets" android:key="SETTINGS_NOTIFICATIONS_TARGETS_PREFERENCE_KEY"/>
+    <com.opengarden.firechat.preference.VectorDividerCategory android:title="ignore_users_divider" android:key="SETTINGS_IGNORE_USERS_DIVIDER_PREFERENCE_KEY"/>
+    <PreferenceCategory android:title="@string/settings_ignored_users" android:key="SETTINGS_IGNORED_USERS_PREFERENCE_KEY"/>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <com.opengarden.firechat.preference.VectorPreferenceCategory android:title="@string/room_settings_labs_pref_title" android:key="SETTINGS_LABS_PREFERENCE_KEY">
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:focusable="false" android:title="@string/room_settings_labs_warning_message" android:key="labs_warning"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/room_settings_labs_end_to_end" android:key="SETTINGS_ROOM_SETTINGS_LABS_END_TO_END_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:focusable="false" android:title="@string/room_settings_labs_end_to_end_is_active" android:key="SETTINGS_ROOM_SETTINGS_LABS_END_TO_END_IS_ACTIVE_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_data_save_mode" android:key="SETTINGS_DATA_SAVE_MODE_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_labs_create_conference_with_jitsi" android:key="SETTINGS_USE_JITSI_CONF_PREFERENCE_KEY" android:defaultValue="true"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_labs_native_camera" android:key="SETTINGS_USE_NATIVE_CAMERA_PREFERENCE_KEY"/>
+    </com.opengarden.firechat.preference.VectorPreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_cryptography" android:key="SETTINGS_CRYPTOGRAPHY_PREFERENCE_KEY">
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/encryption_information_device_name" android:key="SETTINGS_ENCRYPTION_INFORMATION_DEVICE_NAME_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/encryption_information_device_id" android:key="SETTINGS_ENCRYPTION_INFORMATION_DEVICE_ID_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/encryption_information_device_key" android:key="SETTINGS_ENCRYPTION_INFORMATION_DEVICE_KEY_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/encryption_export_e2e_room_keys" android:key="SETTINGS_ENCRYPTION_EXPORT_E2E_ROOM_KEYS_PREFERENCE_KEY" android:summary="@string/encryption_export_room_keys_summary"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/encryption_import_e2e_room_keys" android:key="SETTINGS_ENCRYPTION_IMPORT_E2E_ROOM_KEYS_PREFERENCE_KEY" android:summary="@string/encryption_import_room_keys_summary"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/encryption_never_send_to_unverified_devices_title" android:key="SETTINGS_ENCRYPTION_NEVER_SENT_TO_PREFERENCE_KEY" android:summary="@string/encryption_never_send_to_unverified_devices_summary"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory android:key="SETTINGS_CRYPTOGRAPHY_DIVIDER_PREFERENCE_KEY"/>
+    <PreferenceCategory android:title="@string/settings_devices_list" android:key="SETTINGS_DEVICES_LIST_PREFERENCE_KEY"/>
+    <com.opengarden.firechat.preference.VectorDividerCategory android:key="SETTINGS_DEVICES_DIVIDER_PREFERENCE_KEY"/>
+    <PreferenceCategory android:title="@string/settings_advanced">
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_logged_in" android:key="SETTINGS_LOGGED_IN_PREFERENCE_KEY" android:summary="1.2.3"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_home_server" android:key="SETTINGS_HOME_SERVER_PREFERENCE_KEY" android:summary="1.2.3"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_identity_server" android:key="SETTINGS_IDENTITY_SERVER_PREFERENCE_KEY" android:summary="1.2.3"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="Enable offline messaging" android:key="SETTINGS_ENABLE_OFFLINE_MESSAGING" android:defaultValue="true"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_analytics" android:key="SETTINGS_ANALYTICS_PREFERENCE_KEY">
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/settings_opt_out_of_analytics" android:key="SETTINGS_DISABLE_PIWIK_SETTINGS_PREFERENCE_KEY" android:summary="@string/settings_opt_out_of_analytics_summary"/>
+        <com.opengarden.firechat.preference.VectorSwitchPreference android:title="@string/send_bug_report_rage_shake" android:key="SETTINGS_USE_RAGE_SHAKE_KEY"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_other" android:key="SETTINGS_OTHERS_PREFERENCE_KEY">
+        <Preference android:title="@string/settings_title_app_info_link" android:key="application_info_link" android:summary="@string/settings_summary_app_info_link"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_version" android:key="SETTINGS_VERSION_PREFERENCE_KEY" android:summary="1.2.3"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_olm_version" android:key="SETTINGS_OLM_VERSION_PREFERENCE_KEY" android:summary="1.2.3"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_copyright" android:key="SETTINGS_COPYRIGHT_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_app_term_conditions" android:key="SETTINGS_APP_TERM_CONDITIONS_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_privacy_policy" android:key="SETTINGS_PRIVACY_POLICY_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_third_party_notices" android:key="SETTINGS_THIRD_PARTY_NOTICES_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_keep_media" android:key="SETTINGS_MEDIA_SAVING_PERIOD_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_clear_medias_cache" android:key="SETTINGS_CLEAR_MEDIA_CACHE_PREFERENCE_KEY"/>
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_clear_cache" android:key="SETTINGS_CLEAR_CACHE_PREFERENCE_KEY"/>
+    </PreferenceCategory>
+    <com.opengarden.firechat.preference.VectorDividerCategory/>
+    <PreferenceCategory android:title="@string/settings_deactivate_account_section" android:key="SETTINGS_OTHERS_PREFERENCE_KEY">
+        <com.opengarden.firechat.preference.VectorCustomActionEditTextPreference android:title="@string/settings_deactivate_my_account" android:key="SETTINGS_DEACTIVATE_ACCOUNT_KEY"/>
+    </PreferenceCategory>
+</PreferenceScreen>

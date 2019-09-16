@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="40dp">
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_marginLeft="6dp">
+        <com.opengarden.firechat.view.VectorCircularImageView android:id="@+id/item_user_auto_complete_avatar" android:layout_width="28dp" android:layout_height="28dp" android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <TextView android:textSize="12sp" android:textStyle="bold" android:textColor="?attr/default_text_dark_color" android:layout_gravity="center_vertical" android:id="@+id/item_user_auto_complete_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12dp" android:layout_marginRight="6dp" android:maxLines="1"/>
+</LinearLayout>

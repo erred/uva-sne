@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:background="?attr/riot_primary_background_color" android:layout_width="match_parent" android:layout_height="74dp">
+    <ImageView android:id="@+id/filtered_list_avatar" android:layout_width="40dp" android:layout_height="40dp" android:layout_marginLeft="16dp" android:src="@drawable/ic_material_add_circle" android:layout_centerVertical="true"/>
+    <TextView android:textSize="16sp" android:textStyle="bold" android:textColor="?attr/default_text_dark_color" android:id="@+id/room_creation_add_member_texview" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:layout_marginRight="16dp" android:text="@string/room_creation_add_member" android:singleLine="true" android:layout_toLeftOf="@+id/filtered_list_actions_list" android:layout_toRightOf="@+id/filtered_list_avatar" android:layout_centerVertical="true"/>
+    <View android:background="?attr/list_divider_color" android:layout_width="match_parent" android:layout_height="1dp" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true"/>
+</RelativeLayout>

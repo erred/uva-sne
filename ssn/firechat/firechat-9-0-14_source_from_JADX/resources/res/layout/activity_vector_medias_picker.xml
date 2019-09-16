@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:layout_width="match_parent" android:layout_height="match_parent">
+    <ScrollView android:id="@+id/medias_picker_scrollView" android:scrollbars="none" android:layout_width="match_parent" android:layout_height="match_parent">
+        <RelativeLayout android:id="@+id/medias_picker_preview_gallery_layout" android:layout_width="match_parent" android:layout_height="1000dp">
+            <RelativeLayout android:id="@+id/medias_picker_camera_preview_layout" android:layout_width="wrap_content" android:layout_height="500dp" android:layout_alignParentTop="true" android:layout_centerHorizontal="true">
+                <TextureView android:id="@+id/medias_picker_texture_view" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true"/>
+                <ImageView android:id="@+id/medias_picker_texture_mask_view" android:background="@android:color/black" android:layout_width="match_parent" android:layout_height="match_parent"/>
+                <com.opengarden.firechat.view.VideoRecordView android:id="@+id/medias_record_animation" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="26dp" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
+                <ImageView android:id="@+id/medias_picker_camera_button" android:layout_width="70dp" android:layout_height="70dp" android:layout_marginBottom="30dp" android:src="@drawable/ic_take_picture_vector_green" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
+                <RelativeLayout android:id="@+id/medias_picker_switch_camera" android:background="@drawable/vector_medias_picker_button_background" android:layout_width="46dp" android:layout_height="46dp" android:layout_marginTop="12dp" android:layout_marginRight="12dp" android:layout_alignRight="@+id/medias_picker_texture_view" android:layout_alignParentTop="true">
+                    <ImageView android:layout_width="30dp" android:layout_height="30dp" android:src="@drawable/ic_switch_camera" android:layout_centerInParent="true"/>
+                </RelativeLayout>
+                <RelativeLayout android:id="@+id/medias_picker_exit" android:background="@drawable/vector_medias_picker_button_background" android:layout_width="46dp" android:layout_height="46dp" android:layout_marginLeft="12dp" android:layout_marginTop="12dp" android:onClick="onExitButton">
+                    <ImageView android:layout_width="22dp" android:layout_height="22dp" android:src="@drawable/ic_exit_media_picker_vector_green" android:layout_centerInParent="true"/>
+                </RelativeLayout>
+            </RelativeLayout>
+            <TableLayout android:layout_gravity="center_horizontal" android:id="@+id/gallery_table_layout" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+    </ScrollView>
+    <RelativeLayout android:id="@+id/medias_picker_preview_layout" android:background="@android:color/black" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="horizontal" android:id="@+id/cancel_attach_picture_layout" android:visibility="visible" android:layout_width="match_parent" android:layout_height="50dp" android:layout_alignParentBottom="true">
+            <TextView android:textSize="20sp" android:textColor="@android:color/white" android:gravity="center" android:id="@+id/medias_picker_redo_text_view" android:layout_width="0dp" android:layout_height="match_parent" android:text="@string/cancel" android:layout_weight="30"/>
+            <Space android:visibility="invisible" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="40"/>
+            <TextView android:textSize="20sp" android:textColor="@android:color/white" android:gravity="center" android:id="@+id/medias_picker_attach_text_view" android:layout_width="0dp" android:layout_height="match_parent" android:text="@string/ok" android:layout_weight="30"/>
+        </LinearLayout>
+        <RelativeLayout android:id="@+id/medias_picker_preview_image_layout" android:visibility="visible" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_above="@+id/cancel_attach_picture_layout">
+            <ImageView android:id="@+id/medias_picker_preview_image_view" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_centerInParent="true"/>
+            <ImageView android:id="@+id/medias_picker_preview_avatar_mode_mask" android:layout_width="match_parent" android:layout_height="match_parent"/>
+        </RelativeLayout>
+        <RelativeLayout android:id="@+id/medias_picker_preview_video_layout" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_above="@+id/cancel_attach_picture_layout">
+            <VideoView android:id="@+id/medias_picker_preview_video_view" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_centerInParent="true"/>
+            <ImageView android:id="@+id/medias_picker_preview_video_button" android:layout_width="60dp" android:layout_height="60dp" android:src="@drawable/camera_play" android:layout_centerInParent="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout android:id="@+id/medias_preview_progress_bar_layout" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+        <ProgressBar android:id="@+id/medias_preview_progress_bar" android:visibility="visible" android:layout_width="40dp" android:layout_height="40dp" android:indeterminate="true" android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</FrameLayout>

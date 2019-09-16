@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:id="@+id/section_layout" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <TextView android:id="@+id/section_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAllCaps="false" style="@style/ListHeader"/>
+    <ProgressBar android:theme="@style/SpinnerThemeGrey" android:id="@+id/section_loading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="-16dp" android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:indeterminate="true" android:layout_toRightOf="@+id/section_title" android:layout_alignTop="@+id/section_title" android:layout_alignBottom="@+id/section_title" android:layout_centerVertical="true"/>
+</RelativeLayout>

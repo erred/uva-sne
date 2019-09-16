@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:background="?attr/riot_primary_background_color" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <TextView android:id="@+id/device_name" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:text="device name.."/>
+    <TextView android:id="@+id/device_id" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:layout_marginTop="0dp" android:text="device id.." android:layout_below="@+id/device_name"/>
+    <ImageView android:id="@+id/device_e2e_icon" android:layout_width="14dp" android:layout_height="14dp" android:layout_marginRight="16dp" android:src="@drawable/e2e_verified" android:tint="?attr/default_icon_tint_color" android:layout_alignBottom="@+id/device_id" android:layout_alignParentRight="true"/>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@+id/container_buttons" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="16dp" android:layout_marginTop="2dp" android:layout_marginRight="16dp" android:layout_marginBottom="5dp" android:layout_below="@+id/device_id" android:layout_alignParentLeft="true" android:layout_alignParentStart="true">
+        <Button android:textColor="@android:color/white" android:id="@+id/button_verify" android:background="@color/vector_green_color" android:layout_width="0dp" android:layout_height="25dp" android:text="@string/encryption_information_verify" android:layout_weight="45" style="?android:attr/buttonStyleSmall"/>
+        <Space android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="10"/>
+        <Button android:textColor="@android:color/white" android:id="@+id/button_block" android:background="@color/vector_green_color" android:layout_width="0dp" android:layout_height="25dp" android:text="@string/encryption_information_block" android:layout_weight="45" style="?android:attr/buttonStyleSmall"/>
+    </LinearLayout>
+    <View android:background="?attr/list_divider_color" android:layout_width="match_parent" android:layout_height="1dp" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true"/>
+</RelativeLayout>

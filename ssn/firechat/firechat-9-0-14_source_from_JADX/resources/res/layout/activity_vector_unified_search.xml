@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:background="@android:color/white" android:layout_width="match_parent" android:layout_height="match_parent">
+    <ImageView android:id="@+id/search_background_imageview" android:background="@android:color/white" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent" android:src="@drawable/vector_search_bg" android:layout_centerInParent="true"/>
+    <LinearLayout android:orientation="vertical" android:id="@+id/search_main_page" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_alignParentTop="true" android:layout_centerHorizontal="true">
+        <android.support.design.widget.TabLayout android:id="@+id/search_filter_tabs" android:background="?attr/riot_primary_background_color" android:layout_width="match_parent" android:layout_height="wrap_content" style="@style/VectorUnifiedSearches.TabLayout"/>
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="0px" android:layout_weight="1">
+            <com.opengarden.firechat.view.RiotViewPager android:id="@+id/search_view_pager" android:background="?attr/riot_primary_background_color" android:layout_width="match_parent" android:layout_height="match_parent"/>
+            <ProgressBar android:theme="@style/SpinnerThemeGrey" android:id="@+id/search_load_oldest_progress" android:visibility="gone" android:layout_width="match_parent" android:layout_height="40dp" android:indeterminate="true"/>
+            <TextView android:textSize="17sp" android:textStyle="bold" android:id="@+id/search_no_result_textview" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/search_no_results"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout android:id="@+id/search_in_progress_view" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+        <View android:background="?attr/waiting_background_color" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_alignParentLeft="true" android:layout_alignParentTop="true"/>
+        <ProgressBar android:theme="@style/SpinnerThemeGrey" android:layout_width="40dp" android:layout_height="40dp" android:indeterminate="true" android:layout_centerHorizontal="true" android:layout_centerVertical="true"/>
+    </RelativeLayout>
+</RelativeLayout>
