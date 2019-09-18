@@ -86,10 +86,13 @@ Secondary: [Network Security](Network_Security.pdf)
 - Eventually cyclic
 - Never match self
 
-### 2019-09-12 Modern Cryto DES and AES
+### 2019-09-12 Stream ciphers
 - Stream Cipher
   - stretch key, use like one time pad
   - A5/1, A5/2, RC4 (read, use in cell)
+
+### 2019-09-16 Block ciphers
+
 - Block cipher
   - manipulation on matrix
   - DES
