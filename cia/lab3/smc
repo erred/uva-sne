@@ -1,0 +1,18 @@
+
+    d = 16
+    b = &mysterybytes
+    c = &
+
+back:
+    a = mysterybytes[0]
+    (mystery+15) = a
+    // segfault
+    b++
+    c--
+    d--
+    
+
+.byte 0x05, 0x0f, 0x00, 0x00, 0x00, 0x3c, 0xc0, 0xc7, 0x48, 0x6c, 0x33, 0x33, 0x74, 0xc7, 0xc7, 0x48
+      5     15    0     0     0     60    192   199   72    108   51    51    116   199   199   72
+      add   or    add   0     0     cmp(al) rol mov   rex   ins   xor   xor   jz    mov   mov   rex
+                                    <                 H     l     3     3     t                 H
