@@ -4,10 +4,10 @@ Backup for course data
 
 ## Courses
 
-| Block/Course | Notes        | Course                                                   | Other                                                        |
-| ------------ | ------------ | -------------------------------------------------------- | ------------------------------------------------------------ |
-| **1/SSN**    | [Notes](ssn) | [Course](https://www.os3.nl/2019-2020/courses/ssn/start) | [Project](https://github.com/seankhliao/uva-sne-ssn-project) |
-| **1/CIA**    | [Notes](cia) | [Course](https://www.os3.nl/2019-2020/courses/cia/start) |                                                              |
+| Block/Course | Notes           | Course                                                   | Other                                                        |
+| ------------ | --------------- | -------------------------------------------------------- | ------------------------------------------------------------ |
+| **1/SSN**    | [Notes](SSN.md) | [Course](https://www.os3.nl/2019-2020/courses/ssn/start) | [Project](https://github.com/seankhliao/uva-sne-ssn-project) |
+| **1/CIA**    | [Notes](CIA.md) | [Course](https://www.os3.nl/2019-2020/courses/cia/start) |                                                              |
 
 ## Dokuwiki Cheatsheet
 
