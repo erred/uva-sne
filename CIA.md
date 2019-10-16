@@ -1,37 +1,65 @@
 # Classical Internet Applications
 
-## Days
+## Notes
 
-### 2019-09-03
+### History
 
-- history lessons, memorize
+### Abbrevs
 
-### 2019-09-06
+### Computers
 
-- more history lessons
+#### X server / SSH
 
-### 2019-09-10
+#### shell / exec
 
-- Teletypes
-- X server as physical machines
-- shell parsing
-- exec
-- fork/clone
-- ELF executables
-- dynamic linking, interpreters
-- /proc virtialfs
-- compiler stages
+#### strace / syscalls
 
-### 2019-09-13
+#### ELF / binary / compile
 
-- CISC/RISC/VLIW
-- register size history
-- assembly syntac
-- syscalls
+#### Compilation
 
-### 2019-09-17
+#### CPU internals
 
-- DNS
-- domain names
+#### Assembly
 
-## RFCs
+#### Disk format
+
+### DNS
+
+#### RR types / compatibility
+
+#### Querying
+
+#### Wire format
+
+#### Infrastructure
+
+#### Extensions
+
+#### Wildcard synthesis
+
+#### DNSSEC
+
+#### NSEC / NSEC3
+
+### Email
+
+#### Agents
+
+#### SMTP session
+
+#### Security
+
+### Web
+
+#### urls
+
+#### http / h2
+
+#### servers
+
+#### layout engines
+
+#### ecmascript engines
+
+#### standardization
