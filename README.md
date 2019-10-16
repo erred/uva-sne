@@ -6,15 +6,15 @@ Backup for course data
 
 ### Cheatsheet
 
-| Style                      | Code                               | Style                  | Code                         |
-| -------------------------- | ---------------------------------- | ---------------------- | ---------------------------- |
-| **bold**                   | `**bold**`                         | _italic_               | `//italic//`                 |
-| **under**                  | `__under__`                        | ~~strike~~             | `<del>strike</strike>`       |
-| `mono`                     | `''mono''`                         | <mark>highlight</mark> | `<hi #fff200>highlight</hi>` |
-| <sup>sup</sup>             | `<sup>sup</sup>`                   | <sub>sub</sub>         | `<sup>sup</sup>`             |
-| ordered list               | `- ordered`                        | unordered list         | `* unordered`                |
-| [link](https://google.com) | `[[https://google.com|link text]]` | ruler                  | `----`                       |
-| > quote                    | `> quote`                          | code block             | `<code>code block</code>`    |
+| Style                      | Code                                | Style                  | Code                         |
+| -------------------------- | ----------------------------------- | ---------------------- | ---------------------------- |
+| **bold**                   | `**bold**`                          | _italic_               | `//italic//`                 |
+| **under**                  | `__under__`                         | ~~strike~~             | `<del>strike</strike>`       |
+| `mono`                     | `''mono''`                          | <mark>highlight</mark> | `<hi #fff200>highlight</hi>` |
+| <sup>sup</sup>             | `<sup>sup</sup>`                    | <sub>sub</sub>         | `<sup>sup</sup>`             |
+| ordered list               | `- ordered`                         | unordered list         | `* unordered`                |
+| [link](https://google.com) | `[[https://google.com\|link text]]` | ruler                  | `----`                       |
+| > quote                    | `> quote`                           | code block             | `<code>code block</code>`    |
 
 ```
 > quote
