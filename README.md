@@ -67,7 +67,7 @@ ruler:
 
 - [Notes](ssn)
 - [Project](https://github.com/seankhliao/uva-sne-ssn-project)
-- [Cource](https://www.os3.nl/2019-2020/courses/ssn/start)
+- [Course](https://www.os3.nl/2019-2020/courses/ssn/start)
 
 ### Classical Internet Applications
 
