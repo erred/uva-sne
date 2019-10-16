@@ -6,6 +6,70 @@ Primary: [Information Security](Information_Security.pdf)
 
 Secondary: [Network Security](Network_Security.pdf)
 
+## Notes
+
+### Classical Crypto
+
+#### Substitution
+
+#### Transposition
+
+#### CryptoAnalysis
+
+#### Enigma
+
+### Stream Ciphers
+
+#### A5/1
+
+#### RC4
+
+### Block Ciphers
+
+#### Feistel / DES / TDES
+
+#### AES
+
+### Asymmetric
+
+#### RSA
+
+#### Diffie-Hellman
+
+#### Elliptical Curve
+
+#### Confidentiality / Non repudiation
+
+### Hash
+
+### Authentication
+
+#### Passwords
+
+#### Biometrics
+
+#### 2fa
+
+#### TCP
+
+#### PFS
+
+#### Zero knowledge
+
+### Authorization
+
+#### Covert Channel
+
+### Real World
+
+#### SSH
+
+#### SSH / TLS
+
+#### IPSec
+
+#### Kerberos
+
 ## Days
 
 ### 2019-09-02 Classical Crypto
@@ -80,6 +144,7 @@ Secondary: [Network Security](Network_Security.pdf)
   - same concept but uses points on elliptical curve as generator
 
 ### 2019-09-09 Enigma
+
 - History
 - Not max combinations
   - plug 11 wires(?)
@@ -87,6 +152,7 @@ Secondary: [Network Security](Network_Security.pdf)
 - Never match self
 
 ### 2019-09-12 Stream ciphers
+
 - Stream Cipher
   - stretch key, use like one time pad
   - A5/1, A5/2, RC4 (read, use in cell)
