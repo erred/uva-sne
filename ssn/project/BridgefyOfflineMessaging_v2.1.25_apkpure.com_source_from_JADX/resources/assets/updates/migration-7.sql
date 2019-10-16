@@ -1,1 +1,0 @@
-ALTER TABLE `bgf_friend` ADD COLUMN `blocked` AFTER `bluetooth_address`;
