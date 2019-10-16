@@ -6,30 +6,15 @@ Backup for course data
 
 ### Cheatsheet
 
+| Style          | Code             | Style                  | Code                       |
+| -------------- | ---------------- | ---------------------- | -------------------------- |
+| **bold**       | `**bold**`       | _italic_               | `//italic//`               |
+| **under**      | `__under__`      | ~~strike~~             | `<del>strike</strike>`     |
+| `mono`         | `''mono''`       | <mark>highlight</mark> | <hi #fff200>highlight</hi> |
+| <sup>sup</sup> | `<sup>sup</sup>` | <sub>sub</sub>         | `<sup>sup</sup>`           |
+| ordered list   | `- ordered`      | unordered list         | `* unordered`              |
+
 ```
-====== Page Title Here ======
-
-==== Q1 ====
-=== a ===
-answer here
-
-=== formatting ===
-**bold**
-
-//italic//
-
-__underline__
-
-''monospace''
-
-<del>strikethrough</del>
-
-<hi #fff200>highlight</hi>
-
-<sup>super</sup>
-
-<sub>sub</sub>
-
 > quote
 >> here
 
@@ -42,12 +27,6 @@ hidden behind a button
 </spoiler>
 
 [[https://example.com|link text]]
-
- - ordered
- - list
-
- * unordered
- * list
 
 ruler:
 ----
