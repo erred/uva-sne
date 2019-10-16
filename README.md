@@ -1,10 +1,15 @@
-# UvA SNE Courses
+# UvA SNE
 
 Backup for course data
 
-## Dokuwiki Log format
+## Courses
 
-### Cheatsheet
+| Block/Course | Notes        | Course                                                   | Other                                                        |
+| ------------ | ------------ | -------------------------------------------------------- | ------------------------------------------------------------ |
+| **1/SSN**    | [Notes](ssn) | [Course](https://www.os3.nl/2019-2020/courses/ssn/start) | [Project](https://github.com/seankhliao/uva-sne-ssn-project) |
+| **1/CIA**    | [Notes](cia) | [Course](https://www.os3.nl/2019-2020/courses/cia/start) |                                                              |
+
+## Dokuwiki Cheatsheet
 
 | Style                      | Code                                | Style                  | Code                         |
 | -------------------------- | ----------------------------------- | ---------------------- | ---------------------------- |
@@ -17,13 +22,6 @@ Backup for course data
 | > quote                    | `> quote`                           | code block             | `<code>code block</code>`    |
 
 ```
-> quote
->> here
-
-<code>
-block
-</code>
-
 <spoiler | name prefix>
 hidden behind a button
 </spoiler>
@@ -36,19 +34,6 @@ hidden behind a button
 | :::         | | |
 
 ```
-
-## Block 1
-
-### Security of Systems and Networks
-
-- [Notes](ssn)
-- [Project](https://github.com/seankhliao/uva-sne-ssn-project)
-- [Course](https://www.os3.nl/2019-2020/courses/ssn/start)
-
-### Classical Internet Applications
-
-- [Notes](cia)
-- [Course](https://www.os3.nl/2019-2020/courses/cia/start)
 
 ## wiki-fuse
 
