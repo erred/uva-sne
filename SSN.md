@@ -10,35 +10,86 @@ Secondary: [Network Security](Network_Security.pdf)
 
 ### Classical Crypto
 
-#### Substitution
+- Shift, ROT, Caesar, Monoalphabetic
+  - frequency analysis
+- Codebook / lookup table
+- Polyalphabetic
+  - Vigenere: left shift rows
+- Double transposition (rows, cols)
+- One time pad
 
-#### Transposition
+### Enigma
 
-#### CryptoAnalysis
+3 wheels + reflector, 26^3 period
 
-#### Enigma
+Repeated messgae, standard message, never self translate, operational constraint 10e114 -> 10e23
 
-### Stream Ciphers
+### A5/1
 
-#### A5/1
+Shift registers: m = maj(x8, y10, z10), step if reg == m
 
-#### RC4
+- X / 19bits, x0 = x13 ^ x16 ^ x17 ^ x18
+- Y / 22bits, y0 = y20 ^ y21
+- Z / 23bits, z0 = z7 ^ z21 ^ z22 ^ z23
+- keystream = x18 ^ y21 ^ z22
 
-### Block Ciphers
+### RC4
 
-#### Feistel / DES / TDES
+self modifying lookup table: swap, get
 
-#### AES
+discard first 256 bytes
 
-### Asymmetric
+### Feistel / DES / TDES
 
-#### RSA
+64(56) bits
 
-#### Diffie-Hellman
+1. mix
+2. split A B
+3. A = A ^ F(B), B = B
+4. swap(A, B)
+5. repeat 16 rounds
+6. unmix
 
-#### Elliptical Curve
+### Block chaining
 
-#### Confidentiality / Non repudiation
+- ECB: unlinked
+- CBC: (N-1) ^ N --E+K--> N
+- CFB: (N-1) --E+K--> ^ N --> N
+- OFB: (NpreXOR-1) --E+K--> ^ N --> N
+- CTR: None+Counter --E+K--> ^ N --> N
+
+### AES
+
+1. AddRoundKey
+2. Repeat 9/11/13 rounds
+   1. SubBytes: lookup table: nonlinear
+   2. ShiftRows: leftshift row#: diffusion
+   3. MixColumn: maxtrix mult: diffusion
+   4. AddRoundKey
+3. Sub, Shift, AddRoundKey
+
+### RSA
+
+integer factorization, pq from N,
+all in mod **N** space,
+phi = number of elements in prime field,
+a ^ phi(N) = 1 mod N
+
+- **N** = _pq_, phi( **N** ) = ( _p_ - 1 )( _q_ - 1 )
+- **E** _d_ = 1 mod phi( **N** )
+- public key: **N**, **E**
+- pivate key: _p_, _q_, _d_
+- encryption: C = m^ **E** mod **N**
+- decryption: m = C^ **d** mod **N**
+
+### Diffie-Hellman
+
+discrete logarithm, reconstruct x from G ^ x,
+all in mod **P** space
+
+- _a_, _b_ secret
+- **G** ^ _a_, **G** ^ _b_ public
+- **G** ^ _ab_ secret
 
 ### Hash
 
@@ -170,6 +221,8 @@ Ticket Granting Ticket **TGT** = E("User", Sa, Kkdc)
   2. **KDC** -> **Alice**: E("Bob", Kab, E("Alice", Kab, Kb), Sa)
   3. **Alice** -> E("Alice", Kab, Kb), E(timestamp, Kab)
   4. **Bob** -> E(timestamp+1, Kab)
+
+#### Shibboleth
 
 ## Days
 
