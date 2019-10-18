@@ -11,6 +11,8 @@
 - 1965 donald davies: packet switching
 - 1967 ARPANET
   - Interface Message Processor (IMP): early switch/router
+- 1968
+  - doug engelbart: hypermedia
 - 1969
   - ARPANET IMP / Network Control Program (NCP)
   - BBN: company
@@ -37,11 +39,13 @@
   - Unix V7 / Unix to Unix Copy: UUCP
   - Unix to VAX
   - 3BSD
+  - UUCP ! email
 - 1982
   - Simple Mail Transfer Protocol (SMTP)
 - 1983
   - NCP -> TCP/IP
   - System V
+  - sendmail
   - paul mockapetris: Domain Name System: DNS
 - 1984
   - Top Level Domains: TLD
@@ -61,10 +65,17 @@
   - World Wide Web: WWW
 - 1991
   - Gopher
+- 1993
+  - NCSA mosaic
 - 1994
   - Linux 1.0
+  - W3C
+  - Netscape
 - 1995
   - graphical web
+  - Internet Explorer
+- 1997
+  - DNSSEC 1
 - 1998
   - ICANN
   - IP: Address Supporting Organization ASO
@@ -73,13 +84,13 @@
 - 1999
   - XMPP
   - blogging / napster
+  - DNSSEC 2
 - 2000
   - Dotcom bubble
 - 2003: SNE
 - 2004: Facebook
+- 2005: DNSSEC 3
 - 2006: Twitter
-
-### Computers
 
 #### X server / SSH
 
@@ -142,41 +153,54 @@
 - PTR: anything
 - SOA: hostname, email, (serial refresh retry expire minimum)
 - SRV: services
+- DNSKEY: ksk/zsk_flag 3 algo key_b64
+- DS: keytag algo hash_algo digest_hex
+- RRSIG: type algo labels ttl valid2 keytag zone signature_b64
+- NSEC: next_domain (current_types)
+- NSEC3: hash_algo flags iter salt_len salt next_hashed (current_types)
 - "13" root servers
 
-#### Querying
+### Querying
 
 - Header, Question, Answer, Authority, Additional
 - Header
   - ID, flags, QDCOUNT, ANCOUNT, NSCOUNT, ARCOUNT
   - flags: q/r, opcode, AA (autoritative), tc (truncated), rd (recurse des), ra (recuse avail), ad (authentic), cd (check disable), rcode
 
-#### Extensions
+### EDNS0
 
-#### Wildcard synthesis
+- bigger, more codes/flags
+- OPT RR
+- TSIG: signs packets
+- SIG0: dnssec packets
 
 #### DNSSEC
 
-#### NSEC / NSEC3
+- protects against non authoritative servers
+- sign authoritative data
 
 ### Email
 
-#### Agents
-
-#### SMTP session
-
-#### Security
+- ESMTP sesion: envelope
+  - EHLO addr
+  - MAIL FROM
+  - RCPT TO
+  - DATA: .
+  - QUIT
+- Message Format
+  - 7bit ascii CRLF
+  - 998text + CRLF
+  - headers: Sender, Cc, Bcc, To, Message-ID, Received
+- AUTH, STARTTLS, PGP, S/MIME
+  - Multipurpose Internet Mail Extensions MIME
+- DANE, MTA-STS, SPF, DKIM
 
 ### Web
 
-#### urls
-
-#### http / h2
-
-#### servers
-
-#### layout engines
-
-#### ecmascript engines
-
-#### standardization
+- layout: gecko / khtml / webkit / blink / trident / edgehtml / presto
+- js: spidermonkey / kjs / jscore / nitro / v8 / chakra / carakan
+- CGI / SSI (php jsp) / servlets / asp.net
+- DOM / DHTML / ecmascript / asynchronous javascript and xml AJAX / XMLHttpRequest
+- h2 server push
+- http methods / headers /
+- \*ml
