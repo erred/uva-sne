@@ -9,73 +9,48 @@
 - 1963 leonard kleinrock: message switching
 - 1964 paul baran: packet switching (message blocks)
 - 1965 donald davies: packet switching
-- 1967 ARPANET
-  - Interface Message Processor (IMP): early switch/router
-- 1968
-  - doug engelbart: hypermedia
+- 1967 larry roberts: ARPANET / Interface Message Processor (IMP): early switch/router
+- 1968 douglas engelbart: hypermedia
 - 1969
-  - ARPANET IMP / Network Control Program (NCP)
-  - BBN: company
   - steve crocker: RFC #1
+  - 4 node network
   - ken thompson: B
   - dennis ritchie: C
   - Unics: PDP-7, Multics, interactive, time sharing
   - kleinrock - engelbart: TELNET
 - 1971
-  - FTP
-  - Tomlinson: @ email
+  - ray tomlinson: @ email / ftp
   - Unix V1
 - 1973
-  - Unix V4
-  - C / pipes
+  - Unix V4 / C / pipes
   - HOSTS.TXT
 - 1974
-  - TCP/IP: replace NCP
-  - RFC #675 Internet
-- 1975: Unix V6 / ARPANET
-- 1976: Mailing lists
-- 1977: TCP/IP vs OSI
+  - vinton cerf / bob kahn: TCP/IP
+  - vinton cerf: RFC #675 Internet
+- 1975 Unix V6 / ARPANET
+- 1976 Mailing lists
 - 1979
-  - Unix V7 / Unix to Unix Copy: UUCP
+  - mike lest: Unix V7 / Unix to Unix Copy: UUCP / ! email
   - Unix to VAX
   - 3BSD
-  - UUCP ! email
-- 1982
-  - Simple Mail Transfer Protocol (SMTP)
-- 1983
-  - NCP -> TCP/IP
-  - System V
-  - sendmail
-  - paul mockapetris: Domain Name System: DNS
-- 1984
-  - Top Level Domains: TLD
-  - USSR on usenet
+- 1982 eric alman: Simple Mail Transfer Protocol (SMTP) / sendmail
+- 1983 jon postel: NCP -> TCP/IP
+- 1984 paul mockapetris: Domain Name System: DNS
 - 1986
   - MX records
   - MB MG MR MINFO: failed
   - Network News Transfer Protocol: NNTP
   - 4.3BSD
-  - Stanford Research Institute SRI runs DNS
-- 1988
-  - NSFNET upgrade to T1
-  - SURFnet
-  - jarkko oikarinen: Internet Relay Chat: IRC
-- 1990
-  - NSFNET upgrade to T3
-  - World Wide Web: WWW
-- 1991
-  - Gopher
-- 1993
-  - NCSA mosaic
+- 1988 jarkko oikarinen: Internet Relay Chat: IRC
+- 1990 tim berners lee: World Wide Web: WWW
+- 1991 Gopher
+- 1993 NCSA mosaic
 - 1994
   - Linux 1.0
   - W3C
   - Netscape
-- 1995
-  - graphical web
-  - Internet Explorer
-- 1997
-  - DNSSEC 1
+- 1995 graphical web / Internet Explorer
+- 1997 DNSSEC 1
 - 1998
   - ICANN
   - IP: Address Supporting Organization ASO
@@ -85,8 +60,7 @@
   - XMPP
   - blogging / napster
   - DNSSEC 2
-- 2000
-  - Dotcom bubble
+- 2000 Dotcom bubble
 - 2003: SNE
 - 2004: Facebook
 - 2005: DNSSEC 3
