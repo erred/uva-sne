@@ -83,6 +83,7 @@ a ^ phi(N) = 1 mod N
 
 - **N** = _pq_, phi( **N** ) = ( _p_ - 1 )( _q_ - 1 )
 - **E** _d_ = 1 mod phi( **N** )
+  - \[3, phi( **N** )), coprime with phi( **N** )
 - public key: **N**, **E**
 - pivate key: _p_, _q_, _d_
 - encryption: C = m^ **E** mod **N**
