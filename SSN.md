@@ -28,7 +28,7 @@ Secondary: [Network Security](Network_Security.pdf)
 Repeated messgae, standard message, never self translate, operational constraint 10e114 -> 10e23
 
 - plugboard (characters, wires): C!/((c-2w)!w!(2^w))
-- reflectors _ (characters ^ rotors) _ (rotor_total!/(rotor_total - rotors)!) _ (characters _ (rotors-1))
+- reflectors \* (characters ^ rotors) \* (rotor_total!/(rotor_total - rotors)!) \* (characters \* (rotors-1))
 
 ### A5/1
 
@@ -62,7 +62,7 @@ discard first 256 bytes
 - CBC: (N-1) ^ N --E+K--> N
 - CFB: (N-1) --E+K--> ^ N --> N
 - OFB: (NpreXOR-1) --E+K--> ^ N --> N
-- CTR: None+Counter --E+K--> ^ N --> N
+- CTR: Nonce+Counter --E+K--> ^ N --> N
 
 ### AES
 
