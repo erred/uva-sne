@@ -13,7 +13,7 @@ Secondary: [Network Security](Network_Security.pdf)
 - Shift, ROT, Caesar, Monoalphabetic
   - frequency analysis
   - atbash = reverse
-  - playfair = digraph lookup, split similar, replace below / right
+  - playfair = digraph lookup, split similar, replace below / right / right-left
   - adfgvx = 6x6 grid, lookup row/col, grid by key, rearrange cols by alpha
 - Codebook / lookup table
 - Polyalphabetic
@@ -138,6 +138,8 @@ EER: hand 10e-3, fingerprint 5e-2, iris 10e-6
 
 #### TLS / SSL
 
+- Name:
+  - TLS_KeyExchangeAlgo_AuthAlgo_WITH_MessageStreamBlockCipher_MessageAuthAlgo
 - Session
   1. **Alice** -> **Bob**: Request, CryptoProposed, Ra
   2. **Bob** -> **Alice**: Certificate, CryptoSelected, Rb
@@ -229,3 +231,12 @@ Ticket Granting Ticket **TGT** = E("User", Sa, Kkdc)
   4. **Bob** -> E(timestamp+1, Kab)
 
 #### Shibboleth
+
+Protocol:
+
+- User access Protected Resource
+- User redirected to IdP or Where Are You From WAYF with requesterID, assertionConsumptionLoc
+- User auth, IdP generates Auth Assertion with Handle
+- User redirected to assertionConsumptionLoc
+- Assertion consumed, AttributeQuery direct to IdP
+- IdP responds attributeAssertion
