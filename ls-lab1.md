@@ -261,10 +261,21 @@ guest-01                                     4  1024     2     -b----       7.8
 
 ## Q13. Briefly explain the following terms DomU Dom0 PCI pass-through Which is which in your situation? Is PCI pass-through used and if so for what?
 
-- DomU
-- Dom0
-- PCI passthrough
+- DomU: user domain, the guest VMs that run in Xen, this is Guest-01
+- Dom0: the host / privileged domain, used to manage the system and Xen, this is the host we first installed
+- PCI passthrough: attaching a PCI device directly to a VM, giving it direct control, bypassing the host, not used
+
+- https://wiki.debian.org/Xen
 
 ## Q14. deboostrap rinse and rpmstrap can be used to aid in the creation of virtual machine images In fact xen-create-image can use all of them under the hood When would you use one over the others?
+
+- Debootstrap: used to setup a debian based system
+- Rinse: setup RPM based system
+- rpmstrap: setup RPM based system
+
+For Debian based systems (ours), use deboostrap.
+
+- https://wiki.debian.org/Debootstrap
+- https://manned.org/rpmstrap/ba70bc67
 
 ## Q15. How do you think that the virtual machine communicates with the outside network in your setup? Draw a simple network diagram showing at least the network cards the bridges and any routers that might be present Don't forget to label everything with IP addresses and names
