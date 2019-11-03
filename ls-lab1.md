@@ -279,3 +279,5 @@ For Debian based systems (ours), use deboostrap.
 - https://manned.org/rpmstrap/ba70bc67
 
 ## Q15. How do you think that the virtual machine communicates with the outside network in your setup? Draw a simple network diagram showing at least the network cards the bridges and any routers that might be present Don't forget to label everything with IP addresses and names
+
+{{:2019-2020:students:sean_liao:ls:inr-1_3_.png|}}

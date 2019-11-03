@@ -28,6 +28,8 @@
 
 ## Q4. Form a group of two and discuss how you are going to migrate VMs to each other's hypervisor Set up your systems so you can do both cold and live migrations Describe your setup in your logs Hint Do not use LVM Remember your eno2
 
+{{:2019-2020:students:sean_liao:ls:ls-2.png?direct|}}
+
 - https://wiki.linuxfoundation.org/networking/bridge
 - https://wiki.archlinux.org/index.php/Network_bridge#Troubleshooting
 
@@ -236,7 +238,7 @@ for i in {1..10}; do
 done
 ```
 
-===== Q6. Perform cold migrations with your partner and measure the downtime Do not take just a single measurement Compute mean and median of your chosen metric =====
+## Q6. Perform cold migrations with your partner and measure the downtime Do not take just a single measurement Compute mean and median of your chosen metric
 
 - 10 cycles: 1 cycle = from `nevers` to `avignon` then back to `nevers`.
 - Each migration was a single measurement: total 20 measurements
@@ -250,7 +252,7 @@ done
 We think the lower values for network downtime are a result of us using ping
 which tests if the interface is responsive and not if the host itself is responsive
 
-===== Q7. Perform live migrations with your partner and measure the downtime Compute mean and median of your chosen metric Performance There are various ways to set up shared storage for VM migration for instance using NFS and SMB two protocols that allow you to mount remote filesystems =====
+## Q7. Perform live migrations with your partner and measure the downtime Compute mean and median of your chosen metric Performance There are various ways to set up shared storage for VM migration for instance using NFS and SMB two protocols that allow you to mount remote filesystems
 
 - 10 cycles: 1 cycle = from `nevers` to `avignon` then back to `nevers`.
 - Each migration was a single measurement: total 20 measurements
@@ -261,15 +263,33 @@ which tests if the interface is responsive and not if the host itself is respons
 | Median     | 746              | 490              |
 | stdev      | 30               | 12               |
 
-===== Q8. What are the most important differences between NFS and SMB? Explain in approximately 200 words =====
+## Q8. What are the most important differences between NFS and SMB? Explain in approximately 200 words
 
-===== Q9. Together with your partner design an experiment to compare the performance of NFS and SMB as VM shared storage Distinguish between raw I/O performance and the performance under a realistic workload E g what if the VM was running an Apache Web server? Discuss the design with a lab teacher =====
+NFS (Network File System) is a protocol that only covers exposing a filesystem over a network.
+Authentication is done per host or per request.
+NFS has better performance than SMB, especially for small files.
 
-- `sudo apt install samba`
+SMB (Server Message Block) is a protocol for filesystems, printers, and serial ports over a network.
+Authentication is done per user/connection or per request.
+NFS is supports many more features,
+but as a result is much more complex to configure,
+introduces more bugs,
+and is often the source of security issues.
+SMB has also been extened by Mirosoft,
+and is available natively on Windows.
+
+- https://en.wikipedia.org/wiki/Network_File_System
+- https://en.wikipedia.org/wiki/Server_Message_Block
+- https://ferhatakgun.com/network-share-performance-differences-between-nfs-smb/
+
+## Q9. Together with your partner design an experiment to compare the performance of NFS and SMB as VM shared storage Distinguish between raw I/O performance and the performance under a realistic workload E g what if the VM was running an Apache Web server? Discuss the design with a lab teacher
+
+- `sudo apt install samba cifs-utils`
 - edit `/etc/samba/smb.conf`
 - `sudo mkdir /xen/samba`
 - `sudo chown nobody:nogroup /xen/samba`
 - `sudo systemctl restart smbd.service nmbd.service`
+- `sudo mount -t cifs -u root %%//%%nevers.studlab.os3.nl/xen/samba mnt`
 
 smb.conf:
 
@@ -280,19 +300,18 @@ path = /xen/samba
 guest ok = yes
 read only = no
 create mask = 0755
-
 ```
 
 - https://help.ubuntu.com/lts/serverguide/samba-fileserver.html
 
-===== Q10. Configure both NFS and SMB on your systems Perform the experiment and show the results in your log Try to explain any remarkable differences Hint root is a nobody when it comes to NFS =====
+## Q10. Configure both NFS and SMB on your systems Perform the experiment and show the results in your log Try to explain any remarkable differences Hint root is a nobody when it comes to NFS
 
-====== BONUS ======
+## BONUS
 
-===== Q11. Find out how the importing feature of Amazon works In which case would it be easier to migrate a VM to Amazon instead of just creating a new one? =====
+## Q11. Find out how the importing feature of Amazon works In which case would it be easier to migrate a VM to Amazon instead of just creating a new one?
 
-===== Q12. Create a new PV machine with 6500 MB of disk space Make sure Apache is installed and is serving a web page Convert this PV machine to a HVM machine Document the steps you take There are many ways to do the conversion we provide a cheat sheet below if you don't want to get lost =====
+## Q12. Create a new PV machine with 6500 MB of disk space Make sure Apache is installed and is serving a web page Convert this PV machine to a HVM machine Document the steps you take There are many ways to do the conversion we provide a cheat sheet below if you don't want to get lost
 
-===== Q13. Now migrate the disk to the Amazon cloud and create an instance with your volume Document which steps you took to get it to work Please make sure you use the t2 micro instance name all volumes and snapshots you create (unnamed ones are subject to deletion) delete all volumes and snapshots as soon as you are done This sounds draconic but S3 Storage is extremely expensive Last year we spent as much money on storage as on the whole of the Amazon lab Hint EC2 CLI EC2 volume upload (note ec2-instance-import is not working for us) =====
+## Q13. Now migrate the disk to the Amazon cloud and create an instance with your volume Document which steps you took to get it to work Please make sure you use the t2 micro instance name all volumes and snapshots you create (unnamed ones are subject to deletion) delete all volumes and snapshots as soon as you are done This sounds draconic but S3 Storage is extremely expensive Last year we spent as much money on storage as on the whole of the Amazon lab Hint EC2 CLI EC2 volume upload (note ec2-instance-import is not working for us)
 
-===== Q14. Show the Amazon cloud serving the web page on your server What are the differences between the imported VM against the VM running on your system? =====
+## Q14. Show the Amazon cloud serving the web page on your server What are the differences between the imported VM against the VM running on your system?
