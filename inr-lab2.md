@@ -295,6 +295,36 @@ Warning: way you want. Consider using -I/--head instead.
 ## Q14. What is the size of each ICMP packet? Why is it not 1024?
 
 ```
+arccy@guest-01 ~ % ping -c 10 www.os3.nl -s 1024
+arccy@nevers» sudo tcpdump -i xenbr0 icmp -w capture.pcap
+```
+
+```
+arccy@nevers» tcpdump -r capture.pcap
+reading from file capture.pcap, link-type EN10MB (Ethernet)
+09:02:42.470946 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 1, length 1032
+09:02:42.471360 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 1, length 1032
+09:02:43.472758 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 2, length 1032
+09:02:43.473210 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 2, length 1032
+09:02:44.489264 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 3, length 1032
+09:02:44.489727 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 3, length 1032
+09:02:45.513263 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 4, length 1032
+09:02:45.513638 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 4, length 1032
+09:02:46.537263 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 5, length 1032
+09:02:46.537644 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 5, length 1032
+09:02:47.561257 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 6, length 1032
+09:02:47.561653 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 6, length 1032
+09:02:48.585306 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 7, length 1032
+09:02:48.585708 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 7, length 1032
+09:02:49.609267 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 8, length 1032
+09:02:49.609674 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 8, length 1032
+09:02:50.633264 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 9, length 1032
+09:02:50.633663 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 9, length 1032
+09:02:51.657290 IP g1.nevers.prac.os3.nl > www.os3.nl: ICMP echo request, id 14557, seq 10, length 1032
+09:02:51.657724 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 10, length 1032
+```
+
+```
        -s packetsize
               Specifies the number of data bytes to be  sent.   The  default  is  56,  which
               translates  into  64  ICMP  data  bytes when combined with the 8 bytes of ICMP
