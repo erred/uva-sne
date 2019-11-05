@@ -5,7 +5,7 @@
 - `lspci | grep Ethernet`: list PCI(e) devices, filter for ethernet
   - Broadcom NetXtreme® BCM5720 Dual-Port 1GBASE-T PCIe 2.1 Ethernet Controller
 - PCIe: peripheral component interconnect express
-- Negotiated width: 2x: 1.000 GB/s = 953MiB/s
+- Rate: 1 (width) x 5.0 GT/s x 8/10 (encoding) = 500 MB/s = 477 MiB/s
 
 <spoiler|lspci>
 
