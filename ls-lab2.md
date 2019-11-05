@@ -284,12 +284,15 @@ and is available natively on Windows.
 
 ## Q9. Together with your partner design an experiment to compare the performance of NFS and SMB as VM shared storage Distinguish between raw I/O performance and the performance under a realistic workload E g what if the VM was running an Apache Web server? Discuss the design with a lab teacher
 
-- `sudo apt install samba cifs-utils`
+- `sudo apt install samba smbclient`
 - edit `/etc/samba/smb.conf`
 - `sudo mkdir /xen/samba`
 - `sudo chown nobody:nogroup /xen/samba`
 - `sudo systemctl restart smbd.service nmbd.service`
-- `sudo mount -t cifs -u root %%//%%nevers.studlab.os3.nl/xen/samba mnt`
+- `sudo useradd -r sambauser`
+- `sudo smbpasswd -a sambauser`
+
+- avignon: `sudo mount -t cifs -u sambauser %%//%%nevers.studlab.os3.nl/share mnt`
 
 smb.conf:
 
@@ -299,12 +302,37 @@ comment = LS-2 test
 path = /xen/samba
 guest ok = yes
 read only = no
-create mask = 0755
 ```
 
 - https://help.ubuntu.com/lts/serverguide/samba-fileserver.html
 
 ## Q10. Configure both NFS and SMB on your systems Perform the experiment and show the results in your log Try to explain any remarkable differences Hint root is a nobody when it comes to NFS
+
+### Raw IO
+
+copy 1GiB random (`/dev/urandom`) file, 10 times
+
+|                        | Copy time (s) |
+| ---------------------- | ------------- |
+| Native local to local  | 19.75         |
+| NFS write to remote    | 20.66         |
+| NFS read from remote   | 20.15         |
+| Samba write to remote  | 23.09         |
+| Samba read from remote | 21.61         |
+
+- to avoid caching effects we discarded the first _N_ results that were still increasing in transfer time.
+- this synthetic test uses (relatively) large files and so is only useful for measuring raw throughput.
+- the effects of latency should not be very visible in this test
+- both setups were with default options, no attempts at performance tuning was made
+- as expected samba was slightly slower
+
+### Realistic Performance
+
+Whether the test is **"realistic"** depends on the workload. Ex:
+
+- A media transcoding server works similarly to our test and will see minimal impact
+- A web server serving highly-cached / generated files will see minimal impact beyond first load.
+- A database server may be more sensitive to latency and may see a higher impact
 
 ## BONUS
 

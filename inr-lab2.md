@@ -6,16 +6,22 @@
   - Broadcom NetXtreme® BCM5720 Dual-Port 1GBASE-T PCIe 2.1 Ethernet Controller
 - ## PCIe: peripheral component interconnect express
 
+<spoiler|lspci>
+
 ```
 arccy@nevers» lspci | grep Ethernet
 03:00.0 Ethernet controller: Broadcom Inc. and subsidiaries NetXtreme BCM5720 Gigabit Ethernet PCIe
 03:00.1 Ethernet controller: Broadcom Inc. and subsidiaries NetXtreme BCM5720 Gigabit Ethernet PCIe
 ```
 
+</spoiler>
+
 - https://www.broadcom.com/products/ethernet-connectivity/network-ics/bcm5720-1gbase-t-ic
 - https://unix.stackexchange.com/questions/393/how-to-check-how-many-lanes-are-used-by-the-pcie-card
 
 ## Q2. What is the current speed of the network interface? What offload features are enabled? Briefly explain the purpose of the tcp-segmentation-offload feature Hint ethtool
+
+<spoiler|ethtool>
 
 ```
 arccy@nevers» sudo ethtool eno1
@@ -53,7 +59,11 @@ Settings for eno1:
 	Link detected: yes
 ```
 
+</spoiler>
+
 ## Q3. What is the MAC address of the OS3 router facing your server? Can you infer the manufacturer of the network card? What about the MAC address of eth0 / eno1 and its manufacturer? Hint arp
+
+<spoiler|arp>
 
 ```
 arccy@nevers» arp -i eno1
@@ -64,8 +74,9 @@ avignon.studlab.os3.nl   ether   34:17:eb:f0:db:27   C                     eno1
 router.studlab.os3.nl    ether   f8:b1:56:2f:b5:23   C                     eno1
 ```
 
+</spoiler>
 ## Q4. Assuming that you have completed the previous lab what interfaces are part of the xenbr0 bridge? What MAC addresses has this bridge learned so far? Hint brctl
-
+<spoiler|brctl>
 ```
 arccy@nevers» brctl show
 bridge name	bridge id		STP enabled	interfaces
@@ -73,7 +84,8 @@ xenbr0		8000.2e26ca689ed9	no		eno2
 							vif1.0
 							vif58.0
 ```
-
+</spoiler>
+<spoiler|arp>
 ```
 arccy@nevers» arp -i xenbr0
 Address                  HWtype  HWaddress           Flags Mask            Iface
@@ -83,8 +95,10 @@ guest-05                 ether   00:16:3e:81:56:74   C                     xenbr
 g1.nevers.prac.os3.nl    ether   00:16:3e:76:c6:56   C                     xenbr0
 145.100.110.33           ether   76:8e:e9:fa:ea:b2   C                     xenbr0
 ```
-
+</spoiler>
 ## Q5. How many bytes did your eth0 / eno1 interface receive since boot? The kernel uses an unsigned long long variable for the RX bytes counter How much traffic (in GiB) must the server receive for this value to overflow? Hint ifconfig
+
+<spoiler|ifconfig>
 
 ```
 arccy@nevers» ifconfig eno1
@@ -99,15 +113,18 @@ eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         device interrupt 16
 ```
 
+</spoiler>
 ## Q6. What is the MTU setting for eth0 / eno1 ? When do you think it should be increased? When do you think it should be decreased? Hint ip link ifconfig
-
+<spoiler|ip link>
 ```
 arccy@nevers» ip link show eno1
 2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
     link/ether 34:17:eb:f0:dc:e3 brd ff:ff:ff:ff:ff:ff
 ```
-
+</spoiler>
 ## Q7. What is the default gateway on your server? Why is there an explicit route to the OS3 network? If you would delete this latter route will you be able to send traffic to your default gateway? Why?
+
+<spoiler|ip route>
 
 ```
 arccy@nevers» ip route
@@ -119,8 +136,9 @@ default via 145.100.104.97 dev eno1 proto dhcp src 145.100.104.117 metric 100
 145.100.111.12/30 dev wg0 proto kernel scope link src 145.100.111.12
 ```
 
+</spoiler>
 ## Q8. Perform a traceroute to bad horse Why does it stop after 30 hops? How can you increase this number? Provide the full traceroute output Hint mtr traceroute
-
+<spoiler|traceroute>
 ```
 arccy@nevers» traceroute signed.bad.horse
 traceroute to signed.bad.horse (162.252.205.157), 30 hops max, 60 byte packets
@@ -155,14 +173,17 @@ traceroute to signed.bad.horse (162.252.205.157), 30 hops max, 60 byte packets
 29  * * *
 30  * * *
 ```
-
+</spoiler>
+<spoiler|man traceroute>
 ```
   -m max_ttl  --max-hops=max_ttl
                               Set the max number of hops (max TTL to be
                               reached). Default is 30
 ```
-
+</spoiler>
 ## Q9. What are the three built-in chains in the netfilter filter table? Briefly explain what is the purpose of each chain
+
+<spoiler|iptables>
 
 ```
 arccy@nevers» sudo iptables -L
@@ -184,7 +205,11 @@ Chain OUTPUT (policy ACCEPT)
 target     prot opt source               destination
 ```
 
+</spoiler>
+
 ## Q10. What ports are currently open on your machine? What services do they belong to? Hint netstat
+
+<spoiler|netstat>
 
 ```
 arccy@nevers» sudo netstat -plnt
@@ -212,7 +237,11 @@ tcp6       0      0 :::37979                :::*                    LISTEN      
 tcp6       0      0 :::445                  :::*                    LISTEN      17005/smbd
 ```
 
+</spoiler>
+
 ## Q11. How many unix sockets are currently created on your server? What are unix sockets used for? Hint lsof
+
+<spoiler|lsof>
 
 ```
 arccy@nevers» lsof -U
@@ -231,6 +260,7 @@ systemd 8870 arccy   26u  unix 0x0000000000000000      0t0 161998 /run/user/1000
 systemd 8870 arccy   27u  unix 0x0000000000000000      0t0 161999 /run/user/1000/gnupg/S.gpg-agent type=STREAM
 ```
 
+</spoiler>
 ## Q12. How can you test that a machine is listening on a specific TCP port? Can you do the same for UDP? Why? Hint nc telnet
 
 ```
@@ -238,6 +268,8 @@ nc host:port
 ```
 
 ## Q13. What is the type and version of the webserver that serves www os3 nl ? Hint curl wget
+
+<spoiler|curl>
 
 ```
 arccy@nevers» curl -v -X HEAD https://www.os3.nl
@@ -292,12 +324,15 @@ Warning: way you want. Consider using -I/--head instead.
 * TLSv1.2 (OUT), TLS alert, Client hello (1):
 ```
 
+</spoiler>
 ## Q14. What is the size of each ICMP packet? Why is it not 1024?
 
 ```
 arccy@guest-01 ~ % ping -c 10 www.os3.nl -s 1024
 arccy@nevers» sudo tcpdump -i xenbr0 icmp -w capture.pcap
 ```
+
+<spoiler|tcpdump>
 
 ```
 arccy@nevers» tcpdump -r capture.pcap
@@ -324,9 +359,15 @@ reading from file capture.pcap, link-type EN10MB (Ethernet)
 09:02:51.657724 IP www.os3.nl > g1.nevers.prac.os3.nl: ICMP echo reply, id 14557, seq 10, length 1032
 ```
 
+</spoiler>
+
+<spoiler|man ping>
+
 ```
        -s packetsize
               Specifies the number of data bytes to be  sent.   The  default  is  56,  which
               translates  into  64  ICMP  data  bytes when combined with the 8 bytes of ICMP
               header data.
 ```
+
+</spoiler>
