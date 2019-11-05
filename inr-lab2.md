@@ -4,7 +4,8 @@
 
 - `lspci | grep Ethernet`: list PCI(e) devices, filter for ethernet
   - Broadcom NetXtreme® BCM5720 Dual-Port 1GBASE-T PCIe 2.1 Ethernet Controller
-- ## PCIe: peripheral component interconnect express
+- PCIe: peripheral component interconnect express
+- Negotiated width: 2x: 1.000 GB/s = 953MiB/s
 
 <spoiler|lspci>
 
@@ -14,12 +15,94 @@ arccy@nevers» lspci | grep Ethernet
 03:00.1 Ethernet controller: Broadcom Inc. and subsidiaries NetXtreme BCM5720 Gigabit Ethernet PCIe
 ```
 
+<spoiler|lspci -vv>
+
+```
+03:00.0 Ethernet controller: Broadcom Inc. and subsidiaries NetXtreme BCM5720 Gigabit Ethernet PCIe
+	Subsystem: Dell NetXtreme BCM5720 Gigabit Ethernet PCIe
+	Control: I/O- Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
+	Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Latency: 0
+	Interrupt: pin A routed to IRQ 16
+	Region 0: Memory at 92a30000 (64-bit, prefetchable) [size=64K]
+	Region 2: Memory at 92a40000 (64-bit, prefetchable) [size=64K]
+	Region 4: Memory at 92a50000 (64-bit, prefetchable) [size=64K]
+	Expansion ROM at 90100000 [disabled] [size=256K]
+	Capabilities: [48] Power Management version 3
+		Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0+,D1-,D2-,D3hot+,D3cold+)
+		Status: D0 NoSoftRst+ PME-Enable- DSel=8 DScale=1 PME-
+	Capabilities: [50] Vital Product Data
+		Product Name: Broadcom NetXtreme Gigabit Ethernet
+		Read-only fields:
+			[PN] Part number: BCM95720
+			[MN] Manufacture ID: 31 30 32 38
+			[V0] Vendor specific: FFV20.2.17
+			[V1] Vendor specific: DSV1028VPDR.VER1.0
+			[V2] Vendor specific: NPY2
+			[V3] Vendor specific: PMT1
+			[V4] Vendor specific: NMVBroadcom Corp
+			[V5] Vendor specific: DTINIC
+			[V6] Vendor specific: DCM1001008d452101008d45
+			[RV] Reserved: checksum good, 233 byte(s) reserved
+		End
+	Capabilities: [58] MSI: Enable- Count=1/8 Maskable- 64bit+
+		Address: 0000000000000000  Data: 0000
+	Capabilities: [a0] MSI-X: Enable+ Count=17 Masked-
+		Vector table: BAR=4 offset=00000000
+		PBA: BAR=4 offset=00001000
+	Capabilities: [ac] Express (v2) Endpoint, MSI 00
+		DevCap:	MaxPayload 256 bytes, PhantFunc 0, Latency L0s <4us, L1 <64us
+			ExtTag- AttnBtn- AttnInd- PwrInd- RBE+ FLReset+ SlotPowerLimit 10.000W
+		DevCtl:	Report errors: Correctable- Non-Fatal+ Fatal+ Unsupported+
+			RlxdOrd- ExtTag- PhantFunc- AuxPwr+ NoSnoop- FLReset-
+			MaxPayload 256 bytes, MaxReadReq 512 bytes
+		DevSta:	CorrErr- UncorrErr- FatalErr- UnsuppReq- AuxPwr+ TransPend-
+		LnkCap:	Port #0, Speed 5GT/s, Width x2, ASPM L0s L1, Exit Latency L0s <1us, L1 <2us
+			ClockPM+ Surprise- LLActRep- BwNot- ASPMOptComp-
+		LnkCtl:	ASPM Disabled; RCB 64 bytes Disabled- CommClk+
+			ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
+		LnkSta:	Speed 5GT/s, Width x1, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+		DevCap2: Completion Timeout: Range ABCD, TimeoutDis+, LTR-, OBFF Not Supported
+		DevCtl2: Completion Timeout: 65ms to 210ms, TimeoutDis-, LTR-, OBFF Disabled
+		LnkCtl2: Target Link Speed: 2.5GT/s, EnterCompliance- SpeedDis-
+			Transmit Margin: Normal Operating Range, EnterModifiedCompliance- ComplianceSOS-
+			Compliance De-emphasis: -6dB
+		LnkSta2: Current De-emphasis Level: -6dB, EqualizationComplete-, EqualizationPhase1-
+			EqualizationPhase2-, EqualizationPhase3-, LinkEqualizationRequest-
+	Capabilities: [100 v1] Advanced Error Reporting
+		UESta:	DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+		UEMsk:	DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt+ UnxCmplt+ RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+		UESvrt:	DLP+ SDES+ TLP+ FCP+ CmpltTO+ CmpltAbrt- UnxCmplt- RxOF+ MalfTLP+ ECRC+ UnsupReq- ACSViol-
+		CESta:	RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr+
+		CEMsk:	RxErr- BadTLP+ BadDLLP+ Rollover+ Timeout+ NonFatalErr+
+		AERCap:	First Error Pointer: 00, GenCap+ CGenEn+ ChkCap+ ChkEn+
+	Capabilities: [13c v1] Device Serial Number 00-00-34-17-eb-f0-dc-e3
+	Capabilities: [150 v1] Power Budgeting <?>
+	Capabilities: [160 v1] Virtual Channel
+		Caps:	LPEVC=0 RefClk=100ns PATEntryBits=1
+		Arb:	Fixed- WRR32- WRR64- WRR128-
+		Ctrl:	ArbSelect=Fixed
+		Status:	InProgress-
+		VC0:	Caps:	PATOffset=00 MaxTimeSlots=1 RejSnoopTrans-
+			Arb:	Fixed- WRR32- WRR64- WRR128- TWRR128- WRR256-
+			Ctrl:	Enable+ ID=0 ArbSelect=Fixed TC/VC=ff
+			Status:	NegoPending- InProgress-
+	Kernel driver in use: tg3
+	Kernel modules: tg3
+```
+
+</spoiler>
+
 </spoiler>
 
 - https://www.broadcom.com/products/ethernet-connectivity/network-ics/bcm5720-1gbase-t-ic
 - https://unix.stackexchange.com/questions/393/how-to-check-how-many-lanes-are-used-by-the-pcie-card
 
 ## Q2. What is the current speed of the network interface? What offload features are enabled? Briefly explain the purpose of the tcp-segmentation-offload feature Hint ethtool
+
+- speed: 1000Mb/s
+- tcp-segmentation-offload, generic-segmentation-offload, generic-receive-offload
+- tcp-segmentation-offload: offload the segmentation of data into TCP packets from the CPU to the NIC
 
 <spoiler|ethtool>
 
@@ -60,8 +143,35 @@ Settings for eno1:
 ```
 
 </spoiler>
+<spoiler|ethtool features>
+```
+arccy@nevers» sudo ethtool -k eno1 | grep " on" 
+rx-checksumming: on
+tx-checksumming: on
+	tx-checksum-ipv4: on
+	tx-checksum-ipv6: on
+scatter-gather: on
+	tx-scatter-gather: on
+tcp-segmentation-offload: on
+	tx-tcp-segmentation: on
+	tx-tcp-ecn-segmentation: on
+	tx-tcp6-segmentation: on
+generic-segmentation-offload: on
+generic-receive-offload: on
+rx-vlan-offload: on [fixed]
+tx-vlan-offload: on [fixed]
+highdma: on
+```
+</spoiler>
+
+- https://en.wikipedia.org/wiki/Large_send_offload
 
 ## Q3. What is the MAC address of the OS3 router facing your server? Can you infer the manufacturer of the network card? What about the MAC address of eth0 / eno1 and its manufacturer? Hint arp
+
+- router.os3.nl: `f8:b1:56:2f:b5:23`
+- `fb:b1:56`: Dell
+- eno1: `34:17:eb:f0:dc:e3`
+- `34:17:eb`: Dell
 
 <spoiler|arp>
 
@@ -75,8 +185,23 @@ router.studlab.os3.nl    ether   f8:b1:56:2f:b5:23   C                     eno1
 ```
 
 </spoiler>
+
+- http://www.adminsub.net/mac-address-finder/f8b156
+- https://www.adminsub.net/mac-address-finder/34:17:eb:f0:dc:e3
+
 ## Q4. Assuming that you have completed the previous lab what interfaces are part of the xenbr0 bridge? What MAC addresses has this bridge learned so far? Hint brctl
+
+- eno2: connection to avignon
+- vif1.0: guest-01
+- vif58.0: guest-05
+
+- 00:16:3e:1a:e6:7e: Avignon-live-mig (guest on Avignon)
+- 00:16:3e:81:56:74: guest-05
+- 00:16:3e:76:c6:56: guest-01
+- 76:8e:e9:fa:ea:b2: xenbr0 on avignon
+
 <spoiler|brctl>
+
 ```
 arccy@nevers» brctl show
 bridge name	bridge id		STP enabled	interfaces
@@ -84,19 +209,26 @@ xenbr0		8000.2e26ca689ed9	no		eno2
 							vif1.0
 							vif58.0
 ```
+
 </spoiler>
+
 <spoiler|arp>
+
 ```
 arccy@nevers» arp -i xenbr0
 Address                  HWtype  HWaddress           Flags Mask            Iface
-145.100.110.42           ether   34:17:eb:f0:db:28   C                     xenbr0
 145.100.110.36           ether   00:16:3e:1a:e6:7e   C                     xenbr0
 guest-05                 ether   00:16:3e:81:56:74   C                     xenbr0
 g1.nevers.prac.os3.nl    ether   00:16:3e:76:c6:56   C                     xenbr0
 145.100.110.33           ether   76:8e:e9:fa:ea:b2   C                     xenbr0
 ```
+
 </spoiler>
+
 ## Q5. How many bytes did your eth0 / eno1 interface receive since boot? The kernel uses an unsigned long long variable for the RX bytes counter How much traffic (in GiB) must the server receive for this value to overflow? Hint ifconfig
+
+- received: 60781452482 bytes
+- unsigned long long int: 64 bit: 18446744073709551616
 
 <spoiler|ifconfig>
 
@@ -115,14 +247,25 @@ eno1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 </spoiler>
 ## Q6. What is the MTU setting for eth0 / eno1 ? When do you think it should be increased? When do you think it should be decreased? Hint ip link ifconfig
+
+- MTU: 1500
+- increase: when both ends of the connection support it, MTU can be increases for efficiency
+- decrease: when the link will pass through an encapsulating protocol, it should be decreased to fit unfragmented in the encapsulating packet
+
 <spoiler|ip link>
+
 ```
 arccy@nevers» ip link show eno1
 2: eno1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
     link/ether 34:17:eb:f0:dc:e3 brd ff:ff:ff:ff:ff:ff
 ```
+
 </spoiler>
 ## Q7. What is the default gateway on your server? Why is there an explicit route to the OS3 network? If you would delete this latter route will you be able to send traffic to your default gateway? Why?
+
+- default: 140.100.104.97
+- explicit route: netmask pushed by DHCP
+- yes: there is another explicit route (/32) for the gateway itself
 
 <spoiler|ip route>
 
@@ -138,7 +281,12 @@ default via 145.100.104.97 dev eno1 proto dhcp src 145.100.104.117 metric 100
 
 </spoiler>
 ## Q8. Perform a traceroute to bad horse Why does it stop after 30 hops? How can you increase this number? Provide the full traceroute output Hint mtr traceroute
+
+- traceroute has a default ttl of 30 (hops)
+- can be increased by setting the max ttl: `-m some_large_value`
+
 <spoiler|traceroute>
+
 ```
 arccy@nevers» traceroute signed.bad.horse
 traceroute to signed.bad.horse (162.252.205.157), 30 hops max, 60 byte packets
@@ -173,6 +321,7 @@ traceroute to signed.bad.horse (162.252.205.157), 30 hops max, 60 byte packets
 29  * * *
 30  * * *
 ```
+
 </spoiler>
 <spoiler|man traceroute>
 ```
@@ -182,6 +331,10 @@ traceroute to signed.bad.horse (162.252.205.157), 30 hops max, 60 byte packets
 ```
 </spoiler>
 ## Q9. What are the three built-in chains in the netfilter filter table? Briefly explain what is the purpose of each chain
+
+- INPUT: check incoming packets against this chain
+- FORWARD: check packets not created by and not destined for current host against this chain
+- OUTPUT: check outgoing packets created by this host against this chain
 
 <spoiler|iptables>
 
@@ -207,7 +360,13 @@ target     prot opt source               destination
 
 </spoiler>
 
+- https://unix.stackexchange.com/questions/96548/what-is-the-difference-between-output-and-forward-chains-in-iptables
+
 ## Q10. What ports are currently open on your machine? What services do they belong to? Hint netstat
+
+- 22: ssh
+- 53: coredns
+- 111: rpcbind
 
 <spoiler|netstat>
 
@@ -215,31 +374,19 @@ target     prot opt source               destination
 arccy@nevers» sudo netstat -plnt
 Active Internet connections (only servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-tcp        0      0 0.0.0.0:33343           0.0.0.0:*               LISTEN      4359/rpc.mountd
-tcp        0      0 0.0.0.0:2049            0.0.0.0:*               LISTEN      -
-tcp        0      0 0.0.0.0:139             0.0.0.0:*               LISTEN      17005/smbd
-tcp        0      0 0.0.0.0:55183           0.0.0.0:*               LISTEN      4359/rpc.mountd
-tcp        0      0 0.0.0.0:51023           0.0.0.0:*               LISTEN      4359/rpc.mountd
 tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      22172/rpcbind
-tcp        0      0 0.0.0.0:32787           0.0.0.0:*               LISTEN      -
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      8678/sshd
-tcp        0      0 0.0.0.0:445             0.0.0.0:*               LISTEN      17005/smbd
-
-tcp6       0      0 :::2049                 :::*                    LISTEN      -
-tcp6       0      0 :::34721                :::*                    LISTEN      4359/rpc.mountd
-tcp6       0      0 :::139                  :::*                    LISTEN      17005/smbd
 tcp6       0      0 :::111                  :::*                    LISTEN      22172/rpcbind
-tcp6       0      0 :::48945                :::*                    LISTEN      4359/rpc.mountd
 tcp6       0      0 :::53                   :::*                    LISTEN      5745/coredns
 tcp6       0      0 :::22                   :::*                    LISTEN      8678/sshd
-tcp6       0      0 :::34903                :::*                    LISTEN      -
-tcp6       0      0 :::37979                :::*                    LISTEN      4359/rpc.mountd
-tcp6       0      0 :::445                  :::*                    LISTEN      17005/smbd
 ```
 
 </spoiler>
 
 ## Q11. How many unix sockets are currently created on your server? What are unix sockets used for? Hint lsof
+
+- 12 unix domain sockets open
+- unix sockets allow for communication between processes with a similar interface to network sockets but it all happens in kernel
 
 <spoiler|lsof>
 
@@ -263,11 +410,16 @@ systemd 8870 arccy   27u  unix 0x0000000000000000      0t0 161999 /run/user/1000
 </spoiler>
 ## Q12. How can you test that a machine is listening on a specific TCP port? Can you do the same for UDP? Why? Hint nc telnet
 
+- use netcat to open a connection to the host:port
+- udp: not connection oriented, you can only send data, not open a connection
+
 ```
 nc host:port
 ```
 
 ## Q13. What is the type and version of the webserver that serves www os3 nl ? Hint curl wget
+
+- it claims to be Apache 2.4.10 on Debian
 
 <spoiler|curl>
 
@@ -326,6 +478,9 @@ Warning: way you want. Consider using -I/--head instead.
 
 </spoiler>
 ## Q14. What is the size of each ICMP packet? Why is it not 1024?
+
+- 1032 bytes
+- ICMP headers are 8 bytes
 
 ```
 arccy@guest-01 ~ % ping -c 10 www.os3.nl -s 1024
