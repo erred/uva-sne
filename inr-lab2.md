@@ -264,7 +264,7 @@ arccy@nevers» ip link show eno1
 ## Q7. What is the default gateway on your server? Why is there an explicit route to the OS3 network? If you would delete this latter route will you be able to send traffic to your default gateway? Why?
 
 - default: 140.100.104.97
-- explicit route: netmask pushed by DHCP
+- this is the local network, can be reached directly, no need to push through the router
 - yes: there is another explicit route (/32) for the gateway itself
 
 <spoiler|ip route>

@@ -30,17 +30,17 @@ sudo ./create-base-container.sh
 ### a. Clone the basecontainer using the lxc toolset and name this lx1 Start this the container and check that everything works ==
 
 ```
-sudo lxc list
-sudo lxc copy ogobase lx1
-sudo lxc start lx1
-sudo lxc exec -t --env TERM=xterm-256color lx1 -- bash
+lxc list
+lxc copy ogobase lx1
+lxc start lx1
+lxc exec -t --env TERM=xterm-256color lx1 -- bash
 ```
 
 ### b. Stop and delete the lx1 container using the lxc command from the host machine ==
 
 ```
-sudo lxc stop lx1
-sudo lxc delete lx1
+lxc stop lx1
+lxc delete lx1
 ```
 
 ### c. Investigate what other functionalities lxc provides and briefly describe each function in your log enumerate
@@ -72,41 +72,71 @@ sudo lxc delete lx1
 - openvswitch: larger, more feature rich, multilayer switch
 - ip bridge: simpler layer 2 switch
 
-### Not working
+```
+sudo ip link add br0 type bridge
+sudo ip link set br0 up
+lxc copy ogobase lx2
+
+lxc config device add lx2 eth1 nic nictype=bridged parent=br0 name=eth1
+lxc config device add lx3 eth1 nic nictype=bridged parent=br0 name=eth1
+lxc config set lx2 raw.lxc 'lxc.net.0.ipv4.address = 10.0.0.2/8'
+lxc config set lx3 raw.lxc 'lxc.net.0.ipv4.address = 10.0.0.3/8'
+lxc start lx2 lx3
+
+lxc stop lx2 lx3
+lxc delete lx2 lx3
+sudo ip link delete dev lxc0
+```
 
 ```
-sudo ip link add lxc0 type bridge
-sudo lxc copy ogobase lx2
-sudo lxc copy ogobase lx3
-sudo lxc config device add lx2 eth1 nic name=eth1 nictype=bridged parent=lxc0
-sudo lxc config device add lx3 eth1 nic name-eth1 nictype=bridged parent=lxc0
-sudo lxc config device set lx2 eth1 ipv4.address 10.0.0.2
-sudo lxc config device set lx3 eth1 ipv4.address 10.0.0.3
-sudo lxc start lx2 lx3
+arccy@g1» sudo lxc exec -t --env TERM=xterm-256color lx2 -- bash
+root@lx2:~# ping 10.0.0.3
+PING 10.0.0.3 (10.0.0.3) 56(84) bytes of data.
+64 bytes from 10.0.0.3: icmp_seq=1 ttl=64 time=0.044 ms
+64 bytes from 10.0.0.3: icmp_seq=2 ttl=64 time=0.015 ms
+64 bytes from 10.0.0.3: icmp_seq=3 ttl=64 time=0.016 ms
+^C
+--- 10.0.0.3 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2035ms
+rtt min/avg/max/mdev = 0.015/0.025/0.044/0.013 ms
+```
+
+```
+arccy@g1» lxc list
++---------+---------+-----------------+------+------------+-----------+
+|  NAME   |  STATE  |      IPV4       | IPV6 |    TYPE    | SNAPSHOTS |
++---------+---------+-----------------+------+------------+-----------+
+| lx2     | RUNNING | 10.0.0.2 (eth1) |      | PERSISTENT | 0         |
++---------+---------+-----------------+------+------------+-----------+
+| lx3     | RUNNING | 10.0.0.3 (eth1) |      | PERSISTENT | 0         |
++---------+---------+-----------------+------+------------+-----------+
+| ogobase | STOPPED |                 |      | PERSISTENT | 0         |
++---------+---------+-----------------+------+------------+-----------+
 ```
 
 - http://www.fiber-optic-transceiver-module.com/ovs-vs-linux-bridge-who-is-the-winner.html
+- https://superuser.com/questions/1047891/lxd-containers-and-networking-with-static-ip
 
 ## Q8. Using the configurations/other/simple cfg as guidelines create a config file that replicates the network in Figure 2. Show this config file in your logs, including the values of a b x and y. Also create a simple network diagram depicting the subnets and the IPs configured on each host interface
 
-=== Q9. Create the network environment by using python pogo py create config cfg ===
+## Q9. Create the network environment by using python pogo py create config cfg
 
-=== Q10. Bring up the network using python pogo py start config cfg and do the following: Inspect the IP configuration (addresses routing table) for all A B R (IPv4 and IPv6). Check connectivity between A-R B-R A-B over IPv4 and IPv6. For IPv6 use both the link local and the global addresses. Add IPv4 and IPv6 static routes on A and B such that there is connectivity between the two Show A can reach B via IPv4 and IPv6 ===
+## Q10. Bring up the network using python pogo py start config cfg and do the following: Inspect the IP configuration (addresses routing table) for all A B R (IPv4 and IPv6). Check connectivity between A-R B-R A-B over IPv4 and IPv6. For IPv6 use both the link local and the global addresses. Add IPv4 and IPv6 static routes on A and B such that there is connectivity between the two Show A can reach B via IPv4 and IPv6
 
-=== Q11. Stop and start your network using pogo ===
+## Q11. Stop and start your network using pogo
 
-=== Q12. On R configure and enable the radvd daemon using the IP blocks mentioned in the previous task Explain all the configuration parameters used As with the previous task inspect the IP configuration do a connectivity check and explain the differences ===
+## Q12. On R configure and enable the radvd daemon using the IP blocks mentioned in the previous task Explain all the configuration parameters used As with the previous task inspect the IP configuration do a connectivity check and explain the differences
 
-=== Q13. Explain how the IPv6 address received by host A was derived ===
+## Q13. Explain how the IPv6 address received by host A was derived
 
-=== Q14. Why wasn't it necessary to manually add routes? ===
+## Q14. Why wasn't it necessary to manually add routes?
 
-=== Q15. Stop the radvd service and see if the network breaks Explain why ===
+## Q15. Stop the radvd service and see if the network breaks Explain why
 
-=== Q16. Check the tcpdump path on the host system It should contain pcap files of the last pogo run These dumps should contain all the relevant packets regarding auto-configuration ===
+## Q16. Check the tcpdump path on the host system It should contain pcap files of the last pogo run These dumps should contain all the relevant packets regarding auto-configuration
 
-=== Q17. Explain the auto-negotiation process that takes place over the A-R segment using the packet trace as supporting material Decode and explain all the interesting packets ===
+## Q17. Explain the auto-negotiation process that takes place over the A-R segment using the packet trace as supporting material Decode and explain all the interesting packets
 
-=== Q18. Bonus: Remove all the IP addressing from the network config file Install and configure avahi for IPv6 on R and hosts such that the SSH service on A is accessible from B by just by typing ssh hostA local Do not use any /etc/hosts You will need to build a new base container for this (and cannot use IPv4) ===
+## Q18. Bonus: Remove all the IP addressing from the network config file Install and configure avahi for IPv6 on R and hosts such that the SSH service on A is accessible from B by just by typing ssh hostA local Do not use any /etc/hosts You will need to build a new base container for this (and cannot use IPv4)
 
-=== Q19. Bonus: Fork the network script on Gitlab and add any extra functionality that you find useful (eg sanity check for config files easier config syntax status check for running networks etc ) ===
+## Q19. Bonus: Fork the network script on Gitlab and add any extra functionality that you find useful (eg sanity check for config files easier config syntax status check for running networks etc )
