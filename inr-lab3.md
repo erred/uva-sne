@@ -292,7 +292,7 @@ default via fe80::216:3eff:fea1:2e3e dev eth12 proto ra metric 100 pref medium
 - router constructs link local address and checks for duplicate addresses
   - `14:21:15.654794 IP6 :: > ff02::1:ffa1:2e3e: ICMP6, neighbor solicitation, who has fe80::216:3eff:fea1:2e3e, length 32`
 - host A constructs link local address and checks for duplicate addresses
-  `14:21:16.605512 IP6 :: > ff02::1:ffe3:6342: ICMP6, neighbor solicitation, who has fe80::216:3eff:fee3:6342, length 32`
+  - `14:21:16.605512 IP6 :: > ff02::1:ffe3:6342: ICMP6, neighbor solicitation, who has fe80::216:3eff:fee3:6342, length 32`
 - host A looks for routers
   - `14:21:17.629531 IP6 fe80::216:3eff:fee3:6342 > ip6-allrouters: ICMP6, router solicitation, length 16`
 - router advertisement
