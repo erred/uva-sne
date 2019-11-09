@@ -207,6 +207,10 @@ new-pogo arccy@g1» lxc list
 
 ## Q12. On R configure and enable the radvd daemon using the IP blocks mentioned in the previous task Explain all the configuration parameters used As with the previous task inspect the IP configuration do a connectivity check and explain the differences
 
+- interface: network interface to apply to
+- AdvSendAdvert: whether to actively advertise and respond to solicitations
+- new results: uses auto configured addresses
+
 - hostA -> hostB: `64 bytes from 2001:db8:700:529:216:3eff:fe43:d676: icmp_seq=1 ttl=63 time=0.103 ms`
 - hostB -> hostA: `64 bytes from 2001:db8:700:500:216:3eff:fee3:6342: icmp_seq=1 ttl=63 time=0.041 ms`
 
@@ -229,6 +233,15 @@ interface eth23 {
 
 ## Q13. Explain how the IPv6 address received by host A was derived
 
+1. host A sends out a router solicitation
+2. host R responds with the network prefix
+3. host A uses modified EUI-64 to construct its address:
+   - use network prefix: 2001:db8:700:500::/64
+   - insert fffe into mac address 00:16:3e:e3:63:42 -> 00163efffee36342
+   - flip bit 7 to from local to universal -> 02163efffee36342
+   - attach to network prefix to form 128 bit address: 2001:db8:700:500:216:3eff:fee3:6342
+4. check the address isn't already in use
+
 ```
 180: eth12@if181: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
     link/ether 00:16:3e:e3:63:42 brd ff:ff:ff:ff:ff:ff link-netnsid 0
@@ -242,9 +255,17 @@ interface eth23 {
        valid_lft forever preferred_lft forever
 ```
 
+- https://en.wikipedia.org/wiki/IPv6_address#Stateless_address_autoconfiguration
+
 ## Q14. Why wasn't it necessary to manually add routes?
 
+- router discovery/solicitation identifies the routers/routes to use
+
 ## Q15. Stop the radvd service and see if the network breaks Explain why
+
+- no
+- the addresses/routes are still valid
+- without a lifetime set they are valid forever and will continue to work
 
 - `systemctl stop radvd`
 - hostA -> hostB: `64 bytes from 2001:db8:700:529:216:3eff:fe43:d676: icmp_seq=1 ttl=63 time=0.036 ms`
@@ -267,6 +288,19 @@ default via fe80::216:3eff:fea1:2e3e dev eth12 proto ra metric 100 pref medium
 - `tcpdump -r pogo-bridge0.pcap`
 
 ## Q17. Explain the auto-negotiation process that takes place over the A-R segment using the packet trace as supporting material Decode and explain all the interesting packets
+
+- router constructs link local address and checks for duplicate addresses
+  - `14:21:15.654794 IP6 :: > ff02::1:ffa1:2e3e: ICMP6, neighbor solicitation, who has fe80::216:3eff:fea1:2e3e, length 32`
+- host A constructs link local address and checks for duplicate addresses
+  `14:21:16.605512 IP6 :: > ff02::1:ffe3:6342: ICMP6, neighbor solicitation, who has fe80::216:3eff:fee3:6342, length 32`
+- host A looks for routers
+  - `14:21:17.629531 IP6 fe80::216:3eff:fee3:6342 > ip6-allrouters: ICMP6, router solicitation, length 16`
+- router advertisement
+  - `14:24:27.394170 IP6 fe80::216:3eff:fea1:2e3e > ip6-allnodes: ICMP6, router advertisement, length 56`
+- router creates global address, checks for duplicates
+  - `14:24:27.557536 IP6 :: > ff02::1:ffa1:2e3e: ICMP6, neighbor solicitation, who has 2001:db8:700:500:216:3eff:fea1:2e3e, length 32`
+- host A creates global address, checks for duplicates
+  - `14:24:27.837517 IP6 :: > ff02::1:ffe3:6342: ICMP6, neighbor solicitation, who has 2001:db8:700:500:216:3eff:fee3:6342, length 32`
 
 ```
 14:21:14.917496 IP6 :: > ff02::16: HBH ICMP6, multicast listener report v2, 1 group record(s), length 28
