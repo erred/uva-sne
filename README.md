@@ -6,6 +6,8 @@ Backup for course data
 
 | Block/Course | Notes           | Course                                                   | Other                                                        |
 | ------------ | --------------- | -------------------------------------------------------- | ------------------------------------------------------------ |
+| **2/LS**     |                 | [Course](https://www.os3.nl/2019-2020/courses/ls/start)  |                                                              |
+| **2/INR**    |                 | [Course](https://www.os3.nl/2019-2020/courses/inr/start) |                                                              |
 | **1/SSN**    | [Notes](SSN.md) | [Course](https://www.os3.nl/2019-2020/courses/ssn/start) | [Project](https://github.com/seankhliao/uva-sne-ssn-project) |
 | **1/CIA**    | [Notes](CIA.md) | [Course](https://www.os3.nl/2019-2020/courses/cia/start) |                                                              |
 
