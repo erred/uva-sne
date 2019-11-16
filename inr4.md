@@ -74,6 +74,13 @@ rtt min/avg/max/mdev = 0.014/0.014/0.014/0.000 ms
 
 ## Q4. Explain the structure of a Ethernet frame that contains an ICMP echo request. Explain all the VLAN related fields in detail
 
+| start | length | value          | purpose          |
+| ----- | ------ | -------------- | ---------------- |
+| 0     | 6      | 0016 3e3c 2bb3 | dst addr         |
+| 6     | 6      | 0016 3e52 21ec | src addr         |
+| 12    | 2      | 8100           | ethertype 802.1Q |
+| 14    | 2      | 0014           | vlan tag: 20     |
+
 ```
 14:13:07.457283 00:16:3e:3c:2b:b3 > 00:16:3e:52:21:ec, ethertype 802.1Q (0x8100), length 102: vlan 20, p 0, ethertype IPv4, (tos 0x0, ttl 64, id 49140, offset 0, flags [DF], proto ICMP (1), length 84)
     10.0.20.1 > 10.0.20.2: ICMP echo request, id 432, seq 1, length 64
@@ -85,6 +92,8 @@ rtt min/avg/max/mdev = 0.014/0.014/0.014/0.000 ms
 	0x0050:  2223 2425 2627 2829 2a2b 2c2d 2e2f 3031  "#$%&'()*+,-./01
 	0x0060:  3233 3435 3637                           234567
 ```
+
+- https://en.wikipedia.org/wiki/IEEE_802.1Q
 
 ## Q5. The containers that pogo creates have Reverse Path Filtering. What is Reverse Path Filtering? Turn RPF off using the following commands description
 
@@ -102,7 +111,8 @@ b2:
   ip r add 10.0.30.0/24 via 10.0.20.1
 ```
 
-notes: 
+notes:
+
 - `10.0.20.2 -> 10.0.10.1` stable
 - `10.0.20.2 -> 10.0.30.1` high packet loss: 98%
 - solution: give all virtual interfaces their own unique mac addresses
@@ -143,38 +153,114 @@ rtt min/avg/max/mdev = 0.028/0.037/0.043/0.006 ms
 ## Q7. BONUS Explain why it is necessary to turn off RPF on H1 and H2
 
 H1:
-  - 10.0.20.2 -> 10.0.30.1 would have been filtered out (return through 10.0.10.2)
-H2:
-  - 10.0.30.1 -> 10.0.20.2 (reply) would have been filtered out (return through 10.0.10.1)
+
+- 10.0.20.2 -> 10.0.30.1 would have been filtered out (return through 10.0.10.2)
+  H2:
+- 10.0.30.1 -> 10.0.20.2 (reply) would have been filtered out (return through 10.0.10.1)
 
 ## Q8. What is the maximum number of VLAN IDs active on a network segment? Be precise
 
+- basic vlan: 2^12 - 2 (0, 4095 reserved): 4094
+- with Service VLAN tag: 4094 \* 4094
+- with single PBN: 4094 _ 4094 _ 4094
+- with multilayer PBN: as many as will fit in (potentially unlimited) MTU
+
+- https://wiki.mef.net/display/CESG/Provider+Backbone+Bridged+Networks
+
 ## Q9. Draw a network diagram that depicts the configuration Make sure the VLANs are clearly marked
 
-## Q10. Create a new VM running the Ubuntu 14 04 Trusty operating system Give it 1GB of RAM and a public IP Make sure you can log in using your ssh keys
+{{:2019-2020:students:sean_liao:inr:inr4.png}}
 
-## Q11. Install old git repository https //github com/TeamOS3/ogopogo git
+## Q10. Create the config file that starts the network depicted in Figure 1 using the bridge.cfg
 
-## Q12. Set the values of A B X Y in scripts/rc local. In the scripts directory run the build sh. Copy this image to the /tmp directory
+- `sudo -i -E /home/arccy/pogo/pogo -bc /home/arccy/pogo/bridge.cfg`
+- `sudo ./pogo -sc bridge.cfg`
+- `sudo xen create /etc/xen/bridge1.cfg`
+- `sudo xen create /etc/xen/bridge2.cfg`
+- `sudo xen create /etc/xen/bridge3.cfg`
 
-## Q13. Create the config file that starts the network depicted in Figure 1
+notes: my host doesn't like the mirrors, edit `STP_bridge.py` for new mirrors
 
-## Q14. Create a diagram of the networks showing the state of all the bridge ports and the root bridge
+```
+[global]
+switches = 2
 
-## Q15. Describe in detail (i e your own words not verbatim dumps) what packets are sent when and why. Explain how the root bridge was elected
+[host1]
+role= host
+home=/tmp
+eth0 = 0,10.0.0.1/8,2001:0db8:0:f101::1/64
 
-## Q16.
+[host2]
+role = host
+home=/tmp
+eth0 = 1,10.0.0.2/8,2001:0db8:0:f101::2/64
 
-### a. What parameters are used in the BPDU packets?
+[bridge1]
+role = stp_bridge
+eth0 = 0,,
+eth1 = 1,,
 
-### b. What is the role of each parameter?
+[bridge2]
+role = stp_bridge
+eth0 = 0,,
+eth1 = 1,,
 
-### c. What are they set to? enumerate
+[bridge3]
+role = stp_bridge
+eth0 = 0,,
+eth1 = 1,,
+```
 
-## Q17. What happens if you shutdown the root bridge? Describe all the events that take place from the moment the bridge goes down until the network has converged again
+```
+root@bridge1:~# bridge -d link
+2: eth0 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge1 state forwarding priority 32 cost 100
+    hairpin off guard off root_block off fastleave off learning on flood on mcast_flood on neigh_suppress off vlan_tunnel off
+eth0	1 PVID Egress Untagged
 
-## Q18. Restore the original situation. Disable STP on a bridge. Explain
 
-## Q19. Enable STP again on all bridges. Does the network come back to the initial state? Why?
+3: eth1 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge1 state blocking priority 32 cost 100
+    hairpin off guard off root_block off fastleave off learning on flood on mcast_flood on neigh_suppress off vlan_tunnel off
+eth1	1 PVID Egress Untagged
 
-## Q20. Bonus Get STP to work with containers in the pogo toolset
+
+4: bridge1 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge1
+bridge1	1 PVID Egress Untagged
+```
+
+```
+root@bridge2:~# bridge -d link
+2: eth0 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge2 state forwarding priority 32 cost 100
+    hairpin off guard off root_block off fastleave off learning on flood on mcast_flood on neigh_suppress off vlan_tunnel off
+eth0	1 PVID Egress Untagged
+
+
+3: eth1 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge2 state forwarding priority 32 cost 100
+    hairpin off guard off root_block off fastleave off learning on flood on mcast_flood on neigh_suppress off vlan_tunnel off
+eth1	1 PVID Egress Untagged
+
+
+4: bridge2 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge2
+bridge2	1 PVID Egress Untagged
+```
+
+```
+root@bridge3:~# bridge -d link
+2: eth0 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge3 state forwarding priority 32 cost 100
+    hairpin off guard off root_block off fastleave off learning on flood on mcast_flood on neigh_suppress off vlan_tunnel off
+eth0	1 PVID Egress Untagged
+
+
+3: eth1 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge3 state blocking priority 32 cost 100
+    hairpin off guard off root_block off fastleave off learning on flood on mcast_flood on neigh_suppress off vlan_tunnel off
+eth1	1 PVID Egress Untagged
+
+
+4: bridge3 state UP : <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master bridge3
+bridge3	1 PVID Egress Untagged
+```
+
+```
+root@bridge3:~# ip link set bridge3 down
+root@bridge3:~# ip link set bridge3 type bridge stp 1
+root@bridge3:~# ip link set bridge3 up
+```
