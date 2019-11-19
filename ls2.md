@@ -26,6 +26,15 @@
 - no special devices (pcie) attached
 - https://www.virtuatopia.com/index.php/Migrating_Xen_domainU_Guests_Between_Host_Systems
 
+### Correction
+
+compatible hosts:
+
+- similar (enough) CPU architectures
+- enough free memory
+
+same subnet if connection to external network required.
+
 ## Q4. Form a group of two and discuss how you are going to migrate VMs to each other's hypervisor Set up your systems so you can do both cold and live migrations Describe your setup in your logs Hint Do not use LVM Remember your eno2
 
 {{:2019-2020:students:sean_liao:ls:ls-2.png?direct|}}
