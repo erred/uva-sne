@@ -261,6 +261,15 @@ arccy@nevers» ip link show eno1
 ```
 
 </spoiler>
+
+### Correction
+
+A higher MTU will allow for a higher throughput, assuming little chance of loss on the network.
+Also if there are few hosts on the network (less chance of a host being starved)
+
+A lower MTU will allow it to pass through more networks with a lower chance of fragmentation.
+Also allows for more hosts on the network.
+
 ## Q7. What is the default gateway on your server? Why is there an explicit route to the OS3 network? If you would delete this latter route will you be able to send traffic to your default gateway? Why?
 
 - default: 140.100.104.97
@@ -383,6 +392,10 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 
 </spoiler>
 
+### Correction
+
+Nothing running on localhost (not using systemd-resolved)
+
 ## Q11. How many unix sockets are currently created on your server? What are unix sockets used for? Hint lsof
 
 - 12 unix domain sockets open
@@ -416,6 +429,12 @@ systemd 8870 arccy   27u  unix 0x0000000000000000      0t0 161999 /run/user/1000
 ```
 nc host:port
 ```
+
+### Correction
+
+netcat will use an ICMP message with a port indicator to check if a UDP port is closed
+
+- https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Destination_unreachable
 
 ## Q13. What is the type and version of the webserver that serves www os3 nl ? Hint curl wget
 
