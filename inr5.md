@@ -333,30 +333,47 @@ From 2001:db8:700:529::2 icmp_seq=1145 Destination unreachable: No route
 
 ## Q13. Configure R1 such that it will accept updates only from R2 and R3. Show the configuration changes. Warning some solutions only work via ripngd s telnet interface not vtysh
 
-- router1(config)# ipv6 prefix-list q13pl permit 2001:db8:700:529::/64
-- router1(config)# ipv6 prefix-list q13pl deny any
-- router1(config-router)# ipv6 distribute-list q13pl in
+```
+!
+router ripng
+network ::/0
+ipv6 distribute-list q13 in eth14
+redistribute connected
+!
+ipv6 access-list q13 deny any
+!
+```
 
 ```
-router1# show ipv6 ripng status
-Routing Protocol is "RIPng"
-  Sending updates every 30 seconds with +/-50%, next due in 12 seconds
-  Timeout after 180 seconds, garbage collect after 120 seconds
-  Outgoing update filter list for all interface is not set
-  Incoming update filter list for all interface is q13pl
-  Default redistribution metric is 1
-  Redistributing:    connected
-  Default version control: send version 1, receive version 1
-    Interface        Send  Recv
-    eth1             1     1
-    eth14            1     1
-    eth123           1     1
-  Routing for Networks:
-    ::/0
-  Routing Information Sources:
-    Gateway          BadPackets BadRoutes  Distance Last Update
-    fe80::216:3eff:fe85:1149
-                        0          0        120      00:00:42
+router1# show ipv6 ripng
+  <cr>
+  status  IPv6 routing protocol process parameters and statistics
+  vrf     Specify the VRF
+router1# show ipv6 ripng
+Codes: R - RIPng, C - connected, S - Static, O - OSPF, B - BGP
+Sub-codes:
+      (n) - normal, (s) - static, (d) - default, (r) - redistribute,
+      (i) - interface, (a/S) - aggregated/Suppressed
+
+   Network      Next Hop                      Via     Metric Tag Time
+C(i) 2001:db8:700:501::/64
+                  ::                          self       1    0
+R(n) 2001:db8:700:502::/64
+                  fe80::216:3eff:fec0:e22a    eth123     2    0  02:32
+R(n) 2001:db8:700:503::/64
+                  fe80::216:3eff:fe00:cef5    eth123     2    0  02:52
+R(n) 2001:db8:700:504::/64
+                  fe80::216:3eff:fe00:cef5    eth123     4    0  02:52
+R(n) 2001:db8:700:505::/64
+                  fe80::216:3eff:fe00:cef5    eth123     3    0  02:52
+C(i) 2001:db8:700:507::/64
+                  ::                          self       1    0
+R(n) 2001:db8:700:50f::/64
+                  fe80::216:3eff:fe00:cef5    eth123     2    0  02:52
+R(n) 2001:db8:700:51f::/64
+                  fe80::216:3eff:fe00:cef5    eth123     3    0  02:52
+C(i) 2001:db8:700:529::/64
+                  ::                          self       1    0
 ```
 
 ## Q14. OPTIONAL: Stop the quagga daemon on all the routers and configure bird to achieve similar results
