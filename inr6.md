@@ -45,6 +45,8 @@ eth456 = 9,4.4.33.6/24,2001:db8:700:521::6/64
 
 ## Q2. Draw a diagram of the network that shows the IP addressing for each router interface
 
+{{:2019-2020:students:sean_liao:inr:inr6.png}}
+
 ## Q3. Configure OSPF on each router in such a way that the network is stable and operational (any point is reachable from any point) All routers are in the same area
 
 ```
@@ -101,7 +103,7 @@ C>* fe80::/64 is directly connected, eth1, 00:03:47
 kernel routing table is specified mainly in terms of interfaces,
 ospf6 is specified in terms of next hop addresses
 
-router id: 4.4.33.5
+<spoiler|router id: 4.4.33.5>
 
 ```
 router5# show ipv6 ospf6
@@ -124,7 +126,9 @@ router5# show ipv6 ospf6
 SPF last executed 217.636660s ago
 ```
 
-ospf routing table
+</spoiler>
+
+<spoiler|ospf routing table>
 
 ```
 router5# show ipv6 ospf6 route
@@ -156,7 +160,9 @@ router5# show ipv6 ospf6 route
                                      fe80::216:3eff:fe7d:ebfd  eth456
 ```
 
-ospf interface table
+</spoiler>
+
+<spoiler|ospf interface table>
 
 ```
 router5# show ipv6 ospf6 interface
@@ -219,7 +225,8 @@ lo is up, type LOOPBACK
    OSPF not enabled on this interface
 ```
 
-ospf neighbors
+</spoiler>
+<spoiler|ospf neighbors>
 
 ```
 router5# show ipv6 ospf6 neighbor
@@ -229,7 +236,9 @@ Neighbor ID     Pri    DeadTime    State/IfState         Duration I/F[State]
 4.4.33.6          1    00:00:37     Full/DR              00:07:32 eth456[BDR]
 ```
 
-kernel routing table
+</spoiler>
+
+<spoiler|kernel routing table>
 
 ```
 root@router5:~# ip -6 r
@@ -250,6 +259,8 @@ fe80::/64 dev eth456 proto kernel metric 256 pref medium
 fe80::/64 dev eth5 proto kernel metric 256 pref medium
 ```
 
+</spoiler>
+
 ## Q5. Identify the DR and BDR roles in one network segment as follows. Pick a network segment with both a DR and a BDR and explain how this was established. Shutdown the DR's interface that connects to that segment. Explain what happens and what are the new roles
 
 Segment 456: DR: 4.4.33.6, BDR: 4.4.33.5: pick the highest router-id
@@ -257,6 +268,8 @@ Segment 456: DR: 4.4.33.6, BDR: 4.4.33.5: pick the highest router-id
 - shutdown interface
 - BDR becomes DR
 - DROther (the remaining router) becomes BDR
+
+<spoiler|pre>
 
 ```
 eth456 is up, type BROADCAST
@@ -274,7 +287,11 @@ eth456 is up, type BROADCAST
   DR: 4.4.33.6 BDR: 4.4.33.5
 ```
 
+</spoiler>
+
 - `ip link set eth456 down`
+
+<spoiler|post>
 
 ```
 router4# show ipv6 ospf6 interface eth456
@@ -295,6 +312,8 @@ eth456 is up, type BROADCAST
     0 Pending LSAs for LSUpdate in Time 00:00:00 [thread off]
     0 Pending LSAs for LSAck in Time 00:00:00 [thread off]
 ```
+
+</spoiler>
 
 ## Q6. Perform and explain all configurations required such that all traffic from R1 to R6 goes always via R3. Do not shutdown OSPF processes or interfaces
 
