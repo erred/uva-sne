@@ -199,6 +199,32 @@
     - gethostbyname -> getaddrinfo
     - gethostbyaddr -> getnameinfo
 
+### Algorithms
+
+- Bellman-Ford
+  - shortest path tree
+    - from single source
+    - handles negative weights
+  - for all edges:
+    - check if reduces distance to node
+  - Split horizon / poisoned reverse
+- Dijkstra
+  - shortest path tree
+    - from single source
+  - for all nodes:
+    - updated connected nodes
+    - choose closest
+- Prim
+  - minimum spanning tree
+    - least total cost
+    - but not necessarily pairwise least cost
+  - for all nodes
+    - choose closest node
+- Kruskal
+  - minimum spanning tree
+  - fpr all nodes
+    - choose globally least cost edge without creating cycle
+
 ### Layer 3 routing
 
 - gateway = next hop
