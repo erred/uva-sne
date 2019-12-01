@@ -112,7 +112,7 @@
 |                                                                                               |
 | VLAN type 0x8100                              ||priority|CFI| VLAN ID                         |
 | length                                        | DSAP                   | SSAP                 |
-| control / ethertype   | ...padded min 43...                                                   |
+| control / ethertype   | ...padded...                                                          |
 | FCS                                                                                           |
 ```
 
@@ -123,16 +123,15 @@
 | dest addr                                                                                     |
 |                                               | src addr                                      |
 |                                                                                               |
-| VLAN type 0x88a8                              ||priority|CFI| VLAN ID                         |
-| Instance type 0x88e7                          | flags                 | service identified    |
-|                                               | ..........skip this bit.......................|
-| dest addr                                                                                     |
-|                                               | src addr                                      |
-|                                                                                               |
+| B-Tag VLAN type 0x88a8                        ||priority|CFI| VLAN ID                         |
+| I-Tag type 0x88e7                             | flags                 | service identifier    |
+|                                               | dest addr                                     |
+| src addr                                                                                      |
+|                                               |...............skip............................|
 | VLAN type 0x88a8                              ||priority|CFI| VLAN ID                         |
 | VLAN type 0x8100                              ||priority|CFI| VLAN ID                         |
 | length                                        | DSAP                   | SSAP                 |
-| control / ethertype   | ...padded min 43...                                                   |
+| control / ethertype   | ...padded...                                                          |
 | FCS                                                                                           |
 ```
 
