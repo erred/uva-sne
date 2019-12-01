@@ -118,6 +118,87 @@
 
 ### Layer 3 IPv6
 
+- allocations
+  - 0000 000- = ::/7 special purpose
+  - 001- ---- = 2000::/3 global unicast
+  - 1111 110- = fc00::/7 unique local unicast
+  - 1111 1110 10-- = fe80::/10 link local unicast
+  - 1111 1111 = ff00/8 multicast
+- special purpose
+  - ::/128 unspecified
+  - ::1/128 loopback
+  - ::a.b.c.d/128 IPv4 compatible (depreciated)
+  - ::ffff:0:0/96 IPv4 mapped
+  - 100::/8, 100::/64 discard only
+  - 64:ff9b::/96 Well known prefix (IPv4 algorithmic translation)
+  - 64:ff9b:1::/48 local well known
+- unicast
+  - 2001::/16 1st RIR
+  - 2002::/16 6to4
+- local
+  - fe80::/10 link local
+  - fec0::/10 site local (depreciated)
+  - fc00::/7 unique local
+- multicast
+  - ff00::/8
+    - 8x1 4flags (0RPT) 4scope 112multicast_id
+    - scope: 1 interface, 2 link, e global
+    - ff02::1 all nodes
+    - ff02::2 all routers
+- neighbour discovery
+  - ICMPv6 133-137
+  - SLAAC
+    - Link local - DAD
+    - RA - generate - DAD
+- transition
+  - ipv4 XOR ipv6: use tunnels
+  - Dual Stack
+    - Stateless IP ICMP Translation SIIT
+    - Bump in the Stack BIS
+    - IPv6 Tunnel Brokeer
+    - SOCKS IPv6/IPv4 Gateway
+    - Transport Relay Translator TRT
+    - Bump in the API BIA
+    - **Bump in the Host BIS**
+    - **IP/ICMP translation (SIIT derived)**
+    - **6rd, IPv6 Rapid Deployment, 6to4 in ISP**
+    - **DS-Lite Dual Stack Lite, ISP use tunnels and CGNAT for IPv4**
+    - **NAT64** and **DNS64**
+    - **6to4**
+    - **ISATAP** and **Teredo**
+  - IPv4 embedded addresses:
+    - IPv4 converted: an ip4 address in a ip6 address (full map)
+    - IPv4 translatable: an ip6 address in a ip4 address (partial map)
+    - prefix - ipv4 addr - suffix
+      - bits 64-71 all 0
+      - suffix all 0
+  - NAT64
+    - header translation
+    - 4 to 6 algorithmic, 6 to 4 stateful table
+    - DNS64 address translation from v6 client to v4 server
+  - ISATAP Intra Site Automatic Tunnel Addressing Protocol
+    - 64_bit_prefix:0:5efe:a.b.c.d
+    - 0:5efe constant
+  - 6to4
+    - connects IPv6 over IPv4
+    - 2002:a.b.c.d::/48
+    - well known IPv4 anycast 192.88.99.1
+  - Teredo
+    - 2001::/32 prefix
+    - 2001:0000:ssss:ssss:ffff:pppp:cccc:cccc
+      - s: server
+      - f: flags
+      - p: obfuscated NAT UDP port
+      - c: obfuscated NAT client addr
+  - DNS
+    - AAAA
+    - PTR ugly
+    - .......ip6.arpa IN PTR ...
+  - Other
+    - inet_pton, inet_ntop
+    - gethostbyname -> getaddrinfo
+    - gethostbyaddr -> getnameinfo
+
 ### Layer 3 routing
 
 - gateway = next hop
@@ -215,4 +296,20 @@ todo
 | source ip                                                                                     |
 | dest ip                                                                                       |
 | options (padded)                                                                              |
+```
+
+### IPv6
+
+```
+|           |           |           |           |           |           |           |           |
+|version | traffic class            | flowlabel                                                 |
+| payload length (inc ext)                      | next header type      | hop limit             |
+| src                                                                                           |
+|                                                                                               |
+|                                                                                               |
+|                                                                                               |
+| dst                                                                                           |
+|                                                                                               |
+|                                                                                               |
+|                                                                                               |
 ```
