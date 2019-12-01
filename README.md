@@ -53,12 +53,3 @@ hidden behind a button
 | :::         | | |
 
 ```
-
-## wiki-fuse
-
-mount dokuwiki as a FUSE filesystem,
-requires privileged docker (and access to private docker repo)
-
-```
-make mount
-```
