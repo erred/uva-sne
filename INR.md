@@ -60,9 +60,40 @@
     - Shortest Path Bridging SPB
       - replace STP / RSTP / MSTP
       - QinQ, MinM
-- Rapid Spanning Tree RSTP
 
-### Layer 3 ipv4
+### Layer 2 RSTP
+
+- rapid spanning tree protocol
+- bipartite graph
+- graph to tree
+- add nodes without creating loops
+- broadcast direct connected perceived root
+  - id, cost, own id, own port
+- chooses lowest root id
+  - best path
+  - best bridge
+  - best port
+- designated bridge
+  - designated port to LAN segment
+  - root port points to root
+- wait 2x forward delay to configure
+  - listen / learn
+- Topology Change Notification to bridge
+  - Root set TC for forward delay + max age
+- BDPU
+  - DSAP = SSAP = 0x42
+  - dest `01:80:c2:00:00:00` local broadcast
+- RSTP
+  - backwards compatible
+  - extra flags for early forward
+  - forward early on some
+- STP on VLANs
+- disable host port participation
+- MSTP Multiple Spanning Tree Protocol
+  - each VLAN/region = virtual bridge, Internal Spanning Tree
+  - Common Spanning Tree between VLANs
+
+### Layer 3 IPv4
 
 - Classful IPv4: a.b.c.d
   - 1/2 a: 0..127 to class A/8
@@ -84,6 +115,34 @@
 - subnets: area with same prefix
 - link: ip ttl 1 reachable
 - Ipv4 protocols: `6` tcp, `17` udp
+
+### Layer 3 IPv6
+
+### Layer 3 routing
+
+- gateway = next hop
+- longest prefix match selection
+- Autonomous System: connected group with single clear routing policy
+- Inter AS
+  - BGP4
+- Intra AS
+  - RIP, OSPF, IS-IS, iBGP
+- Static Routing: manual config
+- Distance Vector:
+  - RIP
+  - minimum spanning tree
+- Path Vector:
+  - BGP
+  - full path not just distance
+- Link State:
+  - OSPF
+  - know everything
+
+### Layer 3 RIP
+
+### Layer 3 OSPF
+
+### Layer 3 BGP
 
 ## packets
 
@@ -141,6 +200,10 @@
 | control / ethertype   | ...padded...                                                          |
 | FCS                                                                                           |
 ```
+
+### STP BDPU
+
+todo
 
 ### Ipv4
 
