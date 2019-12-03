@@ -247,7 +247,70 @@
 
 ### Layer 3 RIP
 
+- charles hedrik, 1988
+- bellman-ford
+- small size, max 15 hops
+- send out full table (no gateways), update own table
+- split horizon, poisoned reverse: no advertise back to network heard from
+- Timers: Update 30s, Invalid (timeout) 180s, Flush 240s (120s after timeout), Hold down (no update on unreachable) 180s
+- 520/udp
+- v1 supports fixed 1 level deep subnets
+- Interior Gateway Routing Protocol IGRP:
+  - Cisco
+  - 4 parallel paths, more hops (100)
+  - more route types: internal, system, exterior
+  - more default routes
+  - multi metric (hop count, delay, bandwidth, reliability, load, mtu)
+- Enhanced Interior Gateway Protocol EIGRP
+  - Cisco
+  - all paths
+  - explicit subnet VLSM
+  - Diffusing Update ALgorithm DUAL:
+    - loop free faster convergence
+    - similar to RSTP
+    - switch to backup when next path (minus direct link) cost less than original full path
+  - 224.0.0.10 multicast discovery
+  - no full periodic updates, partial and incremental only
+- RIPv2
+  - subnet mask, alt next hop, auth, multicast, route tags
+  - mulitcast replace broadcast 224.0.0.9 not forwarded
+  - next hop: speaking on behalf of router that doesn't speak RIPv2
+- RIPng (next generation IPv6)
+  - 521/udp
+  - ipv6 prefix, route tags, next hop, multicast
+
 ### Layer 3 OSPF
+
+- link state
+- dijkstra
+- complex topologies, faster than distance vector (RIP)
+- hello -> adjacent
+  - link state packets for point to point
+  - virtual nodes / designated / backups for broadcast networks
+  - change -> trigger update, default period: 30min
+  - smart flood (no resend seen)
+- out of order:
+  - ttl always decrease when passing router
+  - large seq space, lockup on max, wait for timeout
+- prototype 89
+- Link State Advertisements (not packets)
+- HelloInterval, RouterDeadInterval
+- ACK LSA, timeout at same time with trigered redistribution using MaxAge
+- sticky router election, AllDRouters 224.0.0.6, AllSPFRouters 224.0.0.5
+- 2 tier, layer 0 backbone, extended with virtual links
+- Inter Area Summary IAS (aggregation of area), forwarded directly to other areas
+- Autonomous System Boundary Router, other protos, external routes
+- Areas:
+  - Stubby: no external routes, default route injected by Area Border Routers ABR
+  - Totally Stubby: only default, no IAS
+  - Not So Stubby: with certain external info
+- IPv6
+  - OSPFv3
+  - works per link not subnet
+  - link-LSA and explicit flooding scope (link, area, AS)
+  - intra area prefix LSA: prefix info
+  - inter area prefix LSA: type 3 summary
+  - inter area router LSA: type 4 summary
 
 ### Layer 3 BGP
 
