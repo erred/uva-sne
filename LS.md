@@ -1,5 +1,86 @@
 # Large Systems
 
+## Recap
+
+- distribution transparency
+  - what, main problems
+- time to send packet
+- scaling techniques
+- user ISA, system ISA
+- IO vs CPU bound
+- system vs process VM
+- taxonomy
+- VT-X
+- RPC, deferred synchronous
+- UNIX file api
+- MOM
+- distributed algos
+
+## Virtualization
+
+- storage: files, disk partitions, logical blocks, RAID, LVM
+- network: VLAN, channel bonding, clusters, virtual NICs
+- resource: mulitprogramming, virtual memory
+- VMs: basis for cloud computing, resource utilization
+- Hardware - ISA - Software
+- Hardware - (System ISA - Operating System / User ISA) - Application programs
+- ISA
+  - Ring 0: Kernel mode, Ring 3: User mode
+  - User: raw compute
+  - System ISA:
+    - system resources (memory, storage, io), allocation, auth, OS
+    - process: timer, user mode
+    - memory: page table, TLB, virtual memory
+    - traps: syscall exception
+    - syscall: app - kernel - os syscall handler - os - kernel instruction
+    - OS: app - lib - syscall os - kernel instruction - interrupt/trap/fault - os - app
+- VM
+  - system VM: HW - Virtual Machine Monitor - Guest OS - app
+  - process VM: WH - Host OS - Virtual Machine Monitor - app
+  - ABI: java, wine, WSL
+  - API: recompile
+- VM tree
+  - process
+    - same ISA: multiprogrammed systems: UNIX
+    - diff ISA: emulators, translators: Wine, WSL, high level language VM: Java, MS CLR
+  - system
+    - same ISA: classic system VM: VM370, hosted VMs: VMware, Xen, docker
+    - diff ISA: whole system VMs: ARM VM runtime, codesigned VMs: AS/400
+- emulation: translate ISA
+- VM impl:
+  - trap on user access system ISA
+  - not all syscall activate kernel mode (x86)
+  - patch
+  - Ring -1: Intel VT-X: VMX Root vs VMX Non-root
+  - VM driver in host (dom0)
+- paravirtualization:
+  - guest OS modified (drivers) (pv front)
+  - mux / driver on host
+- OS virtualization
+  - namespaces, not system or process, ex containers
+  - uts (hostname), mnt (mount/filesystem), pid (process), user (UID), ipc (IPC IDs), net (network)
+  - uts: sysname, nodename, release, version, machine, domainname
+    - gethostname: `system_utsname.nodename` -> `current->nsproxy->uts_ns->name->nodename`
+  - user, pid: offset view
+  - net: copy stack, devices/sockets belong in single namespace, initial namespace, mv/ad- cgroups: resource management of process groups
+- Windows:
+  - hyper V
+  - containers / hyper V containers
+  - Windows Server Containers: namespaced
+  - Hyper V containers: additionally run in VM
+- Unikernels
+  - no context switch
+  - app specific os optimizations
+
+| impl            | mode | with          | io  | interrupt/timer | motherboard/boot | priveled / page tabel |
+| --------------- | ---- | ------------- | --- | --------------- | ---------------- | --------------------- |
+| HVM / full      | HVM  |               | VS  | VS              | VS               | VH                    |
+| HVM + PV driver | HVM  | PV drivers    | P   | VS              | VS               | VH                    |
+| KVM             | HVM  |               | P   | VS              | VS / P           | VH                    |
+| PVHVM           | HVM  | PVHVM drivers | P   | P               | VS               | VH                    |
+| PVH             | PV   | pvh=1         | P   | P               | P                | VH                    |
+| PV              | PV   |               | P   | P               | P                | P                     |
+
 ## Design & Implementation
 
 - large = distributed
@@ -50,6 +131,76 @@
   - 1999: split to cache, replicated and sharded index and doc
     - cache miss on index update
     - adversial memory: bit flips in 1TB, mostly sorted
+
+### Communication Coordination Replication
+
+- client-server: RPC: too hard to be transparent
+  - ex: NFS: server stateful
+- Message Oriented Middleware
+  - abstract destinations, transparencies
+  - decouple queue and location (IP address)
+- Server-Server
+  - L3 multicast 224.0.2.0+ not working globally, best effort udp
+  - reach, all or none, dynamic groups, ordering: causal or total
+- ordering
+  - causal: m1 based on m2
+  - total: global
+  - time: atomic: direct / indirect gps
+  - order events -> logical clock
+  - always adjust clock to newest time
+  - receipt = got by middleware != delivered = got by app
+- mutex
+  - central coord: request, ok, wait, release
+    - google chubby
+  - mesh
+  - token ring
+
+### scaling
+
+- performance, redundancy - availability
+- issues: consistency, network partitions
+- CAP: Consistency, Availability, Partition Resistance
+  - CA: MySQL, Spanner
+  - CP: read only or dead when part: mongodb, hbase, redis, memcachedb
+  - AP: always respond: couchdb, voldemort, cassandra
+- consistency
+  - linearizability: all at same time
+  - sequential: same order, not at the same time
+  - causal: related things in order
+  - eventual: at some point
+- replication
+  - primary / backup: primary sequencer
+  - active replication: need sequencer
+  - quorom: NR + NW > N, NW > N/2
+  - qs: granularity, replica locate/location (anycast, dns, locad balancer)
+  - cache is king
+- partition
+  - heirarchical: admin
+  - formulaic
+- fault tolerance
+  - safety
+  - availability: uptime: 5nines: 5.26min/year, 6nines: 31.5s/year
+  - reliability: mean time between failure
+  - maintainability: mean time to repair
+  - physical/information/time/software redundancy
+- failures:
+  - crash: k+1
+  - byzantine (wrong ans): 2k+1 (majority)
+  - RPC:
+    - unknown point of failure
+      - locate server, request lost, crash (server), reply lost, crash (client)
+    - idempotent or atomic transactions
+    - at least once
+    - at most once
+    - paxos consensus
+    - partition = failure domain / swim lane
+- architectures:
+  - bittorrent
+    - file pieces, info datastructure, infohash
+    - torrent file: info ds, trackers, bootstrap DHT
+    - choke/unchoke, tit-for-tat, rarest first
+    - upload only to 4, optimistic random unchoke
+    - ditributed hash table: no trackers
 
 ## Administration
 
@@ -104,5 +255,4 @@
   - change process, what changes, affected, why, risk, betas, success criteria
   - backout plan, duration (change, backout), decision point
   - launch readiness criteria: monitoring, backups, access control, SLA, docs, load, scale
-- Desktops
-  -
+- ## Desktops
