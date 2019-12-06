@@ -447,6 +447,38 @@ volunteer run DNS servers to blackhole queries for private address ranges
 
 ## Q11. Perform a traceroute to 145 100 101 1 using a Web-based traceroute tool like https //www net princeton edu/traceroute html and note the ASs that are traversed. Now trace 145 100 104 1. Why does this trace take a different route although both addresses are part of OS3's 145 100 96 0/20 range?
 
+It appears that the 145.100.101.1/24 subnet (OS3-AS) is directly connected to AMS-IX, while the rest of the OS3 network is connected through SURFnet, the more specific subnet is preferred over the larger one advertised by SURFnet
+
+from Hurricane Electric Looking Glass:
+
+```
+BI	145.100.101.0/24	80.249.210.65	1355	100	0	1101, 1146	IGP	?
+BI	145.100.0.0/15	195.66.225.122	1285	100	0	1103	IGP	?
+```
+
+trace: 104.100.101.1
+
+```
+  1    <1 ms   <1 ms   <1 ms 72.52.92.58      AS6939 HURRICANE - Hurricane Electric LLC, US
+  2    83 ms   71 ms  153 ms 184.105.81.217
+  3   244 ms  140 ms  158 ms 72.52.92.165
+  4   140 ms  160 ms  164 ms 72.52.92.214
+  5   174 ms  159 ms  141 ms 80.249.210.65    AS1200 AMS-IX1, NL
+  6  1010 ms  178 ms  145 ms 145.100.101.1    AS1146 OS3-AS OS3, NL
+```
+
+trace: 104.100.104.1
+
+```
+  1   107 ms   18 ms    1 ms 72.52.92.58      AS6939 HURRICANE - Hurricane Electric LLC, US
+  2    95 ms   65 ms   98 ms 184.105.81.217
+  3   139 ms  159 ms  140 ms 72.52.92.165
+  4   214 ms  186 ms  146 ms 195.66.225.122   AS5459 London interconnection point
+  5   151 ms  252 ms  192 ms 145.100.104.1    AS1103 SURFNET-NL SURFnet, The Netherlands, NL
+```
+
+<spoiler|trace from machine in Google cloud>
+
 from a VM in Google cloud:
 
 - 145.100.101.1 (styx.os3.nl)
@@ -460,8 +492,6 @@ from a VM in Google cloud:
   - timeout
   - AS1103: SURFnet
   - timeout
-
-- presumably at some point a more specific route is advertised for 145.100.104.1 (the studexp network?) which leads to the traffic being routed through surfnet
 
 ```
 traceroute to 145.100.101.1 (145.100.101.1), 30 hops max, 60 byte packets
@@ -531,3 +561,5 @@ traceroute to 145.100.104.1 (145.100.104.1), 30 hops max, 60 byte packets
 29  * * *
 30  * * *
 ```
+
+</spoiler>

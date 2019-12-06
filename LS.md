@@ -131,6 +131,18 @@
   - 1999: split to cache, replicated and sharded index and doc
     - cache miss on index update
     - adversial memory: bit flips in 1TB, mostly sorted
+  - 2001: in memory index: single copy
+    - load balanced shards, replicate important docs
+    - +throughput +query latency -variance (xks machines), -availability fail
+    - canary request, test not crash servers
+  - 2004: tiered
+    - cache at root
+    - pyramid / tree of servers, leaf/repository servers over GFS
+    - repository manager coordination, served from in memeory
+  - batch process -> incremental
+    - storage: Colossus / Bigtable, processng: Caffeine / Percolator
+    - bigtable: distributed row-column-timestamp multidimensional eventual consistency
+    - caffeine: events trigger on bigtable updates
 
 ### Communication Coordination Replication
 
@@ -255,4 +267,72 @@
   - change process, what changes, affected, why, risk, betas, success criteria
   - backout plan, duration (change, backout), decision point
   - launch readiness criteria: monitoring, backups, access control, SLA, docs, load, scale
-- ## Desktops
+
+### Desktops
+
+- fungibility: can be substituted: automation, limit variation
+- DHCP for control, IEEE 802.1x network access control
+- Network directories: MS active directory, Apple Open Directory, LDAP
+- storage:
+  - local: fast, bad for fungibility
+  - remote: NFS, SMB, CIFS
+  - local sybced: Dropbox, iCloud, ownCloud
+- Hardware:
+  - Physical: laptop/desktop, vendors, product line: initial/total cost, performance
+  - Virtual Desktop Infra VDI: thin client, needs bandwidth
+  - BYOD
+- Evard Life cycle of machine
+  - new-build-clean-initialize-configured-(update)-entropy-unknown-debug-configured
+  - configured/unknown-rebuild-clean
+  - clean/unknown/configured-retire-off
+- transitions need process, aim for configured state, automate and policies
+- automate Iac: Config mgmt (ansible, puppet), MS GPO, DHCP
+  - central control, testing, small batched, user delay 1wk, track
+- disposal: remove from inventory/contracts, transfer data, reset, remove from track
+- Intel Active Management Technology AMT: hardware/firmware out of band management
+  - vPRO/DRAC for desktops
+  - power, boot, io over LAN, BIOS, control network traffic, OOB comm, inventory (soft, hard), keyboard, video, mouse, one touch setup, MINIX TLS/TCP/IP stack, direct NIC
+
+### Servers
+
+- single: dependency hell
+- beautiful snowflakes: machine per service
+- VM on large servers, exploit stranded capacity, VM packing
+- vs Grid Computing, Cloud Computing, SaaS, Server applicanes
+- racked, console/kvm/terminal access, OOB mgmt, separate admin network
+- controlled env (datacenter)
+- redundancy: mirrored disks, RAID, power supply, n+1/n+2
+- hot plug/hot swap/hot spare, failure domains
+- inverted bell curve of observed failure rate
+- RAID
+  - JBOD: concat
+  - RAID0: stripe
+  - RAID1: mirror
+  - RAID5: parity
+  - RAID6: double parity
+  - left lower level
+  - 0+1: mirror raid0 arrays
+  - 10: stripe accross raid1 arrays
+  - 10, 50(5+0), 100(10+0), proprietary
+
+### Datacenter
+
+- strategy: build your own, rent, outsource, no datacenter, hybrid
+- requirements:
+  - availability, continuity, budget, change control, regulatory, privacy, flexibility
+  - local v remote, up to date, security, remote/customer access, responsive, capacity
+- elements: racks, power, cooling, wiring, fire suppress, location, access
+- 1U racks: 19in wide, hole spacing
+  - not standard: height, depth, post width
+- common: 45U: 42U content, switch top, UPS bottom
+- power ditribution units: power strips with overload protection, ip accessible
+- UPS per rack: 10min full load, 2 year battery, power conditioning
+- generator: fueled, 24h at 125% load
+- BTU: 1055.06 Joules, 1W = 3.41214BTU/h
+- Ton of Cooling: 12000BTU/h = 3.52kW = refrigeration ton RT
+- power usage effectiveness: total/it_equipment
+- underfloor cold air: cold/warm aisle
+- cold aisle containment / hot aisle containment
+- top of rack wiring
+- fire:
+  - halon: not used, inergen: 52% N2, 40% Ar, 8% CO2, argonite: 50% Ar, 50% N2
