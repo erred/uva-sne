@@ -93,6 +93,14 @@ rtt min/avg/max/mdev = 0.014/0.014/0.014/0.000 ms
 	0x0060:  3233 3435 3637                           234567
 ```
 
+### Correction
+
+vlan tag: 0014:
+
+- bits 0-2: priority: best effort
+- bits 3: dei: ineligible
+- bits 4-15: tag id: 20
+
 - https://en.wikipedia.org/wiki/IEEE_802.1Q
 
 ## Q5. The containers that pogo creates have Reverse Path Filtering. What is Reverse Path Filtering? Turn RPF off using the following commands description
@@ -691,6 +699,10 @@ bridge3          UP             00:16:3e:44:73:94 <BROADCAST,MULTICAST,UP,LOWER_
 - 15s later
   - bridge1: forwarding-blocking
   - bridge3: forwarding-forwarding
+
+### Correction
+
+these actions take place at the time intervals indicated above
 
 ## Q15. Next, on a bridge machine that has disabled ports, bring down the bridge, disable STP and then bring up the bridge again. Describe what happens mentioning the state of the ports on all bridges. After how much time do the other bridges notice your disruptive actions? What is the downtime experienced by the ping session? Based on the STP protocol variables explain this downtime
 

@@ -11,52 +11,11 @@ sudo ip link set eno2 master xenbr1
 ## Q2. Create your AS with pogo
 
 ```
-################################################################################
-#GLOBAL CONFIG
-################################################################################
-#
-#                                        10.40.0.0/16
-#
-#
-#
-#                        10.40.1.0/24    10.40.14.0/24       10.40.4.0/24
-#                         --+--               v                 --+--
-#                           |                 v                   |
-#                        .1 |  eth0           v                .4 |   eth0
-#                      +----+----+            v              +---------+
-#172.16.0.0/24         |         |eth2        v          eth2|         |
-#  OS3 IX              | Router1 +---------------------------+ Router4 |
-# ----+----            |         |.1                      .4 |         |
-#     |                +----+----+                           +----+----+
-#     |                eth1 |.1                               eth1| .4
-#     | eth2                |                                     |
-#     |  +----------+       |                                     |
-#     |  |          |eth1   |  10.40.123.0/24                     |
-#     |--+ Router2  +-------+  <<<<<<<<<<<<<           >>>>>>>>>> |
-#     .2 |          |.2     |                       10.40.45.0/24 |
-#        +----------+       |                                     |
-#         .2  | eth0                                              |
-#             |         eth1| .3                              eth1| .5
-#           --+--      +----+-----+                          +----+-----+
-#        10.40.2.0/24  |          |eth2                  eth2|          |
-#                      |  Router3 +--------------------------+  Router5 |
-#                      |          |.3         ^            .5|          |
-#                      +----+-----+           ^              +-----+----+
-#                       .3  | eth0            ^                 .5 |eth0
-#                           |                 ^                    |
-#                         --+--               ^                  --+--
-#                      10.40.3.0/24           ^              10.40.5.0/24
-#                                             ^
-#                                       10.40.35.0/24
-
 [global]
 session_path = /tmp
 
 switches = 10
 
-################################################################################
-#HOST CONFIG
-################################################################################
 [router1]
 role= router
 eth0 = 0,10.40.1.1/24
@@ -124,7 +83,6 @@ bgp router-id 172.16.0.40
 address-family ipv4 unicast
 network 10.40.0.0/16
 exit-address-family
-
 ```
 
 ## Q6. Use your border router to peer with two of your colleagues. Test if the connectivity between the networks is as you expected and document your findings. What does the network in your group look like and what are the relations? Hint Use neighbor a b c d next-hop-self or BGP may take a short-cut over the shared LAN later
@@ -133,11 +91,16 @@ exit-address-family
 
 ```
 router bgp 64640
-bgp router-id 172.16.0.40
+ bgp router-id 172.16.0.40
+ neighbor 172.16.0.26 remote-as 64626
+ neighbor 172.16.0.37 remote-as 64637
 !
 address-family ipv4 unicast
-network 10.40.0.0/16
+ network 10.40.0.0/16
+ neighbor 172.16.0.26 next-hop-self
+ neighbor 172.16.0.37 next-hop-self
 exit-address-family
+!
 ```
 
 ```
@@ -153,36 +116,93 @@ rtt min/avg/max/mdev = 0.524/0.557/0.591/0.040 ms
 
 ## Q7. Configure your border router such that even though you have a direct peering relation with one of your colleagues all the outbound traffic goes via your other colleague. Do the same for inbound traffic. Work together with one person being the source one person the middleperson and one the destination. It is sufficient to do the exercise once from this perspective. Are you in full control of the routing? Explain
 
+no, we are in full control of outbound traffic: we can select the paths to take, but we can only influence the inbound traffic, based on prefix length and the path lengths between other ASes which we are not in control of
+
+- local preference for outbound traffic:
+
 ```
-router2(config)# ip prefix-list DENY deny any
-router2(config-router)# neighbor 172.16.0.26 prefix-list DENY in
+router bgp 64640
+ bgp router-id 172.16.0.40
+ neighbor 172.16.0.26 remote-as 64626
+ neighbor 172.16.0.37 remote-as 64637
+ !
+ address-family ipv4 unicast
+  network 10.40.0.0/16
+  neighbor 172.16.0.26 next-hop-self
+  neighbor 172.16.0.26 route-map RMAPlow in
+  neighbor 172.16.0.37 next-hop-self
+  neighbor 172.16.0.37 route-map RMAPhigh in
+ exit-address-family
+!
+route-map RMAPhigh permit 20
+ set local-preference 20
+!
+route-map RMAPlow permit 10
+ set local-preference 10
 ```
 
 ```
-router2# show ip route
-Codes: K - kernel route, C - connected, S - static, R - RIP,
-       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
-       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
-       F - PBR, f - OpenFabric,
-       > - selected route, * - FIB route, q - queued route, r - rejected route
+router2# show bgp detail
+BGP table version is 3, local router ID is 172.16.0.40, vrf id 0
+Default local pref 100, local AS 64640
+Status codes:  s suppressed, d damped, h history, * valid, > best, = multipath,
+               i internal, r RIB-failure, S Stale, R Removed
+Nexthop codes: @NNN nexthop's vrf id, < announce-nh-self
+Origin codes:  i - IGP, e - EGP, ? - incomplete
 
-B>* 10.26.0.0/16 [20/0] via 172.16.0.37, eth0, 00:02:26
-B>* 10.37.0.0/16 [20/0] via 172.16.0.37, eth0, 00:00:13
-C>* 10.40.123.0/24 is directly connected, eth1, 00:06:26
-C>* 172.16.0.0/24 is directly connected, eth0, 00:06:26
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.26.0.0/16     172.16.0.37                    20      0 64637 64626 i
+*                   172.16.0.26              0     10      0 64626 i
+*> 10.37.0.0/16     172.16.0.37              0     20      0 64637 i
+*> 10.40.0.0/16     0.0.0.0                  0         32768 i
+
+Displayed  3 routes and 4 total paths
+```
+
+- inbound traffic
+
+```
+router bgp 64640
+ bgp router-id 172.16.0.40
+ neighbor 172.16.0.26 remote-as 64626
+ neighbor 172.16.0.37 remote-as 64637
+ !
+ address-family ipv4 unicast
+  network 10.40.0.0/16
+  neighbor 172.16.0.26 next-hop-self
+  neighbor 172.16.0.37 next-hop-self
+  neighbor 172.16.0.37 route-map LONGAS out
+ exit-address-family
+!
+router ospf
+ log-adjacency-changes detail
+ network 10.66.123.0/24 area 0.0.0.0
+!
+route-map LONGAS permit 10
+ set as-path prepend 64640 64640 64640 64640
 ```
 
 ```
-root@router2:~# traceroute 10.37.123.2
-traceroute to 10.37.123.2 (10.37.123.2), 30 hops max, 60 byte packets
- 1  10.37.123.2 (10.37.123.2)  0.599 ms  0.534 ms  0.484 ms
-root@router2:~# traceroute 10.26.123.2
-traceroute to 10.26.123.2 (10.26.123.2), 30 hops max, 60 byte packets
- 1  172.16.0.37 (172.16.0.37)  0.668 ms  0.591 ms  0.550 ms
- 2  10.26.123.2 (10.26.123.2)  0.766 ms  0.723 ms  0.580 ms
+router2# show bgp detail
+BGP table version is 5, local router ID is 172.16.0.40, vrf id 0
+Default local pref 100, local AS 64640
+Status codes:  s suppressed, d damped, h history, * valid, > best, = multipath,
+               i internal, r RIB-failure, S Stale, R Removed
+Nexthop codes: @NNN nexthop's vrf id, < announce-nh-self
+Origin codes:  i - IGP, e - EGP, ? - incomplete
+
+   Network          Next Hop            Metric LocPrf Weight Path
+*> 10.26.0.0/16     172.16.0.37                            0 64637 64626 i
+*                   172.16.0.26              0             0 64626 64626 64626 i
+*> 10.37.0.0/16     172.16.0.37              0             0 64637 i
+*> 10.40.0.0/16     0.0.0.0                  0         32768 i
+
+Displayed  3 routes and 4 total paths
 ```
 
 ## Q8. Document the current BGP routing table. Now choose a colleague from another group and setup peering with him. Write the peering setup on the board so that the rest of the class knows who is peering with whom. Describe the peering relations after you've added the new peer. What new routes did you get? How did the AS Path lengths change?
+
+{{:2019-2020:students:sean_liao:inr:inr7.jpg?direct&400}}
 
 ```
 router2# show bgp detail
@@ -426,6 +446,22 @@ volunteer run DNS servers to blackhole queries for private address ranges
 - https://www.as112.net/
 
 ## Q11. Perform a traceroute to 145 100 101 1 using a Web-based traceroute tool like https //www net princeton edu/traceroute html and note the ASs that are traversed. Now trace 145 100 104 1. Why does this trace take a different route although both addresses are part of OS3's 145 100 96 0/20 range?
+
+from a VM in Google cloud:
+
+- 145.100.101.1 (styx.os3.nl)
+
+  - AS15169: GOOGLE
+  - timeout
+
+- 145.100.104.1 (router.studexp.nl)
+
+  - AS15169: GOOGLE
+  - timeout
+  - AS1103: SURFnet
+  - timeout
+
+- presumably at some point a more specific route is advertised for 145.100.104.1 (the studexp network?) which leads to the traffic being routed through surfnet
 
 ```
 traceroute to 145.100.101.1 (145.100.101.1), 30 hops max, 60 byte packets
