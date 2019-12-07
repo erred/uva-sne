@@ -202,6 +202,8 @@ Displayed  3 routes and 4 total paths
 
 ## Q8. Document the current BGP routing table. Now choose a colleague from another group and setup peering with him. Write the peering setup on the board so that the rest of the class knows who is peering with whom. Describe the peering relations after you've added the new peer. What new routes did you get? How did the AS Path lengths change?
 
+peer with Tjeerd, got almost every other route in the class, some very long paths
+
 {{:2019-2020:students:sean_liao:inr:inr7.jpg?direct&400}}
 
 ```

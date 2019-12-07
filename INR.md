@@ -252,7 +252,7 @@
 - small size, max 15 hops
 - send out full table (no gateways), update own table
 - split horizon, poisoned reverse: no advertise back to network heard from
-- Timers: Update 30s, Invalid (timeout) 180s, Flush 240s (120s after timeout), Hold down (no update on unreachable) 180s
+- Timers: Update 30s, Invalid (timeout) 180s, Flush 240s (60s after timeout), Hold down (no update on unreachable) 180s
 - 520/udp
 - v1 supports fixed 1 level deep subnets
 - Interior Gateway Routing Protocol IGRP:
@@ -313,6 +313,27 @@
   - inter area router LSA: type 4 summary
 
 ### Layer 3 BGP
+
+- path vector, non coordinated
+- speakers = routers
+- Autonomous System AS: set of IP prefixed with single consistent routinf policy
+- earn money: customer > peer > provider
+- AS types: stub (single provider), multi homed, transit, IXP
+- transit relation export filtering: advertise: all to customers, customers to all
+- eBGP between AS, iBGP internal sync routers, local routes, full mesh
+- Adj-RIB-in : import policy : route selection : Loc-RIB : export policy : Adj-RIB-out
+- TCP 179, TTL 1
+- Network Layer Reachability Information NLRI: prefix reachability, route select attrs
+- LOCAL_PREF (higher better), AS_PATH (shorter better), MED (lower better)
+- ORIGIN (unused)
+- tie break: IGP cost, oldest, router id, neighbor ip
+- outbound routes/filters affect inbound traffic (peer policies)
+- inbound routes/filters affect outbound traffic (in control)
+- Outbound Traffic Engineering: local pref, as path extension, med inbound communities
+- Inbound Traffic Engineering: as path extension, med, outbound communities, spec routes
+- communities: optional transitive: preferred treatment, ex: NO_EXPORT, NO_ADVERTISE
+- route reflector: smaller iBGP full mesh
+- confederation: private AS, AS_PATH segment type
 
 ## packets
 
