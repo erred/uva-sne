@@ -1,4 +1,4 @@
-# InterNetworking and Routing
+# Networks
 
 - Layer 2 (Link) and 3 (Network)
 - Interface (Vertical), Protocol (Horizontal)
@@ -19,6 +19,8 @@
 - Strong v Weak Endsystem
   - Strong: only accept match physical interface
   - Weak: accept and route any
+- VLSM: variable length subnet mask
+- CIDR: classless Inter Domain Routing
 
 ### Layer 1
 
@@ -43,36 +45,41 @@
   - useless 802.2
   - wasted bytes
   - Sub Network Access Protocol SNAP: `0xaa` DSAP, `0xaa` SSAP `0x03` control, `0x000000` org id, `2 byte ethertype` protocol
-  - Bridges == Switches
-    - filtering database: learning
-  - VLAN: split physical LAN to logical LANs
-    - 802.1Q-2011, includes everything below
-      - insert 4 byte header after src addr
-    - 802.1ad QinQ
-      - additonal service provider vlan tag before customer vlan tag
-    - 802.1ah Provider Backbone Bridges PBB
-      - additional src, dst, ethertype, service id header
-    - 802.1Qay PBB-Traffic Engineering
-      - alt to MPLS-Transport Profile / Transport-MPLS
-    - ... stop inclusion ...
-    - TRansparent Interconnect of Lots of Links TRILL
-      - Layer 2 routing bridges on LAN with L3 like headers / TTL
-    - Shortest Path Bridging SPB
-      - replace STP / RSTP / MSTP
-      - QinQ, MinM
+- Bridges == Switches
+  - 802.1D
+  - filtering database: learning
+- VLAN: split physical LAN to logical LANs
+  - 802.1Q-2011, includes everything below
+    - insert 4 byte header after src addr
+  - 802.1ad QinQ
+    - additonal service provider vlan tag before customer vlan tag
+  - 802.1ah Provider Backbone Bridges PBB
+    - additional src, dst, ethertype, service id header
+  - 802.1Qay PBB-Traffic Engineering
+    - alt to MPLS-Transport Profile / Transport-MPLS
+  - ... stop inclusion ...
+  - TRansparent Interconnect of Lots of Links TRILL
+    - Layer 2 routing bridges on LAN with L3 like headers / TTL
+  - Shortest Path Bridging SPB
+    - replace STP / RSTP / MSTP
+    - QinQ, MinM
+- frames:
+  - 7preamble, 1sfd
+  - DIX Ethernet II: 6dst, 6src, 2type, 46-1500pdu, 4fcs
+  - 802.3 with 802.2: ...src, 2len, 1dsap, 1ssap, 1 ctrl, 43-1497pdu, 4fcs
+  - 802.1Q-2011 VLAN: ...src, x8100, 2ctag (3flag,1cfi,12tag), 2len...
+  - 802.1ad (QinQ): ..src, x88a8, 2stag, x8100, 2ctag, 2len...
+  - 802.1ah PBB: 6pdst, 6psrc, x88a8, 2btag, x88e7, 2itag, ...802.1ad
 
 ### Layer 2 RSTP
 
 - rapid spanning tree protocol
 - bipartite graph
-- graph to tree
-- add nodes without creating loops
+- graph to tree: add nodes without creating loops
 - broadcast direct connected perceived root
   - id, cost, own id, own port
 - chooses lowest root id
-  - best path
-  - best bridge
-  - best port
+  - tiebreak: cost, trans bridge id, port
 - designated bridge
   - designated port to LAN segment
   - root port points to root
@@ -80,18 +87,26 @@
   - listen / learn
 - Topology Change Notification to bridge
   - Root set TC for forward delay + max age
+  - use short cache: forward delay
 - BDPU
   - DSAP = SSAP = 0x42
   - dest `01:80:c2:00:00:00` local broadcast
 - RSTP
   - backwards compatible
   - extra flags for early forward
-  - forward early on some
 - STP on VLANs
-- disable host port participation
 - MSTP Multiple Spanning Tree Protocol
   - each VLAN/region = virtual bridge, Internal Spanning Tree
   - Common Spanning Tree between VLANs
+- params:
+  - message age: 1/256 sec, 0 on all except new connect
+  - max age: discard (20s)
+  - hello time: time between keepalives (2s)
+  - forward delay: listen, learn time (15s)
+- frames:
+  - hello: 2proto, 1vers, 1type, 1flag (1tca, ..., 1tc), 8rootid, 4cost, 8bridgeid,
+    - 2portid, 2message age, 2maxage, 2hellotime, 2forward delay
+  - TC: 2proto, 1vers, 1type
 
 ### Layer 3 IPv4
 
@@ -115,6 +130,9 @@
 - subnets: area with same prefix
 - link: ip ttl 1 reachable
 - Ipv4 protocols: `6` tcp, `17` udp
+- header:
+  - version, internet header (5-16), tos, total len, id, flags, frag off,
+  - ttl, proto, header checksum, src, dst, options
 
 ### Layer 3 IPv6
 
@@ -128,7 +146,7 @@
   - ::/128 unspecified
   - ::1/128 loopback
   - ::a.b.c.d/128 IPv4 compatible (depreciated)
-  - ::ffff:0:0/96 IPv4 mapped
+  - ::ffff:a.b.c.d/96 IPv4 mapped
   - 100::/8, 100::/64 discard only
   - 64:ff9b::/96 Well known prefix (IPv4 algorithmic translation)
   - 64:ff9b:1::/48 local well known
@@ -178,7 +196,6 @@
     - DNS64 address translation from v6 client to v4 server
   - ISATAP Intra Site Automatic Tunnel Addressing Protocol
     - 64_bit_prefix:0:5efe:a.b.c.d
-    - 0:5efe constant
   - 6to4
     - connects IPv6 over IPv4
     - 2002:a.b.c.d::/48
@@ -198,6 +215,8 @@
     - inet_pton, inet_ntop
     - gethostbyname -> getaddrinfo
     - gethostbyaddr -> getnameinfo
+- header:
+  - vers, class, flowlabel, payload len, next header (proto), hop limit, src, dst
 
 ### Algorithms
 
@@ -230,20 +249,12 @@
 - gateway = next hop
 - longest prefix match selection
 - Autonomous System: connected group with single clear routing policy
-- Inter AS
-  - BGP4
-- Intra AS
-  - RIP, OSPF, IS-IS, iBGP
+- Inter AS: BGP4
+- Intra AS: RIP, OSPF, IS-IS, iBGP
 - Static Routing: manual config
-- Distance Vector:
-  - RIP
-  - minimum spanning tree
-- Path Vector:
-  - BGP
-  - full path not just distance
-- Link State:
-  - OSPF
-  - know everything
+- Distance Vector: RIP, minimum spanning tree
+- Path Vector: BGP, full path not just distance
+- Link State: OSPF, know everything
 
 ### Layer 3 RIP
 
@@ -334,92 +345,3 @@
 - communities: optional transitive: preferred treatment, ex: NO_EXPORT, NO_ADVERTISE
 - route reflector: smaller iBGP full mesh
 - confederation: private AS, AS_PATH segment type
-
-## packets
-
-### Ethernet DIX
-
-```
-|           |           |           |           |           |           |           |           |
-| dest addr                                                                                     |
-|                                               | src addr                                      |
-|                                                                                               |
-| type                                          | ... padded data min 46 bytes max to 1500      |
-| Frame check sequence / cyclic redundancy check                                                |
-```
-
-### Ethernet 802.3 with 802.3 LLC
-
-```
-|           |           |           |           |           |           |           |           |
-| dest addr                                                                                     |
-|                                               | src addr                                      |
-|                                                                                               |
-| length                                        | DSAP                   | SSAP                 |
-| control / ethertype   | ...padded min 43...                                                   |
-| FCS                                                                                           |
-```
-
-### Ethernet 802.1 VLAN
-
-```
-|           |           |           |           |           |           |           |           |
-| dest addr                                                                                     |
-|                                               | src addr                                      |
-|                                                                                               |
-| VLAN type 0x8100                              ||priority|CFI| VLAN ID                         |
-| length                                        | DSAP                   | SSAP                 |
-| control / ethertype   | ...padded...                                                          |
-| FCS                                                                                           |
-```
-
-### Ethernet 802.1ah PBB + 802.1ad
-
-```
-|           |           |           |           |           |           |           |           |
-| dest addr                                                                                     |
-|                                               | src addr                                      |
-|                                                                                               |
-| B-Tag VLAN type 0x88a8                        ||priority|CFI| VLAN ID                         |
-| I-Tag type 0x88e7                             | flags                 | service identifier    |
-|                                               | dest addr                                     |
-| src addr                                                                                      |
-|                                               |...............skip............................|
-| VLAN type 0x88a8                              ||priority|CFI| VLAN ID                         |
-| VLAN type 0x8100                              ||priority|CFI| VLAN ID                         |
-| length                                        | DSAP                   | SSAP                 |
-| control / ethertype   | ...padded...                                                          |
-| FCS                                                                                           |
-```
-
-### STP BDPU
-
-todo
-
-### Ipv4
-
-```
-|           |           |           |           |           |           |           |           |
-| version   | header len| tos / DSCP      | ECN | total length                                  |
-| identifier                                    | flags  | fragment offset                      |
-| time to live          | protocol              | header checksum                               |
-| source ip                                                                                     |
-| dest ip                                                                                       |
-| options (padded)                                                                              |
-```
-
-### IPv6
-
-```
-|           |           |           |           |           |           |           |           |
-|version | traffic class            | flowlabel                                                 |
-| payload length (inc ext)                      | next header type      | hop limit             |
-| src                                                                                           |
-|                                                                                               |
-|                                                                                               |
-|                                                                                               |
-| dst                                                                                           |
-|                                                                                               |
-|                                                                                               |
-|                                                                                               |
-```
