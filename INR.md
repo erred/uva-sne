@@ -22,15 +22,10 @@
 - VLSM: variable length subnet mask
 - CIDR: classless Inter Domain Routing
 
-### Layer 1
-
-- physical layer
-- link segment
-- single collision domain
-
 ### Layer 2
 
 - Link / LAN
+  - Layer 1: physical layer, link segment, single collision domain
 - single broadcast domain
 - Media Access Control MAC sublayer
   - Ethernet: 802.3
@@ -127,6 +122,12 @@
     - 172.16.0.0/12
     - 192.168.0.0/16
     - 169.254.0.0/16 link local dynamic config
+  - other:
+    - 224.0.0.5: ALLSPFRouters multicast
+    - 224.0.0.6: ALLDRouters multicast
+    - 224.0.0.9: RIPv2 multicast
+    - 224.0.0.10: EIGRP multicast
+    - 192.88.99.1: 6to4 anycast
 - subnets: area with same prefix
 - link: ip ttl 1 reachable
 - Ipv4 protocols: `6` tcp, `17` udp
@@ -138,36 +139,26 @@
 
 - allocations
   - 0000 000- = ::/7 special purpose
+    - ::/128 unspecified
+    - ::1/128 loopback
+    - ::a.b.c.d/128 IPv4 compatible (depreciated)
+    - ::ffff:a.b.c.d/96 IPv4 mapped
+      - 100::/8, 100::/64 discard only
+    - 64:ff9b::/96 Well known prefix (IPv4 algorithmic translation)
+    - 64:ff9b:1::/48 local well known
   - 001- ---- = 2000::/3 global unicast
+    - 2001::/16 1st RIR
+    - 2002::/16 6to4
   - 1111 110- = fc00::/7 unique local unicast
   - 1111 1110 10-- = fe80::/10 link local unicast
   - 1111 1111 = ff00/8 multicast
-- special purpose
-  - ::/128 unspecified
-  - ::1/128 loopback
-  - ::a.b.c.d/128 IPv4 compatible (depreciated)
-  - ::ffff:a.b.c.d/96 IPv4 mapped
-  - 100::/8, 100::/64 discard only
-  - 64:ff9b::/96 Well known prefix (IPv4 algorithmic translation)
-  - 64:ff9b:1::/48 local well known
-- unicast
-  - 2001::/16 1st RIR
-  - 2002::/16 6to4
-- local
-  - fe80::/10 link local
-  - fec0::/10 site local (depreciated)
-  - fc00::/7 unique local
-- multicast
-  - ff00::/8
     - 8x1 4flags (0RPT) 4scope 112multicast_id
     - scope: 1 interface, 2 link, e global
     - ff02::1 all nodes
     - ff02::2 all routers
 - neighbour discovery
   - ICMPv6 133-137
-  - SLAAC
-    - Link local - DAD
-    - RA - generate - DAD
+  - SLAAC: generate link local - DAD - RA - generate - DAD
 - transition
   - ipv4 XOR ipv6: use tunnels
   - Dual Stack
@@ -229,9 +220,6 @@
 - Distance Vector: RIP, minimum spanning tree
 - Path Vector: BGP, full path not just distance
 - Link State: OSPF, know everything
-
-### Algorithms
-
 - minimum spanning tree
   - least total cost
   - but not necessarily pairwise least cost
@@ -254,12 +242,19 @@
     - d(s, t) = min i (d(s, i), dit)
   - shortest path from single source, handles negative weights
   - for all edges: check if reduces distance to node
+- table of distance/metric, gateway/next hop
+  - send out full table (no gateways), update own table
 - small inf size, max 15 hops
-- send out full table (no gateways), update own table
 - split horizon, poisoned reverse: no advertise back to network heard from
-- Timers: Update 30s, Invalid (timeout) 180s, Flush 240s (60s after timeout), Hold down (no update on unreachable) 180s
-- 520/udp
-- v1 supports fixed 1 level deep subnets
+- Timers: Update 30s, Invalid (timeout) 180s, Flush 240s (60/120s after timeout), Hold down (no update on unreachable) 180s
+- RIPv1: guess uniform subnet mask from self
+- RIPv2
+  - subnet mask, alt next hop, auth, multicast, route tags
+  - mulitcast replace broadcast 224.0.0.9 not forwarded
+  - next hop: speaking on behalf of router that doesn't speak RIPv2
+- RIPng (next generation IPv6)
+  - 521/udp
+  - ipv6 prefix, route tags, next hop, multicast
 - Interior Gateway Routing Protocol IGRP:
   - Cisco
   - 4 parallel paths, more hops (100)
@@ -276,13 +271,16 @@
     - switch to backup when next path (minus direct link) cost less than original full path
   - 224.0.0.10 multicast discovery
   - no full periodic updates, partial and incremental only
-- RIPv2
-  - subnet mask, alt next hop, auth, multicast, route tags
-  - mulitcast replace broadcast 224.0.0.9 not forwarded
-  - next hop: speaking on behalf of router that doesn't speak RIPv2
-- RIPng (next generation IPv6)
-  - 521/udp
-  - ipv6 prefix, route tags, next hop, multicast
+- frames:
+  - 520/udp, 512 bytes (8udp head, 4 head, 25x 20 route updates)
+  - RIPv1: (1cmd, 1vers, 2reserved), (2afi, 2reserved, 4netaddr, 8reserved, 4metric) x max 20
+    - cmd: 1req, 2res
+  - RIPv2: (1cmd, 1vers, 2reserved), (2afi, 2route_tag, 4netaddr, 4subnet_mask, 4next_hot, 4metric) x max 20
+    - first entry auth: afi=xffff, 2auth_type (2 plaintxt, 3 md5/hmac-sha), data (passwd or keyid, seq, len, offset of auth trailer)
+    - route tag passed along
+  - 521/udp, unfragmented
+  - RIPng: (1cmd, 1vers, 2reserved), (16netaddr, 2route_tag, 1prefix_len, 1metric) x n unfragmented
+    - next hop (next entry RTE, link local, use until reset): 16ipaddr, x0000, x00, xff
 
 ### Layer 3 OSPF
 
