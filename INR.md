@@ -218,32 +218,6 @@
 - header:
   - vers, class, flowlabel, payload len, next header (proto), hop limit, src, dst
 
-### Algorithms
-
-- Bellman-Ford
-  - shortest path tree
-    - from single source
-    - handles negative weights
-  - for all edges:
-    - check if reduces distance to node
-  - Split horizon / poisoned reverse
-- Dijkstra
-  - shortest path tree
-    - from single source
-  - for all nodes:
-    - updated connected nodes
-    - choose closest
-- Prim
-  - minimum spanning tree
-    - least total cost
-    - but not necessarily pairwise least cost
-  - for all nodes
-    - choose closest node
-- Kruskal
-  - minimum spanning tree
-  - fpr all nodes
-    - choose globally least cost edge without creating cycle
-
 ### Layer 3 routing
 
 - gateway = next hop
@@ -256,11 +230,31 @@
 - Path Vector: BGP, full path not just distance
 - Link State: OSPF, know everything
 
-### Layer 3 RIP
+### Algorithms
+
+- minimum spanning tree
+  - least total cost
+  - but not necessarily pairwise least cost
+  - Prim
+    - choose closest node,
+    - single tree grows
+  - Kruskal
+    - choose globally least cost edge
+    - merge forest -> tree
+
+### Layer 3 Routing Information Protocol
 
 - charles hedrik, 1988
 - bellman-ford
-- small size, max 15 hops
+  - limit
+    - d0(s, t) = 0, s = t
+    - d0(s, t) = inf, s != t
+    - dn+1(s, t) = min i (dn(s, i), dit)
+    - d(s, t) = lim n->inf dn(s, t)
+    - d(s, t) = min i (d(s, i), dit)
+  - shortest path from single source, handles negative weights
+  - for all edges: check if reduces distance to node
+- small inf size, max 15 hops
 - send out full table (no gateways), update own table
 - split horizon, poisoned reverse: no advertise back to network heard from
 - Timers: Update 30s, Invalid (timeout) 180s, Flush 240s (60s after timeout), Hold down (no update on unreachable) 180s
@@ -294,6 +288,8 @@
 
 - link state
 - dijkstra
+  - shortest path tree: from single source
+  - for all nodes: updated connected nodes, choose closest
 - complex topologies, faster than distance vector (RIP)
 - hello -> adjacent
   - link state packets for point to point
@@ -327,21 +323,32 @@
 
 - path vector, non coordinated
 - speakers = routers
-- Autonomous System AS: set of IP prefixed with single consistent routinf policy
 - earn money: customer > peer > provider
 - AS types: stub (single provider), multi homed, transit, IXP
 - transit relation export filtering: advertise: all to customers, customers to all
 - eBGP between AS, iBGP internal sync routers, local routes, full mesh
 - Adj-RIB-in : import policy : route selection : Loc-RIB : export policy : Adj-RIB-out
 - TCP 179, TTL 1
-- Network Layer Reachability Information NLRI: prefix reachability, route select attrs
-- LOCAL_PREF (higher better), AS_PATH (shorter better), MED (lower better)
-- ORIGIN (unused)
+- ORIGIN (unused), NEXT_HOP: advertise for someone else
+- drop if own, weight, local_pref (high), as_path (short), origin (low), med (low), ebgp > ibgp
 - tie break: IGP cost, oldest, router id, neighbor ip
-- outbound routes/filters affect inbound traffic (peer policies)
-- inbound routes/filters affect outbound traffic (in control)
-- Outbound Traffic Engineering: local pref, as path extension, med inbound communities
-- Inbound Traffic Engineering: as path extension, med, outbound communities, spec routes
 - communities: optional transitive: preferred treatment, ex: NO_EXPORT, NO_ADVERTISE
+- outbound routes/filters affect inbound traffic (peer policies)
+  - Inbound Traffic Engineering: as path extension, med, outbound communities, spec routes
+- inbound routes/filters affect outbound traffic (in control)
+  - Outbound Traffic Engineering: local pref, as path extension, med inbound communities
 - route reflector: smaller iBGP full mesh
 - confederation: private AS, AS_PATH segment type
+- Network Layer Reachability Information NLRI: prefix reachability, route select attrs
+- frames:
+  - 16bytes1 (old auth), 2len (19-4096), 1type, data
+  - type 1: OPEN
+    - 1vers, 2AS, 2holdtime, 4bgpid (sender ip), 1optparamlen, optparams
+  - type 2: UPDATE
+    - 2unfeasible_route_len, withdrawn_routes, 2total_path_attr_len, path_attr (tlv), NLRI
+  - type 3: NOTIFICATION
+    - 1errcode, 1errsubcode, data
+  - type 4: KEEPALIVE
+    - empty body
+  - type 5: Route-REFRESH
+    - 2afi (address family indicator, multiproto), 1reserved, 1safi (subsequent afi, uni/multicast)
