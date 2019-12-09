@@ -287,19 +287,23 @@
 - link state
 - dijkstra
   - shortest path tree: from single source
-  - for all nodes: updated connected nodes, choose closest
-- complex topologies, faster than distance vector (RIP)
-- hello -> adjacent
+  - for all nodes: updated connected nodes, expand selected to closest connected
+- features:
+  - complex topologies, faster than distance vector (RIP)
+  - subnets, metrics on cost per interface
+  - load balancing, unnumbered interfaces, auth
+  - proto 89, drop external routes on database overflow
+- hello -> adjacent (neighbors = connected, adjacent = connected in protocol)
   - link state packets for point to point
   - virtual nodes / designated / backups for broadcast networks
-  - change -> trigger update, default period: 30min
+  - change -> trigger update, default period LSRefreshTime: 30min
   - smart flood (no resend seen)
-- out of order:
-  - ttl always decrease when passing router
-  - large seq space, lockup on max, wait for timeout
+- out of order packets:
+  - ttl always decrease when passing router, decrease in time
+  - large seq space, lockup on max, wait for timeout, force timeout with maxage flood
 - prototype 89
 - Link State Advertisements (not packets)
-- HelloInterval, RouterDeadInterval
+- HelloInterval 10s, RouterDeadInterval 40s
 - ACK LSA, timeout at same time with trigered redistribution using MaxAge
 - sticky router election, AllDRouters 224.0.0.6, AllSPFRouters 224.0.0.5
 - 2 tier, layer 0 backbone, extended with virtual links
@@ -309,13 +313,39 @@
   - Stubby: no external routes, default route injected by Area Border Routers ABR
   - Totally Stubby: only default, no IAS
   - Not So Stubby: with certain external info
-- IPv6
-  - OSPFv3
-  - works per link not subnet
-  - link-LSA and explicit flooding scope (link, area, AS)
+- OSPFv3
+  - IPv6, no auth, addrs in LSA, works per link not subnet
+  - explicit flooding scope (link, area, AS)
+  - router/network LSA: topology connectivity only (no ips)
+  - link LSA: router link local addr, ip6 prefix, options for network LSA
   - intra area prefix LSA: prefix info
   - inter area prefix LSA: type 3 summary
   - inter area router LSA: type 4 summary
+- frames:
+  - header: 1vers, 1type, 2pktlen, 4routerid, 4areaid, 2chksum, 2authtype (null, simple, cryto), 8auth (ptr)
+  - type 1 Hello: (4netmask, 2hello_int, 1opts, 1rtr_pri, 4rdead_int, 4DR ip, 4BDR ip), 4neighbor x N
+  - type 2 Database Desc: (2mtu, 1opts, 00000_init_more_master/slave, 4seq), 20LSA_header x N
+    - unique LSA instance
+  - type 3 LS Request: (4LS_type, 4LS_id, 4adv_router) x N
+    - unique LSA
+  - type 4 LS Update: 4LSA_cnt, LSA x N
+    - LSA header: 2LSA_age, 1opts, 1LS_type, 4LS_id, 4adv_router, 4LS_seq, 2chksum, 2len
+    - type 1 Router LSA: (0_virtual_asbr_abr_0, 2link_cnt), (4link_id, 4link_data, 1type, 1tos_cnt, 2metric, (1tos, 1zero, 2tos_metric) x N us.0 ) x N
+      - LS_id = originating router id
+      - type (link_id, link_data): 1ptp (neighbor id, orig ip), 2transit (DR ip, orig ip), 3stub (ip, mask), 4virtual (neighbor id, orig ip)
+    - type 2 Network LSA: 4netmask, 4attached_router x N
+      - LS_id = DR ip
+    - type 3 Net Summary LSA: 3netmask, 1zero, 3metric, (1tos, 3tos_metric) x N
+      - LS_id = net prefix dst
+    - type 4 ASBR LSA: see type 3, netmask not relevant
+      - LS_id = ASBR router id
+    - type 5 AS External LSA: 4netmask, 1e_zero, 3metric, 4fwd_addr, 4ext_route_tag, (1e_tos, 3tos_metric, 4fwd_addr, 4ext_route_tag) x N
+      - LS_id = net prefix dst
+      - e: external cost only
+      - flood through AS
+    - type 7 NotSoStubbyArea LSA: see type 5, flood trhough NSSA
+      - LS_id = net prefix dst
+  - type 5 LS Ack: 20LSA_header x N
 
 ### Layer 3 BGP
 
