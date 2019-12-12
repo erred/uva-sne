@@ -123,17 +123,17 @@
     - 192.168.0.0/16
     - 169.254.0.0/16 link local dynamic config
   - other:
+    - 192.88.99.1: 6to4 anycast
     - 224.0.0.5: ALLSPFRouters multicast
     - 224.0.0.6: ALLDRouters multicast
     - 224.0.0.9: RIPv2 multicast
     - 224.0.0.10: EIGRP multicast
-    - 192.88.99.1: 6to4 anycast
 - subnets: area with same prefix
 - link: ip ttl 1 reachable
 - Ipv4 protocols: `6` tcp, `17` udp
 - header:
-  - version, internet header (5-16), tos, total len, id, flags, frag off,
-  - ttl, proto, header checksum, src, dst, options
+  - 1(version, internet header (5-16)), 1tos, 2totallen, 2id, 2(3flags, 13fragoff)
+  - 1ttl, 1proto, 2chksum, 4src, 4dst, 4options x N
 
 ### Layer 3 IPv6
 
@@ -143,9 +143,10 @@
     - ::1/128 loopback
     - ::a.b.c.d/128 IPv4 compatible (depreciated)
     - ::ffff:a.b.c.d/96 IPv4 mapped
-      - 100::/8, 100::/64 discard only
+    - ::ffff:0:a.b.c.d/96 IPv4 translated
     - 64:ff9b::/96 Well known prefix (IPv4 algorithmic translation)
     - 64:ff9b:1::/48 local well known
+    - 100::/8, 100::/64 discard only
   - 001- ---- = 2000::/3 global unicast
     - 2001::/16 1st RIR
     - 2002::/16 6to4
@@ -156,6 +157,8 @@
     - scope: 1 interface, 2 link, e global
     - ff02::1 all nodes
     - ff02::2 all routers
+    - ff02::5 OSPF all routers
+    - ff02::5 OSPF all designated routers
 - neighbour discovery
   - ICMPv6 133-137
   - SLAAC: generate link local - DAD - RA - generate - DAD
@@ -164,7 +167,7 @@
   - Dual Stack
     - Stateless IP ICMP Translation SIIT
     - Bump in the Stack BIS
-    - IPv6 Tunnel Brokeer
+    - IPv6 Tunnel Broker
     - SOCKS IPv6/IPv4 Gateway
     - Transport Relay Translator TRT
     - Bump in the API BIA
@@ -175,7 +178,7 @@
     - **NAT64** and **DNS64**
     - **6to4**
     - **ISATAP** and **Teredo**
-  - IPv4 embedded addresses:
+  - IPv4 embedded addresses (NAT64)
     - IPv4 converted: an ip4 address in a ip6 address (full map)
     - IPv4 translatable: an ip6 address in a ip4 address (partial map)
     - prefix - ipv4 addr - suffix
@@ -322,6 +325,7 @@
   - inter area prefix LSA: type 3 summary
   - inter area router LSA: type 4 summary
 - frames:
+
   - header: 1vers, 1type, 2pktlen, 4routerid, 4areaid, 2chksum, 2authtype (null, simple, cryto), 8auth (ptr)
   - type 1 Hello: (4netmask, 2hello_int, 1opts, 1rtr_pri, 4rdead_int, 4DR ip, 4BDR ip), 4neighbor x N
   - type 2 Database Desc: (2mtu, 1opts, 00000_init_more_master/slave, 4seq), 20LSA_header x N
@@ -331,21 +335,29 @@
   - type 4 LS Update: 4LSA_cnt, LSA x N
     - LSA header: 2LSA_age, 1opts, 1LS_type, 4LS_id, 4adv_router, 4LS_seq, 2chksum, 2len
     - type 1 Router LSA: (0_virtual_asbr_abr_0, 2link_cnt), (4link_id, 4link_data, 1type, 1tos_cnt, 2metric, (1tos, 1zero, 2tos_metric) x N us.0 ) x N
+      - **by all routers**: describe self connected links, scope: area
       - LS_id = originating router id
       - type (link_id, link_data): 1ptp (neighbor id, orig ip), 2transit (DR ip, orig ip), 3stub (ip, mask), 4virtual (neighbor id, orig ip)
     - type 2 Network LSA: 4netmask, 4attached_router x N
+      - **by DR**: describe routers in network, scope: area
       - LS_id = DR ip
     - type 3 Net Summary LSA: 3netmask, 1zero, 3metric, (1tos, 3tos_metric) x N
+      - **by ABR**: area summary, scope: other areas
       - LS_id = net prefix dst
     - type 4 ASBR LSA: see type 3, netmask not relevant
+      - **by ABR**: ASBR info, from type 1 with asbr bit set, scope: other areas
       - LS_id = ASBR router id
     - type 5 AS External LSA: 4netmask, 1e_zero, 3metric, 4fwd_addr, 4ext_route_tag, (1e_tos, 3tos_metric, 4fwd_addr, 4ext_route_tag) x N
+      - **by ASBR**: external route summary, scope: all areas
       - LS_id = net prefix dst
       - e: external cost only
       - flood through AS
-    - type 7 NotSoStubbyArea LSA: see type 5, flood trhough NSSA
+    - type 7 NotSoStubbyArea LSA: see type 5, flood through NSSA
+      - **by ASBR**: external route summary, scope: NSSA, translated to type 5 by ABR
       - LS_id = net prefix dst
   - type 5 LS Ack: 20LSA_header x N
+
+- http://www.ciscopress.com/articles/article.asp?p=2294214&seqNum=2
 
 ### Layer 3 BGP
 
