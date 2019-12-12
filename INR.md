@@ -106,11 +106,11 @@
 ### Layer 3 IPv4
 
 - Classful IPv4: a.b.c.d
-  - 1/2 a: 0..127 to class A/8
-  - 1/4 a: 128..191 to class B/16
-  - 1/8 a: 192..223 to class C/24
-  - 1/16 a: 224..239 to class D mulitcast
-  - 1/15 a: 240..255 to class E reserved local broadcast
+  - 1/2 `0-------`: 0..127 to class A/8
+  - 1/4 `10------`: 128..191 to class B/16
+  - 1/8 `110-----`: 192..223 to class C/24
+  - 1/16 `1110----`: 224..239 to class D mulitcast
+  - 1/16 `1111----`: 240..255 to class E reserved local broadcast
 - IPv4 special
   - 0.0.0.0 unkown IP
   - 127.0.0.1 loopback
