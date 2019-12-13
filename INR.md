@@ -144,7 +144,7 @@
     - ::a.b.c.d/128 IPv4 compatible (depreciated)
     - ::ffff:a.b.c.d/96 IPv4 mapped
     - ::ffff:0:a.b.c.d/96 IPv4 translated
-    - 64:ff9b::/96 Well known prefix (IPv4 algorithmic translation)
+    - 64:ff9b::/96 Well known prefix (IPv4 embedded)
     - 64:ff9b:1::/48 local well known
     - 100::/8, 100::/64 discard only
   - 001- ---- = 2000::/3 global unicast
