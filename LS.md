@@ -1,22 +1,13 @@
 # Large Systems
 
-## Recap
+## Guest
 
-- distribution transparency
-  - what, main problems
-- time to send packet
-- scaling techniques
-- user ISA, system ISA
-- IO vs CPU bound
-- system vs process VM
-- taxonomy
-- VT-X
-- RPC, deferred synchronous
-- UNIX file api
-- MOM
-- distributed algos
+### DevOps
 
-## Rabobank
+- CLAMS: Culture, Lean, Automation, Measurement, Sharing
+- Cross functonal teams, sgared backlog: team/management/business user
+
+### Rabobank
 
 - commodoty flexible workspace: WaaS, SaaS, self service
 - network datacenter -> open internet: performance, cost, segmentation
@@ -26,6 +17,8 @@
 - security zero trust and identity based
 - people: less, more skilled, program infra, analyze business value
 - cost: capex -> opex, make -> buy, flex, standardize, budgeting, old fin models
+
+## Slides
 
 ### Design & Implementation
 
