@@ -210,7 +210,7 @@
     - gethostbyname -> getaddrinfo
     - gethostbyaddr -> getnameinfo
 - header:
-  - vers, class, flowlabel, payload len, next header (proto), hop limit, src, dst
+  - 4(4vers, 8class, 20flowlabel), 2payload len, 1next header (proto), 1hop limit, 16src, 16dst
 
 ### Layer 3 routing
 
@@ -341,7 +341,7 @@
     - type 2 Network LSA: 4netmask, 4attached_router x N
       - **by DR**: describe routers in network, scope: area
       - LS_id = DR ip
-    - type 3 Net Summary LSA: 3netmask, 1zero, 3metric, (1tos, 3tos_metric) x N
+    - type 3 Net Summary LSA: 4netmask, 1zero, 3metric, (1tos, 3tos_metric) x N
       - **by ABR**: area summary, scope: other areas
       - LS_id = net prefix dst
     - type 4 ASBR LSA: see type 3, netmask not relevant

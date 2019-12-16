@@ -67,6 +67,7 @@
   - async comms, virtualize
   - virtualization: interface vs implementation
   - cube: replicate, partition, service partition
+  - software optimization
 - google:
   - 1997: split to index and doc servers (sharded)
   - 1999: split to cache, replicated and sharded index and doc
@@ -193,7 +194,7 @@
   - trap on user access system ISA
   - not all syscall activate kernel mode (x86)
   - patch
-  - Ring -1: Intel VT-X: VMX Root vs VMX Non-root
+  - Ring -1: Intel VT-X: VMX Root vs VMX Non-root, vmcall, hardware context switch
   - Ring -2/-3: SMM system management mode intel IME
   - VM driver in host (dom0)
 - paravirtualization:
@@ -278,6 +279,10 @@
   - change process, what changes, affected, why, risk, betas, success criteria
   - backout plan, duration (change, backout), decision point
   - launch readiness criteria: monitoring, backups, access control, SLA, docs, load, scale
+- Change review
+  - what / affected / reason / risks / beta results / success criteria / backout plan / change duration / backout duration / decision point
+- Launch readiness
+  - monitoring, backups, access control, SLA, service requests, documentation, load test, scaling options
 
 ### Desktops
 
@@ -337,11 +342,11 @@
   - not standard: height, depth, post width
 - common: 45U: 42U content, switch top, UPS bottom
 - power ditribution units: power strips with overload protection, ip accessible
-- UPS per rack: 10min full load, 2 year battery, power conditioning
+- UPS per rack: 10min full load, 2 year battery, power conditioning (over usage, surge, EMI/RFI filter, harmonics attenuation)
 - generator: fueled, 24h at 125% load
 - BTU: 1055.06 Joules, 1W = 3.41214BTU/h
 - Ton of Cooling: 12000BTU/h = 3.52kW = refrigeration ton RT
-- power usage effectiveness: total/it_equipment
+- PUE power usage effectiveness: total/it_equipment
 - underfloor cold air: cold/warm aisle
 - cold aisle containment / hot aisle containment
 - top of rack wiring
